@@ -39,5 +39,5 @@ done
 echo "Local and HTTP Repo"
 sudo mount -o loop,ro $dir/$iso /var/www/html/repo
 echo "Tests"
-sudo ls /var/lib/iso/CentOs*
+sudo ls -l $dir/$iso  
 sudo curl -L http://127.0.0.1/repo | head | grep "Index of"
