@@ -6,7 +6,7 @@ dir=/var/lib/iso
 echo " Upgrade the system"
 sudo yum -y upgrade
 echo "Virtualization host installation"
-sudo yum group install "Virtualization Host"
+sudo yum -y group install "Virtualization Host"
 echo "Virtualisation tools installation"
 sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer
 echo "Apache 2 installation"
@@ -41,3 +41,4 @@ sudo mount -o loop,ro $dir/$iso /var/www/html/repo
 echo "Tests"
 sudo ls -l $dir/$iso  
 sudo curl -L http://127.0.0.1/repo | head | grep "Index of"
+sudo virt-host-validate
