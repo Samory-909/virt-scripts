@@ -258,13 +258,13 @@ fi
 if [ $baseline = small ] ; then
         size=8
         format=qcow2
-        ram=1024
+        ram=2048
         vcpus=1
     configuration
 elif [ $baseline = medium ] ; then
         size=16
         format=qcow2
-        ram=2048
+        ram=3072
         vcpus=2
     configuration
 elif [ $baseline = large ] ; then
