@@ -331,8 +331,8 @@ temp_all_erase ()
 echo "Destroy, undefine and erase any temporary template domain"
 for tdom in $(virsh list --name --all | grep tmp-.*); do
         virsh destroy $tdom 2> /dev/null
-        virsh undefine $tdom
-        rm -f $vol/$tdom*
+        virsh undefine $tdom --remove-all-storage
+#        rm -f $vol/$tdom*
 done
 
 }
@@ -342,7 +342,7 @@ dom_start ()
 # start domains
 for domn in $list; do
     virsh start $domn
-        sleep 10
+        sleep 30
 done
 }
 
