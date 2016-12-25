@@ -40,9 +40,9 @@ data=/var/www/html/conf
 conf=http://$bridgeip4/conf
 
 ## cdrom location
-#mirror="/var/lib/iso/CentOS-7-x86_64-DVD-1511.iso"
+#mirror="/var/lib/iso/CentOS-7-x86_64-DVD-1611.iso"
 ## Local or public HTTP mirrors
-mirror=http://$bridgeip4/repo
+mirror=http://$bridgeip4/repo/CentOS/7/os/x86_64
 #mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64
 #mirror=http://ftp.belnet.be/ftp.centos.org/7/os/x86_64
 #mirror=http://mirror.i3d.net/pub/centos/7/os/x86_64
