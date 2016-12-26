@@ -42,7 +42,7 @@ conf=http://$bridgeip4/conf
 ## cdrom location
 #mirror="/var/lib/iso/CentOS-7-x86_64-DVD-1511.iso"
 ## Local or public HTTP mirrors
-mirror=http://$bridgeip4/repo
+mirror=http://$bridgeip4/repo/CentOS/7/os/x86_64
 #mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64
 #mirror=http://ftp.belnet.be/ftp.centos.org/7/os/x86_64
 #mirror=http://mirror.i3d.net/pub/centos/7/os/x86_64
@@ -216,7 +216,7 @@ echo "Template \"$baseline\" domain installation is starting  ... "
 echo "virsh console $uidtemp - in an other terminal to see the installation log"
 #nohup \
 virt-install \
---virt-type kvm \
+--virt-type=kvm \
 --name=$uidtemp \
 --disk path=$vol/$uidtemp.$format,size=$size,format=$format \
 --ram=$ram \
@@ -256,7 +256,7 @@ fi
 }
 
 if [ $baseline = small ] ; then
-        size=8
+        size=4
         format=qcow2
         ram=2048
         vcpus=1
