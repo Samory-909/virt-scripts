@@ -129,8 +129,6 @@ For example :
 
 ```
 # ./hosts-file.sh
-127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1 localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.122.152 d1
 192.168.122.236 d2
 192.168.122.190 d3
@@ -142,7 +140,7 @@ For example :
 To update your `/etc/hosts` :
 
 ```
-./hosts-file.sh > /etc/hosts
+./hosts-file.sh >> /etc/hosts
 ```
 
 ### Netx steps ...
