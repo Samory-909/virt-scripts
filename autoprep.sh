@@ -28,8 +28,8 @@ check_apache () {
 yum install -y httpd curl || apt-get -y install apache2 curl
 firewall-cmd --permanent --add-service=http
 firewall-cmd --reload
-systemctl enable httpd
-systemctl start httpd
+systemctl enable httpd || systemctl enable apache2
+systemctl start httpd || systemctl start apache2
 mkdir -p /var/www/html/conf
 echo "this is ok" > /var/www/html/conf/ok
 local check_value="this is ok"
