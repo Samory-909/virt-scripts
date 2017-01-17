@@ -6,12 +6,12 @@ This suite of "quick and dirty" scripts are intended to mount virtual sandboxes 
 
 The main scripts are :
 
-1. autoprep.sh : prepare your system
-* get-iso.sh : get iso distributions
-* auto-install.sh : build a fresh Centos, Debian or Ubuntu system
-* sparsify.sh : optimize space disk on guest
-* clone.sh : clone, sysprep and optimize builded guests
-* hosts-file : print the running guests and their ipv4 address
+1. `autoprep.sh` : prepare your system
+* `get-iso.sh` : get iso distributions
+* `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system
+* `sparsify.sh` : optimize space disk on guest
+* `clone.sh` : clone, sysprep and optimize builded guests
+* `hosts-file` : print the running guests and their ipv4 address
 
 ## Lab scripts
 
