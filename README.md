@@ -27,7 +27,7 @@ Usage :
 # ./autoprep.sh
 ```
 
-### Step 2 : get iso images (optionnal)
+### Step 2 : Get iso images (optionnal)
 
 Script : get-iso.sh
 
