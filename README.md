@@ -143,7 +143,7 @@ To update your `/etc/hosts` :
 ./hosts-file.sh >> /etc/hosts
 ```
 
-### Netx steps ...
+### Next steps ...
 
 * Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes.
 * Add dynamicaly a new disk.
