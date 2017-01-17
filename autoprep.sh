@@ -6,7 +6,7 @@ echo " Upgrade the system"
 apt-get -y install sudo
 sudo apt-get update && sudo apt-get -y upgrade
 echo "Virtualization host installation"
-sudo apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools curl
+sudo apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools
 }
 
 centos7_prep() { 
@@ -14,7 +14,7 @@ echo " Upgrade the system"
 sudo yum -y upgrade
 echo "Virtualization host installation"
 sudo yum -y group install "Virtualization Host"
-sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer curl
+sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer
 }
 
 services_activation() {
@@ -25,7 +25,7 @@ sudo virt-host-validate
 }
 
 check_apache () {
-yum install -y httpd curl || apt-get install apache2 curl
+yum install -y httpd curl || apt-get -y install apache2 curl
 firewall-cmd --permanent --add-service=http
 firewall-cmd --reload
 systemctl enable httpd
