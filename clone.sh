@@ -6,7 +6,7 @@ destination=$2
 sparsify () {
 virt-clone -o $original -n $destination -f /var/lib/libvirt/images/$destination.qcow2
 echo "Sparse disk optimization"
-virt-sparsify --check-tmpdir=ignore --compress --convert qcow2 --format qcow2 /var/lib/libvirt/images/$destination.qcow2 /var/lib/libvirt/images/$destination.sparse
+virt-sparsify --check-tmpdir ignore --compress --convert qcow2 --format qcow2 /var/lib/libvirt/images/$destination.qcow2 /var/lib/libvirt/images/$destination.sparse
 rm -rf /var/lib/libvirt/images/$destination.qcow2
 mv /var/lib/libvirt/images/$destination.sparse /var/lib/libvirt/images/$destination.qcow2
 chown qemu:qemu /var/lib/libvirt/images/$destination.qcow2

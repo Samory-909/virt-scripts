@@ -173,7 +173,7 @@ virt-install \
 --disk path=/var/lib/libvirt/images/$name.qcow2,size=8,format=qcow2 \
 --ram=512 \
 --vcpus=1 \
---os-variant=debian8 \
+--os-variant=debianwheezy \
 --network bridge=virbr0 \
 --graphics none \
 --console pty,target_type=serial \
