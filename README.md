@@ -1,6 +1,6 @@
 # Virt-scripts
 
-This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7. The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. At this moment, you will not find any error management as we suppose a Centos 7 standard installation on the virtualization host.
+This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7 or Debian Jessie. The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. At this moment, you will not find any error management as we suppose a Centos 7 or a Debian Jessie standard installation on the virtualization host.
 
 ## Contents
 
@@ -19,7 +19,7 @@ The main scripts are :
 
 Script : autoprep.sh
 
-Description : Setup KVM/Libvirtd/LibguestFS on RHEL7/Centos 7.
+Description : Setup KVM/Libvirtd/LibguestFS on RHEL7/Centos 7/Debian Jessie.
 
 Usage : 
 
