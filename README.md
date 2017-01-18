@@ -1,6 +1,6 @@
 # Virt-scripts
 
-This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7 or Debian Jessie. The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. At this moment, you will not find any error management as we suppose a Centos 7 or a Debian Jessie standard installation on the virtualization host.
+This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7 or Debian Jessie hosts. The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. At this moment, you will not find any error management as we suppose a Centos 7 or a Debian Jessie standard installation on the virtualization host.
 
 ## Contents
 
@@ -153,19 +153,18 @@ To update your `/etc/hosts` :
 
 ## Todo
 
-* auto-install.sh :
+* `auto-install.sh` :
  * bridge variable
- * Fedora
- * Arch Linux
- * Kali without GDM
- * Installation profiles growed with development tools
+ * strorage choice
+ * Other distros :
+  * Fedora
+  * Arch Linux
+  * Kali without GDM
 
-* add-storage.sh : add hot virtio disk 
+* `add-storage.sh` : add hot virtio disk 
 
-* add-interface.sh : push new eth interface with preconfig
+* `add-interface.sh` : push new eth interface with preconfig
 
-* destroy_all.sh : put destinations
+* `start_all.sh` and `destroy_all.sh` : get domains, give choices and stop/start
 
-* start_all.sh : put destinations
-
-* create_repo.sh : create local repo
+* `create_repo.sh` : create local repo
