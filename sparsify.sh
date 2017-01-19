@@ -8,7 +8,7 @@ echo "stop guest OS"
 virsh destroy $name
 echo "Sparse disk optimization"
 # make a virtual machine disk sparse
-virt-sparsify --check-tmpdir=ignore --compress --convert qcow2 --format qcow2 /var/lib/libvirt/images/$name.qcow2 /var/lib/libvirt/images/$name-sparsified.qcow2
+virt-sparsify --check-tmpdir ignore --compress --convert qcow2 --format qcow2 /var/lib/libvirt/images/$name.qcow2 /var/lib/libvirt/images/$name-sparsified.qcow2
 # remove original image
 rm -rf /var/lib/libvirt/images/$name.qcow2
 # rename sparsified

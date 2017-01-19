@@ -2,6 +2,7 @@
 
 image=$1 # centos, debian, ubuntu
 name=$2
+fr_debian_mirror=http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/
 ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
 ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/jessie/main/installer-amd64/
 ovh_centos_mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64
@@ -15,7 +16,7 @@ url_debian_iso=http://cdimage.debian.org/debian-cd/8.6.0/amd64/iso-cd/debian-8.6
 local_centos_iso=/var/lib/iso/CentOS-7-x86_64-DVD-1611.iso
 url_centos_iso=http://ftp.belnet.be/ftp.centos.org/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso
 ubuntu_mirror=$ovh_ubuntu_mirror
-debian_mirror=$ovh_debian_mirror
+debian_mirror=$fr_debian_mirror
 centos_mirror=$ovh_centos_mirror
 
 check_apache () {
@@ -131,7 +132,7 @@ d-i netcfg/get_hostname string unassigned-hostname
 d-i netcfg/get_domain string unassigned-domain
 d-i netcfg/wireless_wep string
 d-i mirror/country string manual
-d-i mirror/http/hostname string debian.mirrors.ovh.net
+d-i mirror/http/hostname string ftp.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
 d-i passwd/make-user boolean false
