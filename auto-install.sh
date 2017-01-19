@@ -2,6 +2,7 @@
 
 image=$1 # centos, debian, ubuntu
 name=$2
+fr_ubuntu_mirror=http://fr.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/
 fr_debian_mirror=http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/
 ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
 ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/jessie/main/installer-amd64/
@@ -15,9 +16,9 @@ local_debian_iso=/var/lib/iso/debian-8.6.0-amd64-netinst.iso
 url_debian_iso=http://cdimage.debian.org/debian-cd/8.6.0/amd64/iso-cd/debian-8.6.0-amd64-netinst.iso
 local_centos_iso=/var/lib/iso/CentOS-7-x86_64-DVD-1611.iso
 url_centos_iso=http://ftp.belnet.be/ftp.centos.org/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso
-ubuntu_mirror=$ovh_ubuntu_mirror
+ubuntu_mirror=$belnet_ubuntu_mirror
 debian_mirror=$fr_debian_mirror
-centos_mirror=$ovh_centos_mirror
+centos_mirror=$belnet_centos_mirror
 
 check_apache () {
 yum install -y httpd curl || apt-get install apache2 curl
@@ -111,7 +112,7 @@ virt-install \
 --disk path=/var/lib/libvirt/images/$name.qcow2,size=8,format=qcow2 \
 --ram=512 \
 --vcpus=1 \
---os-variant=ubuntu16.04 \
+--os-variant=ubuntusaucy \
 --network bridge=virbr0 \
 --graphics none \
 --console pty,target_type=serial \

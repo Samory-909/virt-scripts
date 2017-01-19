@@ -1,9 +1,10 @@
 #!/bin/bash
 
 name=$1
+fr_debian_mirror=http://ftp.debian.org/debian/dists/wheezy/main/installer-amd64/
 ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/wheezy/main/installer-amd64/
 belnet_debian_mirror=http://ftp.belnet.be/debian/dists/wheezy/main/installer-amd64/
-mirror=$ovh_debian_mirror
+mirror=$fr_debian_mirror
 
 virt-install \
 --virt-type kvm \
