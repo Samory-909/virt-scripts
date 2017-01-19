@@ -14,7 +14,7 @@ rm -rf /var/lib/libvirt/images/$name.qcow2
 # rename sparsified
 mv /var/lib/libvirt/images/$name-sparsified.qcow2 /var/lib/libvirt/images/$name.qcow2
 # set correct ownership for the VM image file
-chown qemu:qemu /var/lib/libvirt/images/$name.qcow2
+#chown qemu:qemu /var/lib/libvirt/images/$name.qcow2
 }
 
 sparsify
