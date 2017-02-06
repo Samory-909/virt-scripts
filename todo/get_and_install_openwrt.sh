@@ -3,7 +3,7 @@
 ## WAN interface is default KVM bridge virbr0
 ##Create an isloted bridge named LAN on virbr3 with this xml file :
 #<network>
-#  <name>LAN</name>
+#  <name>lan</name>
 #  <bridge name='virbr3' stp='on' delay='0'/>
 #</network>
 ##Enable the bridge :
@@ -19,13 +19,11 @@ else
 wget $url$image -O $destination$name.img.gz
 gunzip $destination$name.img.gz
 virt-install --name=$name \
---ram=256 --vcpus=1 \
+--ram=128 --vcpus=1 \
 --os-type=linux \
 --disk path=$destination$name.img,bus=ide \
 --network bridge=virbr3,model=virtio \
 --network bridge=virbr0,model=virtio \
---import & > /dev/null
-sleep 5
-kill $(ps aux | grep virt-install | head -n 1 | awk '{ print $2 }')
-
+--import  \
+--noautoconsole
 fi
