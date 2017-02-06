@@ -7,8 +7,8 @@
 #  <bridge name='virbr3' stp='on' delay='0'/>
 #</network>
 ##Enable the bridge :
-#virsh net-start LAN
-#virsh net-autostart LAN
+#virsh net-start lan
+#virsh net-autostart lan
 #
 name=$1
 url=https://downloads.openwrt.org/chaos_calmer/15.05/x86/kvm_guest/openwrt-15.05-x86-kvm_guest-combined-ext4.img.gz

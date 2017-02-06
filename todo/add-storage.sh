@@ -2,8 +2,8 @@
 
 # Variables
 guest=$1
-disk=/var/lib/libvirt/images/$2.img
-device=$3
+disk=/var/lib/libvirt/images/$1-$2.img
+device=$2
 #device=vdb
 
 # Create 4G Spare Disk with dd
