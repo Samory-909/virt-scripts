@@ -26,7 +26,7 @@ The name explains the function.
 
 ### Guests installations and deployments
 
-1. auto-install-tui.sh` : auto-install.sh text user interface demo
+1. `auto-install-tui.sh` : auto-install.sh text user interface demo
 * `nested-physical.sh` : nested installation
 * `quickbuilder-install.sh` : install quickbuilder procedure
 * `define-guest-image.sh` : Install pre-buid images (quickbuilder)
