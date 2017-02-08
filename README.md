@@ -181,8 +181,6 @@ To update your `/etc/hosts` :
 ## Todo
 
 * `auto-install.sh` 
- * Other distros :
   * Fedora
   * Arch Linux
-  * Kali without GDM
 * `create_repo.sh` : create local repo
