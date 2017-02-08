@@ -172,9 +172,6 @@ To update your `/etc/hosts` :
 ### Next steps ...
 
 * Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes.
-* ~~Add dynamicaly a new disk.~~
-* ~~Create a guest as router/firewall~~ and migrate your VM to another virtual switch.
-* ~~Exploit Nested virtualization~~
 * Exploit snapshots and virtual storage
 * Exploit free-ipa, pacemaker, ovirt
 
