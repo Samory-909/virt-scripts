@@ -1,17 +1,32 @@
 # Virt-scripts
 
-This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7 or Debian Jessie hosts. The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. At this moment, you will not find any error management as we suppose a Centos 7 or a Debian Jessie standard installation on the virtualization host.
+This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7 or Debian Jessie hosts. 
+The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. At this moment, you will not find any error management as we suppose a Centos 7 or a Debian Jessie standard installation on the virtualization host.
 
 ## Contents
 
 The main scripts are :
 
-1. `autoprep.sh` : prepare your system
+1. `autoprep.sh` : prepare your system as virtualization host
 * `get-iso.sh` : get iso distributions
-* `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system
-* `sparsify.sh` : optimize space disk on guest
+* `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system with http repos and kickstart files
+* `sparsify.sh` : optimize space disk on the designated guest
 * `clone.sh` : clone, sysprep and optimize builded guests
 * `hosts-file` : print the running guests and their ipv4 address
+
+## New scripts
+
+The name give you the function.
+
+* add-isolated-bridge.sh : add an isolated libvirt bridge
+* add-net-live.sh : attach a bridged network interface to a live guest
+* auto-install-tui.sh : auto-install.sh text user interface demo
+* define-guest-image.sh : Install pre-buid images (quickbuilder)
+* destroy_and_undefine_all.sh : destroy and udefine all the guests
+* get_and_install_openwrt.sh : get and start openwrt with two interfaces
+* nested-physical.sh : nested installation
+* quickbuilder-install.sh : install quickbuilder procedure
+* start_all.sh : start all the defined guests
 
 ## Lab scripts
 
