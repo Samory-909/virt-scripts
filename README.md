@@ -16,7 +16,7 @@ The main scripts are :
 
 ## New scripts
 
-The name give you the function.
+The name explains the function.
 
 ### Add bridge, vnic, disk
 
