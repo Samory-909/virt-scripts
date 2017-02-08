@@ -21,12 +21,12 @@ The name give you the function.
 * add-isolated-bridge.sh : add an isolated libvirt bridge
 * add-net-live.sh : attach a bridged network interface to a live guest
 * auto-install-tui.sh : auto-install.sh text user interface demo
-* define-guest-image.sh : Install pre-buid images (quickbuilder)
-* destroy_and_undefine_all.sh : destroy and udefine all the guests
-* get_and_install_openwrt.sh : get and start openwrt with two interfaces
 * nested-physical.sh : nested installation
 * quickbuilder-install.sh : install quickbuilder procedure
+* define-guest-image.sh : Install pre-buid images (quickbuilder)
+* get_and_install_openwrt.sh : get and start openwrt with two interfaces
 * start_all.sh : start all the defined guests
+* destroy_and_undefine_all.sh : destroy and udefine all the guests
 
 ## Lab scripts
 
