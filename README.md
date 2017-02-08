@@ -18,24 +18,24 @@ The main scripts are :
 
 The name give you the function.
 
-### add bridge, vnic, disk
+### Add bridge, vnic, disk
 
-1. add-isolated-bridge.sh : add an isolated libvirt bridge
-* add-net-live.sh : attach a bridged network interface to a live guest
-* add-storage.sh : attach an empty bit disk by Gb size
+1. `add-isolated-bridge.sh` : add an isolated libvirt bridge
+* `add-net-live.sh` : attach a bridged network interface to a live guest
+* `add-storage.sh` : attach an empty bit disk by Gb size
 
 ### Guests installations and deployments
 
-1. auto-install-tui.sh : auto-install.sh text user interface demo
-* nested-physical.sh : nested installation
-* quickbuilder-install.sh : install quickbuilder procedure
-* define-guest-image.sh : Install pre-buid images (quickbuilder)
-* get_and_install_openwrt.sh : get and start openwrt with two interfaces
+1. auto-install-tui.sh` : auto-install.sh text user interface demo
+* `nested-physical.sh` : nested installation
+* `quickbuilder-install.sh` : install quickbuilder procedure
+* `define-guest-image.sh` : Install pre-buid images (quickbuilder)
+* `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
 ### Start stop  and remove guests
 
-1. start_all.sh : start all the defined guests
-* destroy_and_undefine_all.sh : destroy,  undefine all the guests with storage removing
+1. `start_all.sh` : start all the defined guests
+* `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
 
 ## Lab scripts
 
