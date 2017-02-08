@@ -5,29 +5,31 @@ The main goal is to have on hand the major distributions by exploiting the Linux
 
 ## Contents
 
-The main scripts are :
+### Native installation and post-installation
+
+Purpose : gold image auto-creation
 
 1. `autoprep.sh` : prepare your system as virtualization host
 * `get-iso.sh` : get iso distributions
 * `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system with http repos and kickstart files
+* `auto-install-tui.sh` : auto-install.sh text user interface demo
 * `sparsify.sh` : optimize space disk on the designated guest
 * `clone.sh` : clone, sysprep and optimize builded guests
 * `hosts-file` : print the running guests and their ipv4 address
+* `nested-physical.sh` : nested installation
 
-## New scripts
+### Devices creation
 
-The name explains the function.
-
-### Add bridge, vnic, disk
+Purpose : disks and network creation
 
 1. `add-isolated-bridge.sh` : add an isolated libvirt bridge
 * `add-net-live.sh` : attach a bridged network interface to a live guest
 * `add-storage.sh` : attach an empty bit disk by Gb size
 
-### Guests installations and deployments
+### Quickbuilder
 
-1. `auto-install-tui.sh` : auto-install.sh text user interface demo
-* `nested-physical.sh` : nested installation
+Purpose : deploy quickly centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05 guests based on pre-builded and downloaded minimal images.
+
 * `quickbuilder-install.sh` : install quickbuilder procedure
 * `define-guest-image.sh` : Install pre-buid images (quickbuilder)
 * `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
@@ -37,7 +39,7 @@ The name explains the function.
 1. `start_all.sh` : start all the defined guests
 * `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
 
-## Lab scripts
+## Native installation and post-installation
 
 ### Step 1 : Verify your installation
 
