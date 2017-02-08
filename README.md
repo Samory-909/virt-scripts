@@ -170,25 +170,17 @@ To update your `/etc/hosts` :
 ### Next steps ...
 
 * Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes.
-* Add dynamicaly a new disk.
-* Create a guest as router/firewall and migrate your VM to another virtual switch.
-* Exploit Nested virtualization
+* ~~Add dynamicaly a new disk.~~
+* ~~Create a guest as router/firewall~~ and migrate your VM to another virtual switch.
+* ~~Exploit Nested virtualization~~
 * Exploit snapshots and virtual storage
+* Exploit free-ipa, pacemaker, ovirt
 
 ## Todo
 
-* `auto-install.sh` :
- * bridge variable
- * strorage choice
+* `auto-install.sh` 
  * Other distros :
   * Fedora
   * Arch Linux
   * Kali without GDM
-
-* `add-storage.sh` : add hot virtio disk 
-
-* `add-interface.sh` : push new eth interface with preconfig
-
-* `start_all.sh` and `destroy_all.sh` : get domains, give choices and stop/start
-
 * `create_repo.sh` : create local repo
