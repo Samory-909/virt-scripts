@@ -6,7 +6,7 @@ echo " Upgrade the system"
 apt-get -y install sudo
 sudo apt-get update && sudo apt-get -y upgrade
 echo "Virtualization host installation"
-sudo apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools
+sudo apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime
 }
 
 centos7_prep() { 
@@ -14,7 +14,7 @@ echo " Upgrade the system"
 sudo yum -y upgrade
 echo "Virtualization host installation"
 sudo yum -y group install "Virtualization Host"
-sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer
+sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer virt-manager
 }
 
 services_activation() {
