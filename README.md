@@ -31,7 +31,7 @@ Purpose : disks and network creation
 Purpose : deploy quickly centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05 guests based on pre-builded and downloaded minimal images.
 
 * `quickbuilder-install.sh` : install quickbuilder procedure
-* `define-guest-image.sh` : Install pre-buid images (quickbuilder)
+* `define-guest-image.sh` : Install pre-builded images (quickbuilder)
 * `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
 ### Start stop  and remove guests
@@ -167,6 +167,43 @@ To update your `/etc/hosts` :
 
 ```
 ./hosts-file.sh >> /etc/hosts
+```
+
+### Device management
+
+#### Add an isolated bridge
+
+Script : add-isolated-bridge.sh 
+
+Description : add an isolated libvirt bridge named "lan" on "virbr3"
+
+Usage :
+
+```
+./add-isolated-bridge.sh
+```
+
+
+### Attach a bridged network interface to a live guest
+
+Script : add-net-live.sh 
+
+Description : attach a bridged network interface to a live guest
+
+Usage :
+
+```
+./add-net-live.sh guest_name
+```
+
+Script : add-storage.sh 
+
+Description : attach an empty bit disk by GB size
+
+Usage :
+
+```
+./add-storage.sh guest_name disk_name size_in_GB
 ```
 
 ### Next steps ...

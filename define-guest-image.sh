@@ -8,10 +8,13 @@
 # First parmater as name
 name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
-# Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', kali
+# Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)
+# Nested (default no)
+nested=""
+#nested="--cpu host-passthrough"
 # VCPUs
 vcpu="1"
 # The new guest disk name
@@ -39,6 +42,11 @@ if [ $image = "kali.qcow2" ]; then
 memory="1024"
 size="16"
 fi
+if [ $image = "gns3.qcow2" ]; then
+memory="2048"
+size="32"
+nested="--cpu host-passthrough"
+fi
 ## Local image copy to the default storage pool ##
 cp ./$image /var/lib/libvirt/images/$disk
 ## Import and lauch the new guest ##
@@ -53,4 +61,4 @@ virt-install \
 --graphics $graphics \
 --console pty,target_type=serial \
 --import \
---noautoconsole
+--noautoconsole $nested
