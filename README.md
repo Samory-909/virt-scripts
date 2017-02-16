@@ -169,9 +169,7 @@ To update your `/etc/hosts` :
 ./hosts-file.sh >> /etc/hosts
 ```
 
-### Device management
-
-#### Add an isolated bridge
+### Manage network and storage
 
 Script : add-isolated-bridge.sh 
 
@@ -182,9 +180,6 @@ Usage :
 ```
 ./add-isolated-bridge.sh
 ```
-
-
-### Manage network and storage 
 
 Script : add-net-live.sh 
 
