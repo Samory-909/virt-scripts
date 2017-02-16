@@ -184,7 +184,7 @@ Usage :
 ```
 
 
-### Attach a bridged network interface to a live guest
+### Manage network and storage 
 
 Script : add-net-live.sh 
 
@@ -216,5 +216,4 @@ Usage :
 
 * `auto-install.sh` 
   * Fedora
-  * Arch Linux
 * `create_repo.sh` : create local repo
