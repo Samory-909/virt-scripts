@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 debian8_prep() {
 echo " Upgrade the system"
 apt-get -y install sudo
@@ -26,6 +25,7 @@ sudo virt-host-validate
 
 check_apache () {
 yum install -y httpd curl || apt-get -y install apache2 curl
+#We do so despite it being disabled
 firewall-cmd --permanent --add-service=http
 firewall-cmd --reload
 systemctl enable httpd || systemctl enable apache2
