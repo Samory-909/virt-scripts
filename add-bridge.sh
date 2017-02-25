@@ -36,7 +36,6 @@ done
 }
 
 validate_ip_range () {
-
 check_ip4 () {
 iplist=$(echo $(ip -4 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ipint in $iplist ; do
@@ -46,7 +45,6 @@ exit
 fi
 done
 }
-
 check_ip6 () {
 iplist=$(echo $(ip -6 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ipint in $iplist ; do
@@ -56,12 +54,9 @@ exit
 fi
 done
 }
-
 check_ip4
 check_ip6
-
 }
-
 
 isolated () {
 cat << EOF > $path/$name.xml
