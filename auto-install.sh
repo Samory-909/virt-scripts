@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installation by HTTP Repos and response file via local HTTP.
 image=$1 # centos, debian, ubuntu
 name=$2
 fr_ubuntu_mirror=http://fr.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/
@@ -260,7 +260,7 @@ elif [ $image = debian ] ; then
 elif [ $image = ubuntu ] ; then
  ubuntu_install
 else
- echo "Erreur dans le script : ./auto-install.sh [ centos | debian | ubuntu ] nom_de_vm"
+ echo "Error : ./auto-install.sh [ centos | debian | ubuntu ] nom_de_vm"
  exit
 fi
 }

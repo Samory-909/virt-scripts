@@ -1,7 +1,30 @@
 #!/bin/bash
-
+#This script clone, sparsify and sysprep linux guest
 original=$1
 destination=$2
+name=$original
+
+check_guest_name () {
+if [ -z "${name}" ]; then
+echo "This script clone, sparsify and sysprep linux guest"
+echo "Usage : '$0 <original guest> <destination guest>'"
+echo "Please provide a the guest name of a destroyed guest: exit"
+exit
+fi
+if grep -qv ${name} <<< $(virsh list --all --name)  ; then
+echo "Please provide a defined guest name : exit"
+echo "Guests avaible : $(virsh list --all --name)"
+exit
+fi
+}
+
+check_destination () {
+if [ -z $destination ] ; then
+echo "Please provide the name of the destination guest: exit"
+echo "For example : '$0 $name <destination guest>'"
+exit
+fi
+}
 
 sparsify () {
 virt-clone -o $original -n $destination -f /var/lib/libvirt/images/$destination.qcow2
@@ -21,5 +44,7 @@ EOF
 #write-append /etc/sysconfig/network-scripts/ifcfg-eth0 "DHCP_HOSTNAME=$domain\nHWADDR=$mac\n"
 }
 
+check_guest_name
+check_destination
 sparsify
 prepare

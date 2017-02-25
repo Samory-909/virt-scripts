@@ -1,4 +1,5 @@
 #!/bin/bash
+#Setup KVM/Libvirtd/LibguestFS on RHEL7/Centos 7/Debian Jessie.
 
 debian8_prep() {
 echo " Upgrade the system"

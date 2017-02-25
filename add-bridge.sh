@@ -1,5 +1,5 @@
 #!/bin/bash
-# Create an isolated or a nat/ipv6 bridge <name> <interface> <type>
+# This script create an isolated or a nat/ipv6 bridge <name> <interface> <type>
 name=${1}
 bridge=${2}
 # 'isolated' or 'nat'
@@ -14,7 +14,16 @@ ip6="fd00:${net_id1}:${net_id2}::"
 #ip4="192.168.1."
 #ip6="fd00:1::"
 
-check_name () {
+check_parameters () {
+if [ "$#" -ne 3  ] ; then
+echo "Description : This script create an isolated or a nat/ipv6 bridge" 
+echo "Usage       : $0 <name> <interface> <type, isolated or nat>"
+echo "Example     : '$0 net1 virbr100 isolated' or '$0 lan101 virbr101 nat'"
+exit
+fi
+}
+
+check_bridge_name () {
 if [ -e /run/libvirt/network/${name}.xml ] ; then
 echo "This bridge name ${name} is already in use"
 echo "Change the bridge name or do 'virsh net-destroy ${name}' : exit"
@@ -126,8 +135,9 @@ virsh net-create ${path}/${name}.xml
 #virsh net-autostart ${name}
 }
 
+check_parameters
 validate_ip_range
-check_name
+check_bridge_name
 check_interface
 check_type
 create_bridge

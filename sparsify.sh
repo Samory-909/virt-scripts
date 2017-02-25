@@ -1,11 +1,26 @@
 #!/bin/bash
-
+#This script sparses an attached disk
+#The guest must be shutdown 
+#Great gain on disk space !
 name=$1
+
+check_guest_name () {
+if [ -z "${name}" ]; then
+echo "This script sparses an attached disk"
+echo "Please provide a the guest name of a destroyed guest: exit"
+exit
+fi
+if grep -qv ${name} <<< $(virsh list --all --name)  ; then
+echo "Please provide a defined guest name : exit"
+echo "Guests avaible : $(virsh list --all --name)"
+exit
+fi
+}
 
 sparsify ()
 {
 echo "stop guest OS"
-virsh destroy $name
+virsh destroy $name 2> /dev/null
 echo "Sparse disk optimization"
 # make a virtual machine disk sparse
 virt-sparsify --check-tmpdir ignore --compress --convert qcow2 --format qcow2 /var/lib/libvirt/images/$name.qcow2 /var/lib/libvirt/images/$name-sparsified.qcow2
@@ -17,4 +32,5 @@ mv /var/lib/libvirt/images/$name-sparsified.qcow2 /var/lib/libvirt/images/$name.
 #chown qemu:qemu /var/lib/libvirt/images/$name.qcow2
 }
 
+check_guest_name
 sparsify

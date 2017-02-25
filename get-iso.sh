@@ -1,7 +1,6 @@
 #!/bin/bash
-
+#Get latest iso of Centos 7, Debian Jessie and Ubuntu Xenial.
 os=$1
-
 location=/var/lib/iso
 url_ubuntu_iso=http://releases.ubuntu.com/16.04/ubuntu-16.04.1-server-amd64.iso
 url_debian_iso=http://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-8.7.1-amd64-netinst.iso
@@ -21,7 +20,7 @@ elif [ $os = debian ] ; then
 elif [ $os = ubuntu ] ; then
  url=$url_ubuntu_iso
 else
- echo "Erreur dans le script : ./get-iso.sh [ centos | debian | ubuntu ]"
+ echo "Error : ./get-iso.sh [ centos | debian | ubuntu ]"
  exit
 fi
 }
