@@ -4,6 +4,7 @@ name=$1
 bridge=$2
 # 'isolated' or 'nat'
 type=$3
+nb_param=3
 path=/tmp
 net_id1="$(shuf -i 0-255 -n 1)"
 net_id2="$(shuf -i 0-255 -n 1)"
@@ -13,6 +14,15 @@ ip6="fd00:${net_id1}:${net_id2}::"
 # Fix your own range
 #ip4="192.168.1."
 #ip6="fd00:1::"
+
+check_parameters () {
+if [ $# -lt $nb_param  ] ; then
+echo "Please provide $nb_param parameters : <name> <interface> <type, 'isolated' or 'nat'>"
+echo "For example do : '$0 net1 virbr100 nat' or '$0 lan virbr100 isolated'"
+exit
+fi
+}
+
 
 check_name () {
 if [ -e /run/libvirt/network/$name.xml ] ; then
@@ -40,7 +50,7 @@ check_ip4 () {
 iplist=$(echo $(ip -4 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ipint in $iplist ; do
 if [ $ipint = ${ip4} ] ; then
-echo Random Error
+echo Random Error, Please retry
 exit
 fi
 done
@@ -49,7 +59,7 @@ check_ip6 () {
 iplist=$(echo $(ip -6 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ipint in $iplist ; do
 if [ $ipint = $ip6 ] ; then
-echo Random Error
+echo Random Error, Please retry@
 exit
 fi
 done
@@ -123,6 +133,7 @@ virsh net-create $path/$name.xml
 #virsh net-autostart $name
 }
 
+check_parameters
 validate_ip_range
 check_name
 check_interface
