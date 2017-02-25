@@ -40,8 +40,8 @@ validate_ip_range () {
 check_ip4 () {
 iplist=$(echo $(ip -4 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ipint in $iplist ; do
-if [ $ipint = ${ip4}0 ] ; then
-echo Alea Error
+if [ $ipint = ${ip4} ] ; then
+echo Random Error
 exit
 fi
 done
@@ -51,7 +51,7 @@ check_ip6 () {
 iplist=$(echo $(ip -6 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ipint in $iplist ; do
 if [ $ipint = $ip6 ] ; then
-echo Alea Error
+echo Random Error
 exit
 fi
 done
