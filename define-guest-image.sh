@@ -1,14 +1,16 @@
 #!/bin/bash
-## This script import and launch minimal KVM images with a text console ##
-## First download all the qcow2 images on https://get.goffinet.org/kvm/ ##
-## Usage : bash define-guest.sh <name> <image> ##
-## Reset root password with the procedure : ##
+## This script import and launch minimal KVM images with a text console         ##
+## First download all the qcow2 images on https://get.goffinet.org/kvm/         ##
+## Usage : bash define-guest.sh <name> <image>                                  ##
+## Reset root password with the procedure :                                     ##
 ## https://linux.goffinet.org/processus_et_demarrage.html#10-password-recovery  ##
-## Please check all the variables ##
+
+## Please check all the variables
 # First parmater as name
 name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
+imagename="debian7 debian8 centos7 ubuntu1604 metasploitable kali arch"
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)
@@ -28,7 +30,7 @@ hypervisor="kvm"
 memory="256"
 # Graphics 'none' or 'vnc'
 graphics="none"
-# Network inetrface and model 'virtio' or 'rtl8139' or 'e1000'
+# Network interface and model 'virtio' or 'rtl8139' or 'e1000'
 interface="virbr0"
 model="virtio"
 # Parameters for metasploitable guests
@@ -47,8 +49,42 @@ memory="2048"
 size="32"
 nested="--cpu host-passthrough"
 fi
+
+## Download the image dialog function : list, choice, sure, dowload
+usage_message () {
+echo "Usage : $0 <name> <image>"
+echo "Please downlad one of those images :"
+for x in $imagename ; do
+echo "https://get.goffinet.org/kvm/${x}.qcow2"
+done
+}
+
+## Check parameters
+# check "$#" -lt 2
+echo $#
+if [ "$#" -ne 2  ] ; then
+usage_message
+exit
+fi
+# check a valid image name
+if grep -qvw "$2" <<< "$imagename" ; then
+usage_message
+exit
+fi
+# check the presence of the image
+if [ ! -f ./${image}  ] ; then
+usage_message
+exit
+fi
+# Check the usage of the requested domain
+if grep -q ${name} <<< $(virsh list --all --name)  ; then
+echo "Please provide an other guest name : exit"
+exit
+fi
+
 ## Local image copy to the default storage pool ##
 cp ./$image /var/lib/libvirt/images/$disk
+
 ## Import and lauch the new guest ##
 virt-install \
 --virt-type $hypervisor \

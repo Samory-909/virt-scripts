@@ -29,7 +29,6 @@ echo "This bridge name ${name} is already in use"
 echo "Change the bridge name or do 'virsh net-destroy ${name}' : exit"
 exit
 fi
-#echo OK
 }
 
 check_interface () {
