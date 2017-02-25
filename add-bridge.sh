@@ -1,11 +1,10 @@
 #!/bin/bash
 # Create an isolated or a nat/ipv6 bridge <name> <interface> <type>
-name=$1
-bridge=$2
+name=${1}
+bridge=${2}
 # 'isolated' or 'nat'
-type=$3
-nb_param=3
-path=/tmp
+type=${3}
+path="/tmp"
 net_id1="$(shuf -i 0-255 -n 1)"
 net_id2="$(shuf -i 0-255 -n 1)"
 # random /24 in 10.0.0.0/8 range
@@ -15,51 +14,45 @@ ip6="fd00:${net_id1}:${net_id2}::"
 #ip4="192.168.1."
 #ip6="fd00:1::"
 
-check_parameters () {
-if [ $# -lt $nb_param  ] ; then
-echo "Please provide $nb_param parameters : <name> <interface> <type, 'isolated' or 'nat'>"
-echo "For example do : '$0 net1 virbr100 nat' or '$0 lan virbr100 isolated'"
-exit
-fi
-}
-
-
 check_name () {
-if [ -e /run/libvirt/network/$name.xml ] ; then
-echo "Used name : exit."
-echo "change the bridge name or do 'virsh net-destroy $name'"
+if [ -e /run/libvirt/network/${name}.xml ] ; then
+echo "This bridge name ${name} is already in use"
+echo "Change the bridge name or do 'virsh net-destroy ${name}' : exit"
 exit
 fi
 #echo OK
 }
 
 check_interface () {
+if [ -z "${bridge}" ]; then
+echo "Please provide a valid interface name : exit"
+exit
+fi
 intlist=$(echo $(ls /sys/class/net))
-for x in $intlist ; do
-if [ $x = $bridge ] ; then
-echo "Used interface : exit"
-echo "change the bridge interface $bridge"
+for interface in ${intlist} ; do
+if [ ${interface} = ${bridge} ] ; then
+echo "This interface ${bridge} is already in use"
+echo "Please provide an other bridged interface name : exit"
 exit
 fi
 done
-#echo OK
 }
 
 validate_ip_range () {
 check_ip4 () {
-iplist=$(echo $(ip -4 route | awk '{ print $1; }' | sed 's/\/.*$//'))
-for ipint in $iplist ; do
-if [ $ipint = ${ip4} ] ; then
-echo Random Error, Please retry
+ip4list=$(echo $(ip -4 route | awk '{ print $1; }' | sed 's/\/.*$//'))
+for ip4int in ${ip4list} ; do
+if [ ${ip4int} = ${ip4} ] ; then
+echo "Random Error, Please retry $@ : exit"
 exit
 fi
 done
 }
 check_ip6 () {
-iplist=$(echo $(ip -6 route | awk '{ print $1; }' | sed 's/\/.*$//'))
-for ipint in $iplist ; do
-if [ $ipint = $ip6 ] ; then
-echo Random Error, Please retry@
+ip6list=$(echo $(ip -6 route | awk '{ print $1; }' | sed 's/\/.*$//'))
+for ip6int in ${ip6list} ; do
+if [ ${ip6int} = ${ip6} ] ; then
+echo "Random Error, Please retry $@ : exit"
 exit
 fi
 done
@@ -69,25 +62,25 @@ check_ip6
 }
 
 isolated () {
-cat << EOF > $path/$name.xml
+cat << EOF > ${path}/${name}.xml
 <network>
-  <name>$name</name>
-  <bridge name='$bridge' stp='on' delay='0'/>
+  <name>${name}</name>
+  <bridge name='${bridge}' stp='on' delay='0'/>
 </network>
 EOF
 }
 
 nat_ipv6 () {
-cat << EOF > $path/$name.xml
+cat << EOF > ${path}/${name}.xml
 <network ipv6='yes'>
-  <name>$name</name>
+  <name>${name}</name>
   <forward mode='nat'>
     <nat>
       <port start='1024' end='65535'/>
     </nat>
   </forward>
-  <bridge name='$bridge' stp='on' delay='0'/>
-  <domain name='$name'/>
+  <bridge name='${bridge}' stp='on' delay='0'/>
+  <domain name='${name}'/>
   <ip address='${ip4}1' netmask='255.255.255.0'>
     <dhcp>
       <range start='${ip4}128' end='${ip4}150'/>
@@ -103,7 +96,7 @@ EOF
 }
 
 report_nat_ipv6 () {
-cat << EOF > ~/$name_report.txt
+cat << EOF > ~/${name}_report.txt
 Bridge Name         : $name
 Bridge Interface    : $bridge
 ------------------------------------------------------------
@@ -114,26 +107,25 @@ Bridge IPv6 address : ${ip6}1
 IPv6 range          : ${ip6}::/64
 DHCPv6 range        : ${ip6}128/24 - ${ip4}150/24
 EOF
-echo "~/$name_report.txt writed : "
-cat ~/$name_report.txt
+echo "~/${name}_report.txt writed : "
+cat ~/${name}_report.txt
 }
 
 check_type () {
-case $type in
+case ${type} in
     isolated) isolated ;;
     nat) nat_ipv6 ; report_nat_ipv6 ;;
-    *) echo "isolated or nat ? exit" ;;
+    *) echo "isolated or nat ? exit" ; exit ;;
 esac
 }
 
 create_bridge () {
-#cat $path/$name.xml
-virsh net-destroy $name
-virsh net-create $path/$name.xml
-#virsh net-autostart $name
+#cat ${path}/${name}.xml
+virsh net-destroy ${name}
+virsh net-create ${path}/${name}.xml
+#virsh net-autostart ${name}
 }
 
-check_parameters
 validate_ip_range
 check_name
 check_interface
