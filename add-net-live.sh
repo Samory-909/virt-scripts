@@ -1,16 +1,29 @@
 #!/bin/bash
-#This script attach a guest NIC to a bridged interface
+#This script attach a live guest NIC to a bridged interface 
 
 guest=$1
 bridge=$2
 type=bridge
+parameters=$#
 
 check_parameters () {
-if [ "$#" -ne 2  ] ; then
-echo "Description : This script attach a guest NIC to a bridged interface"
-echo "Usage       : $0 <guest name> <bridge_interface>"
-echo "Example     : $0 guest1 virbr0 attach the guest1 NIC to virbr0"
+if [ "$parameters" -ne 2  ] ; then
+echo "Description : This script attach a live guest to a bridge"
+echo "Usage       : $0 <guest name> <bridge_interface_name>"
+echo "Example     : $0 guest1 virbr0 attach the live guest1 NIC to virbr0"
 exit
+fi
+if grep -qvw "$guest" <<< $(virsh list --name)  ; then
+echo "Please provide a live guest name : exit"
+echo "Guests avaible :"
+echo "$(virsh list --name)"
+exit
+fi
+#if [ grep -qvw "$bridge" <<< $(virsh net-dumpxml ${bridge}) ] ; then
+#echo "This bridge name ${bridge} is not defined"
+#echo "Bridges avaible :"
+#virsh net-list
+#exit
 fi
 }
 

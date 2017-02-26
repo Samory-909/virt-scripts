@@ -1,11 +1,13 @@
 #!/bin/bash
 #This script attach a disk to a live guest
 guest=$1
-disk=/var/lib/libvirt/images/${1}-${2}.img
+device=$2
+disk=/var/lib/libvirt/images/${1}-${device}.img
 size=$3
+parameters=$#
 
 check_parameters () {
-if [ "$#" -ne 3  ] ; then
+if [ "$parameters" -ne 3  ] ; then
 echo "Description : This script attach a disk to a live guest"
 echo "Usage       : $0 <guest name> <block device name> <size in GB>"
 echo "Example     : '$0 guest1 vdb 4' add a vdb 4GB disk to guest1"
@@ -20,7 +22,7 @@ dd if=/dev/zero of=$disk  bs=1M seek=$seek count=0
 # Or create a qcow2 disk
 #qemu-img create -f qcow2 -o preallocation=metadata $disk ${size}G
 # Attach the disk on live guest with persistence
-virsh attach-disk $guest $disk $2 --cache none --live --persistent
+virsh attach-disk $guest $disk $device --cache none --live --persistent
 # Detach the disk
 #virsh detach-disk $guest $disk --persistent --live
 }

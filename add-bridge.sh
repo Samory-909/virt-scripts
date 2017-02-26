@@ -1,7 +1,7 @@
 #!/bin/bash
 # This script create an isolated or a nat/ipv6 bridge <name> <type>
 name=${1}
-bridge=name
+bridge=$name
 # 'isolated' or 'nat'
 type=${2}
 parameters=$#
