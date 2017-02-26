@@ -77,10 +77,13 @@ Description :  Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installa
 Usage :
 
 ```
-./auto-install.sh [ centos | debian | ubuntu ] guest_name
+# ./auto-install.sh
+Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installation by HTTP Repos and response file via local HTTP.
+Usage : ./auto-install.sh [ centos | debian | ubuntu ] nom_de_vm
+Please provide one distribution centos, debian, ubuntu and one guest name: exit
 ```
 
-Note : Escape character is `^]`
+Note : Escape character is `^]` (CTRL+ `]`)
 
 
 ### Step 4 : Sparse your native image

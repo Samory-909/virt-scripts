@@ -20,6 +20,20 @@ ubuntu_mirror=$belnet_ubuntu_mirror
 debian_mirror=$fr_debian_mirror
 centos_mirror=$belnet_centos_mirror
 
+check_guest_name () {
+if [ -z "${name}" ]; then
+echo "Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installation by HTTP Repos and response file via local HTTP."
+echo "Usage : $0 [ centos | debian | ubuntu ] nom_de_vm"
+echo "Please provide one distribution centos, debian, ubuntu and one guest name: exit"
+exit
+fi
+if grep -qw ${name} <<< $(virsh list --all --name)  ; then
+echo "Usage : $0 [ centos | debian | ubuntu ] nom_de_vm"
+echo "Please provide a defined guest name that is not in use : exit"
+exit
+fi
+}
+
 check_apache () {
 yum install -y httpd curl || apt-get install apache2 curl
 firewall-cmd --permanent --add-service=http
@@ -261,9 +275,11 @@ elif [ $image = ubuntu ] ; then
  ubuntu_install
 else
  echo "Error : ./auto-install.sh [ centos | debian | ubuntu ] nom_de_vm"
+ echo "Please provide one of those distributions"
  exit
 fi
 }
 
+check_guest_name
 check_apache
 start_install
