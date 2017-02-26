@@ -65,7 +65,7 @@ else
 fi
 }
 
-echo "This will install all the necessary packages to use Libvirtd/KVM"
+echo "This script will install all the necessary packages to use Libvirtd/KVM"
 echo "Please reboot your host after this step"
 validation
 check_distribution

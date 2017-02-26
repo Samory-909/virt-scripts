@@ -61,7 +61,6 @@ done
 
 ## Check parameters
 # check "$#" -lt 2
-echo $#
 if [ "$#" -ne 2  ] ; then
 usage_message
 exit

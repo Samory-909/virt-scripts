@@ -30,7 +30,7 @@ Purpose : disks and network creation
 
 Purpose : deploy quickly centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05 guests based on pre-builded and downloaded minimal images.
 
-* `define-guest-image.sh` : deploy pre-builded images (quickbuilder)
+1. `define-guest-image.sh` : deploy pre-builded images (quickbuilder)
 * `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
 ### Start stop and remove guests
@@ -50,7 +50,7 @@ Usage :
 
 ```
 # ./autoprep.sh
-This will install all the necessary packages to use Libvirtd/KVM
+This script will install all the necessary packages to use Libvirtd/KVM
 Please reboot your host after this step
 Are you sure? [y/N]
 ```
@@ -142,7 +142,7 @@ Usage :
 
 ```
 ./clone.sh
-This script clone, sparsify and sysprep linux guest
+This script clones, sparsifies and syspreps linux guest
 Usage : './clone.sh <original guest> <destination guest>'
 Please provide a the guest name of a destroyed guest: exit
 ```

@@ -6,7 +6,7 @@ name=$original
 
 check_guest_name () {
 if [ -z "${name}" ]; then
-echo "This script clone, sparsify and sysprep linux guest"
+echo "This script clones, sparsifies and syspreps linux guest"
 echo "Usage : '$0 <original guest> <destination guest>'"
 echo "Please provide a the guest name of a destroyed guest: exit"
 exit
