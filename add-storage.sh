@@ -13,6 +13,19 @@ echo "Usage       : $0 <guest name> <block device name> <size in GB>"
 echo "Example     : '$0 guest1 vdb 4' add a vdb 4GB disk to guest1"
 exit
 fi
+# check if device exists : virsh domblklist $guest | awk '{ print $1 }' | grep $device
+if grep -qvw "$guest" <<< $(virsh list --name)  ; then
+echo "Please provide a live guest name : exit"
+echo "Guests avaible :"
+echo "$(virsh list --name)"
+exit
+fi
+if grep -qw "$device" <<< $(virsh domblklist $guest) ; then
+echo "This block device $device is alrady in use"
+echo "Block devices in use :"
+virsh domblklist $guest
+exit
+fi
 }
 
 add_storage () {

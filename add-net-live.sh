@@ -19,7 +19,7 @@ echo "Guests avaible :"
 echo "$(virsh list --name)"
 exit
 fi
-#if [ grep -qvw "$bridge" <<< $(virsh net-dumpxml ${bridge}) ] ; then
+#if  grep -qvw "$bridge" <<< $(virsh net-dumpxml ${bridge}) ; then
 #echo "This bridge name ${bridge} is not defined"
 #echo "Bridges avaible :"
 #virsh net-list
