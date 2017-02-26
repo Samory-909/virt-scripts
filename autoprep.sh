@@ -1,6 +1,28 @@
 #!/bin/bash
 #Setup KVM/Libvirtd/LibguestFS on RHEL7/Centos 7/Debian Jessie.
 
+check_distribution () {
+if [ -f /etc/debian_version ]; then
+debian8_prep
+sudo virsh net-start default
+sudo virsh net-autostart default
+elif [ -f /etc/redhat-release ]; then
+centos7_prep
+fi
+}
+
+validation () {
+read -r -p "Are you sure? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY])
+        get_iso
+        ;;
+    *)
+        exit
+        ;;
+esac
+}
+
 debian8_prep() {
 echo " Upgrade the system"
 apt-get -y install sudo
@@ -43,12 +65,10 @@ else
 fi
 }
 
-if [ -f /etc/debian_version ]; then
-debian8_prep
-sudo virsh net-start default
-sudo virsh net-autostart default
-elif [ -f /etc/redhat-release ]; then
-centos7_prep
-fi
+echo "This will install all the necessary packages to use Libvirtd/KVM"
+echo "Please reboot your host after this step"
+validation
+check_distribution
 services_activation
 check_apache
+echo "Please verify the install report et reboot your host"

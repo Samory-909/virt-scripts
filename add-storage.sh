@@ -8,7 +8,7 @@ check_parameters () {
 if [ "$#" -ne 3  ] ; then
 echo "Description : This script attach a disk to a live guest"
 echo "Usage       : $0 <guest name> <block device name> <size in GB>"
-echo "Example     : '$0 guest1 vdb 4' add a vdb disk to guest1"
+echo "Example     : '$0 guest1 vdb 4' add a vdb 4GB disk to guest1"
 exit
 fi
 }

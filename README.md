@@ -10,7 +10,7 @@ The main goal is to have on hand the major distributions by exploiting the Linux
 Purpose : gold image auto-creation
 
 1. `autoprep.sh` : prepare your system as virtualization host
-* `get-iso.sh` : get iso distributions
+* `get-iso.sh` : get iso distributions for fresh installations
 * `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system with http repos and kickstart files
 * `auto-install-tui.sh` : auto-install.sh text user interface demo
 * `sparsify.sh` : optimize space disk on the designated guest
@@ -22,19 +22,18 @@ Purpose : gold image auto-creation
 
 Purpose : disks and network creation
 
-1. `add-isolated-bridge.sh` : add an isolated libvirt bridge
-* `add-net-live.sh` : attach a bridged network interface to a live guest
-* `add-storage.sh` : attach an empty bit disk by Gb size
+1. `add-bridge.sh` : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
+* `add-net-live.sh` : attach a started guest nic to a bridged network interface
+* `add-storage.sh` : attach an empty bit disk by GB size
 
 ### Quickbuilder
 
 Purpose : deploy quickly centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05 guests based on pre-builded and downloaded minimal images.
 
-* `quickbuilder-install.sh` : install quickbuilder procedure
-* `define-guest-image.sh` : Install pre-builded images (quickbuilder)
+* `define-guest-image.sh` : deploy pre-builded images (quickbuilder)
 * `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
-### Start stop  and remove guests
+### Start stop and remove guests
 
 1. `start_all.sh` : start all the defined guests
 * `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
@@ -51,6 +50,9 @@ Usage :
 
 ```
 # ./autoprep.sh
+This will install all the necessary packages to use Libvirtd/KVM
+Please reboot your host after this step
+Are you sure? [y/N]
 ```
 
 ### Step 2 : Get iso images (optionnal)
@@ -62,8 +64,8 @@ Description : Get latest iso of Centos 7, Debian Jessie and Ubuntu Xenial.
 Usage :
 
 ```
-# ./get-iso.sh unknow
-Erreur dans le script : ./get-iso.sh [ centos | debian | ubuntu ]
+# ./get-iso.sh
+Usage : ./get-iso.sh [ centos | debian | ubuntu ]
 ```
 
 ### Step 3 : Build a guest automatically
@@ -90,7 +92,10 @@ Description : Sparse a disk. Great gain on disk space !
 Usage :
 
 ```
-./sparsify.sh guest_name
+./sparsify.sh 
+This script sparses an attached disk
+Please provide a the guest name of a destroyed guest: exit
+Usage : ./sparsify.sh <guest name>
 ```
 
 Check the disk usage : 2,0G
@@ -136,7 +141,10 @@ Description : Cloning a domain disk with sparsifying and Linux sysprep.
 Usage :
 
 ```
-./clone.sh original_guest_name clone_guest_name
+./clone.sh
+This script clone, sparsify and sysprep linux guest
+Usage : './clone.sh <original guest> <destination guest>'
+Please provide a the guest name of a destroyed guest: exit
 ```
 
 ### Step 6 : Add the guest hostname resolution
@@ -154,6 +162,7 @@ Usage :
 For example :
 
 ```
+
 # ./hosts-file.sh
 192.168.122.152 d1
 192.168.122.236 d2
@@ -171,24 +180,31 @@ To update your `/etc/hosts` :
 
 ### Manage network and storage
 
-Script : add-isolated-bridge.sh 
+Script : add-bridge.sh 
 
-Description : add an isolated libvirt bridge named "lan" on "virbr3"
+Description : add an isolated or ipv4 nat/ipv6 ula libvirt bridge 
 
 Usage :
 
 ```
-./add-isolated-bridge.sh
+./add-bridge.sh
+./add-bridge.sh
+Description : This script create an isolated or a nat/ipv6 bridge
+Usage       : ./add-bridge.sh <name> <interface> <type, isolated or nat>
+Example     : './add-bridge.sh net1 virbr100 isolated' or './add-bridge.sh lan101 virbr101 nat'
 ```
 
 Script : add-net-live.sh 
 
-Description : attach a bridged network interface to a live guest
+Description : attach a live guest nic to a bridged network interface
 
 Usage :
 
 ```
-./add-net-live.sh guest_name
+./add-net-live.sh
+Description : This script attach a guest NIC to a bridged interface
+Usage       : ./add-net-live.sh <guest name> <bridge_interface>
+Example     : './add-net-live.sh guest1 virbr0' attach the guest1 NIC to virbr0
 ```
 
 Script : add-storage.sh 
@@ -198,7 +214,10 @@ Description : attach an empty bit disk by GB size
 Usage :
 
 ```
-./add-storage.sh guest_name disk_name size_in_GB
+./add-storage.sh
+Description : This script attach a disk to a live guest
+Usage       : ./add-storage.sh <guest name> <block device name> <size in GB>
+Example     : './add-storage.sh guest1 vdb 4' add a vdb 4GB disk to guest1
 ```
 
 ### Next steps ...

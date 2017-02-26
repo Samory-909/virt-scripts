@@ -8,11 +8,13 @@ check_guest_name () {
 if [ -z "${name}" ]; then
 echo "This script sparses an attached disk"
 echo "Please provide a the guest name of a destroyed guest: exit"
+echo "Usage : $0 <guest name>"
 exit
 fi
-if grep -qv ${name} <<< $(virsh list --all --name)  ; then
+if grep -qv $name <<< $(virsh list --all --name)  ; then
 echo "Please provide a defined guest name : exit"
 echo "Guests avaible : $(virsh list --all --name)"
+echo "Usage : $0 <guest name>"
 exit
 fi
 }
