@@ -9,7 +9,7 @@ check_parameters () {
 if [ "$#" -ne 2  ] ; then
 echo "Description : This script attach a guest NIC to a bridged interface"
 echo "Usage       : $0 <guest name> <bridge_interface>"
-echo "Example     : '$0 guest1 virbr0' attach the guest1 NIC to virbr0"
+echo "Example     : $0 guest1 virbr0 attach the guest1 NIC to virbr0"
 exit
 fi
 }

@@ -1,9 +1,10 @@
 #!/bin/bash
-# This script create an isolated or a nat/ipv6 bridge <name> <interface> <type>
+# This script create an isolated or a nat/ipv6 bridge <name> <type>
 name=${1}
-bridge=${2}
+bridge=name
 # 'isolated' or 'nat'
-type=${3}
+type=${2}
+parameters=$#
 path="/tmp"
 net_id1="$(shuf -i 0-255 -n 1)"
 net_id2="$(shuf -i 0-255 -n 1)"
@@ -15,10 +16,10 @@ ip6="fd00:${net_id1}:${net_id2}::"
 #ip6="fd00:1::"
 
 check_parameters () {
-if [ "$#" -ne 3  ] ; then
+if [ "$parameters" -ne 2  ] ; then
 echo "Description : This script create an isolated or a nat/ipv6 bridge" 
-echo "Usage       : $0 <name> <interface> <type, isolated or nat>"
-echo "Example     : '$0 net1 virbr100 isolated' or '$0 lan101 virbr101 nat'"
+echo "Usage       : $0 <name> <type, isolated or nat>"
+echo "Example     : '$0 net1 isolated' or '$0 lan101 nat'"
 exit
 fi
 }
