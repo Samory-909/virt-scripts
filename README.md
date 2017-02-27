@@ -181,7 +181,7 @@ To update your `/etc/hosts` :
 ./hosts-file.sh >> /etc/hosts
 ```
 
-### Manage network and storage
+### Manage devices
 
 Script : add-bridge.sh 
 
@@ -205,9 +205,9 @@ Usage :
 
 ```
 ./add-net-live.sh
-Description : This script attach a guest NIC to a bridged interface
-Usage       : ./add-net-live.sh <guest name> <bridge_interface>
-Example     : './add-net-live.sh guest1 virbr0' attach the guest1 NIC to virbr0
+Description : This script attach a live guest to a bridge
+Usage       : ./add-net-live.sh <guest name> <bridge_interface_name>
+Example     : ./add-net-live.sh guest1 virbr0 attach the live guest1 NIC to virbr0
 ```
 
 Script : add-storage.sh 

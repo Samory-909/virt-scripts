@@ -24,7 +24,7 @@ fi
 #echo "Bridges avaible :"
 #virsh net-list
 #exit
-fi
+#fi
 }
 
 attach_nic () {
