@@ -1,4 +1,5 @@
 #!/bin/bash
+# For educational purposes : http://linux.goffinet.org/
 # This script create an isolated or a nat/ipv6 bridge <name> <type>
 name=${1}
 bridge=$name
@@ -16,6 +17,7 @@ ip6="fd00:${net_id1}:${net_id2}::"
 #ip6="fd00:1::"
 
 check_parameters () {
+# Check the number of parameters given and display help
 if [ "$parameters" -ne 2  ] ; then
 echo "Description : This script create an isolated or a nat/ipv6 bridge" 
 echo "Usage       : $0 <name> <type, isolated or nat>"
@@ -25,6 +27,7 @@ fi
 }
 
 check_bridge_name () {
+# Check if the bridge name given is in use and display help
 if [ -e /run/libvirt/network/${name}.xml ] ; then
 echo "This bridge name ${name} is already in use"
 echo "Change the bridge name or do 'virsh net-destroy ${name}' : exit"
@@ -33,10 +36,12 @@ fi
 }
 
 check_interface () {
+# Check if the bridge name is present
 if [ -z "${bridge}" ]; then
 echo "Please provide a valid interface name : exit"
 exit
 fi
+# Check if the bridge interface is in use and display help
 intlist=$(echo $(ls /sys/class/net))
 for interface in ${intlist} ; do
 if [ ${interface} = ${bridge} ] ; then
@@ -48,7 +53,10 @@ done
 }
 
 validate_ip_range () {
+# Function to valide chosen IP prefixes
+
 check_ip4 () {
+# Check if the IPv4 prefix computed is in use
 ip4list=$(echo $(ip -4 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ip4int in ${ip4list} ; do
 if [ ${ip4int} = ${ip4} ] ; then
@@ -57,7 +65,9 @@ exit
 fi
 done
 }
+
 check_ip6 () {
+# Check if the IPv6 prefix is in use
 ip6list=$(echo $(ip -6 route | awk '{ print $1; }' | sed 's/\/.*$//'))
 for ip6int in ${ip6list} ; do
 if [ ${ip6int} = ${ip6} ] ; then
@@ -66,11 +76,13 @@ exit
 fi
 done
 }
+
 check_ip4
 check_ip6
 }
 
 isolated () {
+# Create a simple bridge xml file
 cat << EOF > ${path}/${name}.xml
 <network>
   <name>${name}</name>
@@ -80,6 +92,7 @@ EOF
 }
 
 nat_ipv6 () {
+# Create a routed bridge xml file for IPv4 (NAT) and IPv6 private ranges
 cat << EOF > ${path}/${name}.xml
 <network ipv6='yes'>
   <name>${name}</name>
@@ -105,6 +118,7 @@ EOF
 }
 
 report_nat_ipv6 () {
+# Reporting Function about IPv4 and IPv6 configuration
 cat << EOF > ~/${name}_report.txt
 Bridge Name         : $name
 Bridge Interface    : $bridge
@@ -115,12 +129,14 @@ DHCP range          : ${ip4}128 - ${ip4}150
 Bridge IPv6 address : ${ip6}1
 IPv6 range          : ${ip6}::/64
 DHCPv6 range        : ${ip6}128/24 - ${ip4}150/24
+DNS Servers         : ${ip4}1 and ${ip6}1
 EOF
 echo "~/${name}_report.txt writed : "
 cat ~/${name}_report.txt
 }
 
 check_type () {
+# Check if the bridge type paramter given is 'isolated' or 'nat'
 case ${type} in
     isolated) isolated ;;
     nat) nat_ipv6 ; report_nat_ipv6 ;;
@@ -129,10 +145,12 @@ esac
 }
 
 create_bridge () {
+# Bridge creation
 #cat ${path}/${name}.xml
 virsh net-destroy ${name}
 virsh net-create ${path}/${name}.xml
 #virsh net-autostart ${name}
+virsh net-list
 }
 
 check_parameters
@@ -141,4 +159,3 @@ check_bridge_name
 check_interface
 check_type
 create_bridge
-virsh net-list
