@@ -26,8 +26,8 @@ exit
 fi
 }
 
-check_bridge_name () {
-# Check if the bridge name given is in use and display help
+check_bridge_interface () {
+# Check if the bridge interface name given is in use and display help
 if [ -e /run/libvirt/network/${name}.xml ] ; then
 echo "This bridge name ${name} is already in use"
 echo "Change the bridge name or do 'virsh net-destroy ${name}' : exit"
@@ -155,7 +155,7 @@ virsh net-list
 
 check_parameters
 validate_ip_range
-check_bridge_name
 check_interface
+check_bridge_interface
 check_type
 create_bridge

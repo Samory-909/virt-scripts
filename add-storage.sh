@@ -24,7 +24,7 @@ exit
 fi
 # Check if the device given is already in use
 # and display alll the block device attached to the guest
-if grep -qw "$device" <<< $(virsh domblklist $guest) ; then
+if grep -qw "$device" <<< $(virsh domblklist $guest | tail -n +3 | head -n -1 | awk '{ print $1; }') ; then
 echo "This block device $device is alrady in use"
 echo "Block devices in use :"
 virsh domblklist $guest
