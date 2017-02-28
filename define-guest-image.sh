@@ -50,7 +50,7 @@ size="32"
 nested="--cpu host-passthrough"
 fi
 
-## Download the image dialog function : list, choice, sure, dowload
+## Download the image dialog function : list, choice, sure, download
 usage_message () {
 echo "Usage : $0 <name> <image>"
 echo "Please downlad one of those images :"
