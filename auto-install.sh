@@ -19,6 +19,8 @@ url_centos_iso=http://ftp.belnet.be/ftp.centos.org/7/isos/x86_64/CentOS-7-x86_64
 ubuntu_mirror=$belnet_ubuntu_mirror
 debian_mirror=$fr_debian_mirror
 centos_mirror=$belnet_centos_mirror
+autoconsole=""
+#autoconsole="--noautoconsole"
 
 check_guest_name () {
 if [ -z "${name}" ]; then
@@ -263,7 +265,7 @@ virt-install \
 --noreboot \
 --console pty,target_type=serial \
 --location $mirror \
--x "auto=true hostname=$name domain= ks=$url text console=ttyS0,115200n8 serial"
+-x "auto=true hostname=$name domain= ks=$url text console=ttyS0,115200n8 serial $autoconsole"
 }
 
 start_install () {
