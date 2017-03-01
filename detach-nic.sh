@@ -1,5 +1,5 @@
 #!/bin/bash
-#This script detach a live guest NIC to a bridged interface 
+# This script detach a live guest NIC from a bridged interface 
 
 guest=$1
 bridge=$2
@@ -9,9 +9,9 @@ parameters=$#
 check_parameters () {
 # Check the numbers of parameters required
 if [ "$parameters" -ne 2  ] ; then
-echo "Description : This script detach a live guest to a bridge"
+echo "Description : This script detach a live guest from a bridge"
 echo "Usage       : $0 <guest name> <bridge_interface_name>"
-echo "Example     : $0 guest1 virbr0 detach the live guest1 NIC to virbr0"
+echo "Example     : $0 guest1 virbr0 detach the live guest1 NIC from virbr0"
 exit
 fi
 # Check if the guest name chosen is in live and display help to choose 

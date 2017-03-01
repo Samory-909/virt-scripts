@@ -18,12 +18,16 @@ Purpose : gold image auto-creation
 * `hosts-file` : print the running guests and their ipv4 address
 * `nested-physical.sh` : nested installation
 
-### Devices creation
+### Devices management
 
-Purpose : disks and network creation
+Purposes : change RAM and vcpus, add block devices and network facilities 
 
-1. `add-bridge.sh` : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
-* `add-net-live.sh` : attach a started guest nic to a bridged network interface
+1. `add-memory.sh` : add RAM
+* `add-vcpu.sh` : set vcpus count
+* `add-bridge.sh` : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
+* `add-nic.sh` : a new NIC on live guest to a bridged interface
+* `attach-nic.sh` : attach a live guest present NIC to a bridge
+* `detach-nic.sh` : detach a live guest from a bridge
 * `add-storage.sh` : attach an empty bit disk by GB size
 
 ### Quickbuilder
