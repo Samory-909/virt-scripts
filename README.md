@@ -7,7 +7,7 @@ The main goal is to have on hand the major distributions by exploiting the Linux
 
 ### Native installation and post-installation
 
-Purpose : gold image auto-creation
+Purposes : gold image auto-creation
 
 1. `autoprep.sh` : prepare your system as virtualization host
 * `get-iso.sh` : get iso distributions for fresh installations
@@ -17,6 +17,13 @@ Purpose : gold image auto-creation
 * `clone.sh` : clone, sysprep and optimize builded guests
 * `hosts-file` : print the running guests and their ipv4 address
 * `nested-physical.sh` : nested installation
+
+### Quickbuilder
+
+Purposes : deploy quickly guests based on pre-builded with previous scripts. Some images are avaible on https://get.goffinet.org/kvm : centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05.
+
+1. `define-guest-image.sh` : deploy pre-builded images (quickbuilder)
+* `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
 ### Devices management
 
@@ -29,17 +36,7 @@ Purposes : change RAM and vcpus, add block devices and network facilities
 * `attach-nic.sh` : attach a live guest present NIC to a bridge
 * `detach-nic.sh` : detach a live guest from a bridge
 * `add-storage.sh` : attach an empty bit disk by GB size
-
-### Quickbuilder
-
-Purpose : deploy quickly centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05 guests based on pre-builded and downloaded minimal images.
-
-1. `define-guest-image.sh` : deploy pre-builded images (quickbuilder)
-* `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
-
-### Start stop and remove guests
-
-1. `start_all.sh` : start all the defined guests
+* `start_all.sh` : start all the defined guests
 * `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
 
 ## Native installation and post-installation
@@ -201,19 +198,6 @@ Usage       : ./add-bridge.sh <name> <interface> <type, isolated or nat>
 Example     : './add-bridge.sh net1 virbr100 isolated' or './add-bridge.sh lan101 virbr101 nat'
 ```
 
-Script : add-net-live.sh 
-
-Description : attach a live guest nic to a bridged network interface
-
-Usage :
-
-```
-./add-net-live.sh
-Description : This script attach a live guest to a bridge
-Usage       : ./add-net-live.sh <guest name> <bridge_interface_name>
-Example     : ./add-net-live.sh guest1 virbr0 attach the live guest1 NIC to virbr0
-```
-
 Script : add-storage.sh 
 
 Description : attach an empty bit disk by GB size
@@ -227,11 +211,13 @@ Usage       : ./add-storage.sh <guest name> <block device name> <size in GB>
 Example     : './add-storage.sh guest1 vdb 4' add a vdb 4GB disk to guest1
 ```
 
+To be continued ...
+
 ### Next steps ...
 
 * Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes.
 * Exploit snapshots and virtual storage
-* Exploit free-ipa, pacemaker, ovirt
+* Exploit free-ipa, pacemaker, ovirt, openstack, gns3
 
 ## Todo
 
