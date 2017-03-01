@@ -41,7 +41,7 @@ Purposes : change RAM and vcpus, add block devices and network facilities
 
 ## How-To
 
-First clone this project in you home directory :
+First clone this project in your home directory :
 
 ```
 cd
