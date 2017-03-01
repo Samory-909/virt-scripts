@@ -51,7 +51,7 @@ fi
 ## Download the image dialog function : list, choice, sure, download
 usage_message () {
 echo "Usage : $0 <name> <image>"
-echo "Please downlad one of those images :"
+echo "Please download one of those images :"
 for x in $imagename ; do
 echo "https://get.goffinet.org/kvm/${x}.qcow2"
 done

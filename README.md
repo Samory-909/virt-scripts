@@ -77,6 +77,8 @@ Description :  Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installa
 
 Usage :
 
+Please check all the parameters. For customization, you can adapt the kickstart or preseed templates inside the script.
+
 ```
 # ./auto-install.sh
 Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installation by HTTP Repos and response file via local HTTP.
@@ -175,7 +177,8 @@ And you can verify it :
 
 Move those images disk into the `virt-scripts` directory and undefine original guests :
 
-```
+```bash
+#!/bin/bash
 cd ~/virt-scripts
 for x in centos7 debian8 ubuntu1604
 do
@@ -212,6 +215,21 @@ Début d'installation...
 Création du domaine...                                                   |    0 B     00:00
 Création du domaine terminée.  Vous pouvez redémarrer votre domaine en lançant :
   virsh --connect qemu:///system start u1
+```
+
+Also, I have prebuilded other images for training classes :
+
+```
+~/virt-scripts# ./define-guest-image.sh
+Usage : ./define-guest-image.sh <name> <image>
+Please download one of those images :
+https://get.goffinet.org/kvm/debian7.qcow2
+https://get.goffinet.org/kvm/debian8.qcow2
+https://get.goffinet.org/kvm/centos7.qcow2
+https://get.goffinet.org/kvm/ubuntu1604.qcow2
+https://get.goffinet.org/kvm/metasploitable.qcow2
+https://get.goffinet.org/kvm/kali.qcow2
+https://get.goffinet.org/kvm/arch.qcow2
 ```
 
 ### Step 7 : Manage guests
