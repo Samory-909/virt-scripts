@@ -39,7 +39,15 @@ Purposes : change RAM and vcpus, add block devices and network facilities
 * `start_all.sh` : start all the defined guests
 * `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
 
-## Native installation and post-installation
+## How-To
+
+First clone this project in you home directory :
+
+```
+cd
+git clone https://github.com/goffinet/virt-scripts
+cd virt-scripts
+``` 
 
 ### Step 1 : Verify your installation
 
@@ -236,6 +244,30 @@ https://get.goffinet.org/kvm/arch.qcow2
 
 Verify your running guests
 
+```
+~/virt-scripts# virsh list
+ Id    Name                           State
+----------------------------------------------------
+ 88    c1                             running
+ 89    d1                             running
+ 90    u1                             running
+```
+
+Access to the text console
+
+```
+~/virt-scripts# virsh console c1
+Connected to domain c1
+Escape character is ^]
+
+CentOS Linux 7 (Core)
+Kernel 3.10.0-514.6.2.el7.x86_64 on an x86_64
+
+centos7 login:
+```
+
+To exit from the text console execute CTRL `]`.
+
 ### Step 8 : Add the guest hostname resolution
 
 Script : 
@@ -251,14 +283,10 @@ Usage :
 For example :
 
 ```
-
-# ./hosts-file.sh
-192.168.122.152 d1
-192.168.122.236 d2
-192.168.122.190 d3
-192.168.122.155 c1
-192.168.122.100 c2
-192.168.122.40 c3
+./hosts-file.sh
+192.168.122.47 c1
+192.168.122.56 d1
+192.168.122.118 u1
 ```
 
 To update your `/etc/hosts` :
