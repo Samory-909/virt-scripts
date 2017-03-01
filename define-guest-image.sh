@@ -3,8 +3,8 @@
 ## First download all the qcow2 images on https://get.goffinet.org/kvm/         ##
 ## Usage : bash define-guest.sh <name> <image>                                  ##
 ## Reset root password with the procedure :                                     ##
-## https://linux.goffinet.org/processus_et_demarrage.html#10-password-recovery  ##
-
+## https://linux.goffinet.org/07_processus_et_demarrage.html#8-password-recovery## 
+##################################################################################
 ## Please check all the variables
 # First parmater as name
 name=$1
