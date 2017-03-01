@@ -42,11 +42,9 @@ fi
 # Parameters for Kali guests
 if [ $image = "kali.qcow2" ]; then
 memory="1024"
-size="16"
 fi
 if [ $image = "gns3.qcow2" ]; then
 memory="2048"
-size="32"
 nested="--cpu host-passthrough"
 fi
 
