@@ -74,7 +74,7 @@ usage_message
 exit
 fi
 # Check the usage of the requested domain
-if grep -q ${name} <<< $(virsh list --all --name)  ; then
+if grep -qw ${name} <<< $(virsh list --all --name)  ; then
 echo "Please provide an other guest name : exit"
 exit
 fi

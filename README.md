@@ -151,7 +151,74 @@ Usage : './clone.sh <original guest> <destination guest>'
 Please provide a the guest name of a destroyed guest: exit
 ```
 
-### Step 6 : Add the guest hostname resolution
+### Step 6 : Quickbuilder
+
+Assume that you have installed three guests with `auto-install.sh` :
+
+```
+~/virt-scripts# ./auto-install.sh centos7 centos
+~/virt-scripts# ./auto-install.sh debian8 debian
+~/virt-scripts# ./auto-install.sh ubuntu1604 ubuntu
+```
+
+And you can verify it :
+
+```
+~/virt-scripts# virsh list --all
+ Id    Name                           State
+----------------------------------------------------
+ -     centos7                        shut off
+ -     debian8                        shut off
+ -     ubuntu1604                     shut off
+
+```
+
+Move those images disk into the `virt-scripts` directory and undefine original guests :
+
+```
+cd ~/virt-scripts
+for x in centos7 debian8 ubuntu1604
+do
+mv /var/lib/libvirt/images/$x.qcow2 ./
+virsh undefine $x
+done
+
+```
+
+And you can deploy quicky builded and optimized guests based on those images :
+
+```
+~/virt-scripts# ./define-guest-image.sh c1 centos7
+
+Début d'installation...
+Création du domaine...                                                   |    0 B     00:00
+Création du domaine terminée.  Vous pouvez redémarrer votre domaine en lançant :
+  virsh --connect qemu:///system start c1
+```
+
+```
+~/virt-scripts# ./define-guest-image.sh d1 debian8
+
+Début d'installation...
+Création du domaine...                                                   |    0 B     00:00
+Création du domaine terminée.  Vous pouvez redémarrer votre domaine en lançant :
+  virsh --connect qemu:///system start d1
+```
+
+```
+~/virt-scripts# ./define-guest-image.sh u1 ubuntu1604
+
+Début d'installation...
+Création du domaine...                                                   |    0 B     00:00
+Création du domaine terminée.  Vous pouvez redémarrer votre domaine en lançant :
+  virsh --connect qemu:///system start u1
+```
+
+### Step 7 : Manage guests
+
+Verify your running guests
+
+### Step 8 : Add the guest hostname resolution
 
 Script : 
 
@@ -182,6 +249,7 @@ To update your `/etc/hosts` :
 ./hosts-file.sh >> /etc/hosts
 ```
 
+
 ### Manage devices
 
 Script : add-bridge.sh 
@@ -191,7 +259,6 @@ Description : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
 Usage :
 
 ```
-./add-bridge.sh
 ./add-bridge.sh
 Description : This script create an isolated or a nat/ipv6 bridge
 Usage       : ./add-bridge.sh <name> <interface> <type, isolated or nat>
