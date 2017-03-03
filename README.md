@@ -1,12 +1,12 @@
 # Virt-scripts
 
-This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7 or Debian Jessie hosts. 
-The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. Only for educational purposes.
+This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd (on Centos 7 or Debian Jessie hosts). 
+The main goal is to spawn quickly linux guests for lab purposes. But we can find other subsequents objectives as coding/scripting, automation or virtual networks and system management, helping to understand virtual infrastructures technologies and architectures. Only for educational purposes.
 
 Three groups of scripts :
 
 1. Native installation for Centos 7 Debian 8 and Ubuntu 16.10 and post-installation.
-2. Quickbuilder
+2. Quickbuilder, guests spwaning with pre-builded images
 3. Devices management
 
 If you already have images at stock, there exists beter ways to automate and manage libvirt guest like those nice scripts :
@@ -353,12 +353,14 @@ To be continued ...
 
 ### Next steps ...
 
+* Integrate kcli for guests management
 * Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes.
 * Exploit snapshots and virtual storage
-* Exploit free-ipa, pacemaker, ovirt, openstack, gns3
+* Exploit free-ipa, pacemaker, ovirt, openstack, gns3 (see kcli plans)
 
 ## Todo
 
 * `auto-install.sh` 
   * Fedora
 * `create_repo.sh` : create local repo
+* Revise code and comment, comment, comment ...
