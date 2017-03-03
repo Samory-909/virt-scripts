@@ -3,9 +3,21 @@
 This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd with Centos 7 or Debian Jessie hosts. 
 The main goal is to have on hand the major distributions by exploiting the Linux environment as well as possible. But we can find other subsequents objectives as programmation and automation, scripting and virtual network and system management. Only for educational purposes.
 
-## Contents
+Three groups of scripts :
 
-### Native installation and post-installation
+1. Native installation for Centos 7 Debian 8 and Ubuntu 16.10 and post-installation.
+2. Quickbuilder
+3. Devices management
+
+If you already have images at stock, there exists beter ways to automate and manage libvirt guest like those nice scripts :
+
+* in python :  `kcli` (https://github.com/karmab/kcli/tree/master/kvirt)
+* in bash : https://github.com/vpenso/libvirt-shell-functions
+
+For native installation of Arch Linux : look at https://github.com/Anthony25/spawn-archlinux-libvirt.
+
+
+## Native installation and post-installation
 
 Purposes : gold image auto-creation
 
@@ -18,14 +30,14 @@ Purposes : gold image auto-creation
 * `hosts-file` : print the running guests and their ipv4 address
 * `nested-physical.sh` : nested installation
 
-### Quickbuilder
+## Quickbuilder
 
 Purposes : deploy quickly guests based on pre-builded with previous scripts. Some images are avaible on https://get.goffinet.org/kvm : centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05.
 
 1. `define-guest-image.sh` : deploy pre-builded images (quickbuilder)
 * `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
-### Devices management
+## Devices management
 
 Purposes : change RAM and vcpus, add block devices and network facilities 
 
@@ -295,8 +307,21 @@ To update your `/etc/hosts` :
 ./hosts-file.sh >> /etc/hosts
 ```
 
+SSH is enabled by default :
 
-### Manage devices
+```
+~/virt-scripts# ssh c1
+The authenticity of host 'c1 (192.168.122.47)' can't be established.
+ECDSA key fingerprint is 04:be:d2:e9:d9:9a:98:02:e3:a8:34:2d:3a:dd:26:a5.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'c1,192.168.122.47' (ECDSA) to the list of known hosts.
+root@c1's password:
+[root@centos7 ~]# exit
+déconnexion
+Connection to c1 closed.
+```
+
+### Step 9 : Manage devices
 
 Script : add-bridge.sh 
 
