@@ -27,7 +27,7 @@ size="8"
 # Hypervisor can be 'qemu', 'kvm' or 'xen'
 hypervisor="kvm"
 # RAM in Mb
-memory="256"
+memory="512"
 # Graphics 'none' or 'vnc'
 graphics="none"
 # Network interface and model 'virtio' or 'rtl8139' or 'e1000'
@@ -51,7 +51,7 @@ fi
 ## Download the image dialog function : list, choice, sure, download
 usage_message () {
 echo "Usage : $0 <name> <image>"
-echo "Please download one of those images :"
+echo "Please download one of those images in /var/lib/libvirt/images :"
 for x in $imagename ; do
 echo "https://get.goffinet.org/kvm/${x}.qcow2"
 done
@@ -69,7 +69,7 @@ usage_message
 exit
 fi
 # check the presence of the image
-if [ ! -f ./${image}  ] ; then
+if [ ! -f /var/lib/libvirt/images/${image}  ] ; then
 usage_message
 exit
 fi
@@ -80,7 +80,7 @@ exit
 fi
 
 ## Local image copy to the default storage pool ##
-cp ./$image /var/lib/libvirt/images/$disk
+cp /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
 
 ## Import and lauch the new guest ##
 virt-install \
