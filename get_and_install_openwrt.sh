@@ -4,10 +4,11 @@
 name=$1
 url=https://downloads.openwrt.org/chaos_calmer/15.05/x86/kvm_guest/openwrt-15.05-x86-kvm_guest-combined-ext4.img.gz
 destination=/var/lib/libvirt/images/
+parameters=$#
 
 check_parameters () {
 # Check parameters
-if [ $i{#} -ne 1 ]; then
+if [ $parameters -ne 1 ]; then
 echo "Please provide the name" ; exit
 exit
 fi
