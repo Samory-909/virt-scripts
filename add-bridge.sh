@@ -148,9 +148,10 @@ create_bridge () {
 # Bridge creation
 #cat ${path}/${name}.xml
 virsh net-destroy ${name} 2> /dev/null
-#virsh net-undefine ${name} 2> /dev/null
-virsh net-create ${path}/${name}.xml
-#virsh net-autostart ${name}
+virsh net-undefine ${name} 2> /dev/null
+virsh net-define ${path}/${name}.xml
+virsh net-autostart ${name}
+virsh net-start ${name}
 virsh net-list
 }
 
