@@ -28,7 +28,7 @@ bridges_creation () {
 
 openwrt_installation () {
 # Get and decompresse image
-wget $url$image -O $destination$router_name.img.gz
+wget $url -O $destination$router_name.img.gz
 gunzip $destination$router_name.img.gz
 # Install the guest
 virt-install --name=$router_name \

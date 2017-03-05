@@ -12,9 +12,9 @@ echo "Please provide the image name : "
 echo ${imagename}
 exit
 fi
-if [ -f ${destination}${image}  ] ; then
-echo "The image ${destination}${image} exists."
-echo "Do you want replace this file ${image}"
+if [ ! -f ${destination}${image}  ] ; then
+echo "The image ${destination}${image} does not exist."
+echo "Do you want download this file ${image}"
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])

@@ -126,8 +126,8 @@ Bridge Interface    : $bridge
 Bridge IPv4 address : ${ip4}1/24
 IPv4 range          : ${ip4}0 255.255.255.0
 DHCP range          : ${ip4}128 - ${ip4}150
-Bridge IPv6 address : ${ip6}1
-IPv6 range          : ${ip6}::/64
+Bridge IPv6 address : ${ip6}1/64
+IPv6 range          : ${ip6}/64
 DHCPv6 range        : ${ip6}128/24 - ${ip4}150/24
 DNS Servers         : ${ip4}1 and ${ip6}1
 EOF
