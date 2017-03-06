@@ -119,7 +119,7 @@ d-i grub-installer/with_other_os                            boolean     true
 d-i finish-install/reboot_in_progress                       note
 d-i finish-install/keep-consoles                            boolean     false
 d-i cdrom-detect/eject                                      boolean     true
-d-i preseed/late_command in-target sed -i 's/PermitRootLogin\ prohibit-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config ; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/7cf2c788c1c5600f7433d16f8f352c877a281a6a/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh
+d-i preseed/late_command in-target sed -i 's/PermitRootLogin\ prohibit-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config ; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/7cf2c788c1c5600f7433d16f8f352c877a281a6a/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh ; in-target shutdown -h now
 EOF
 
 virt-install \
@@ -133,7 +133,7 @@ virt-install \
 --graphics none \
 --console pty,target_type=serial \
 --location $mirror \
--x "auto=true hostname=$name domain= url=$url text console=ttyS0,115200n8 serial"
+-x "auto=true hostname=$name domain= url=$url text console=ttyS0,115200n8 serial $autoconsole"
 }
 
 debian_install () {
@@ -182,7 +182,7 @@ d-i grub-installer/with_other_os boolean true
 d-i grub-installer/bootdev  string /dev/vda
 d-i finish-install/keep-consoles boolean true
 d-i finish-install/reboot_in_progress note
-d-i preseed/late_command string in-target sed -i 's/PermitRootLogin\ without-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/7cf2c788c1c5600f7433d16f8f352c877a281a6a/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh
+d-i preseed/late_command string in-target sed -i 's/PermitRootLogin\ without-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/7cf2c788c1c5600f7433d16f8f352c877a281a6a/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh ; in-target shutdown -h now
 EOF
 
 virt-install \
@@ -196,7 +196,7 @@ virt-install \
 --graphics none \
 --console pty,target_type=serial \
 --location $mirror \
--x "auto=true hostname=$name domain= url=$url text console=ttyS0,115200n8 serial"
+-x "auto=true hostname=$name domain= url=$url text console=ttyS0,115200n8 serial $autoconsole"
 }
 
 centos_install () {

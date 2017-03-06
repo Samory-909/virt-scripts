@@ -6,6 +6,7 @@ image="$1.qcow2"
 url=http://get.goffinet.org/kvm/
 destination=/var/lib/libvirt/images/
 parameters=$#
+wd=$PWD
 
 if [ ${parameters} -ne 1 ]; then
 echo "Please provide the image name : "
@@ -26,3 +27,7 @@ case "$response" in
 esac
 fi
 wget ${url}${image} -O ${destination}${image}
+wget ${url}${image}.sha1 -O ${destination}${image}.sha1
+cd ${destination}
+sha1sum -c ${image}.sha1
+cd ${wd}
