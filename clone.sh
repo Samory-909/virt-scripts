@@ -33,17 +33,19 @@ exit
 fi
 }
 
-prepare () {
-virt-sysprep -d $original --hostname $original --selinux-relabel 
-#virt-edit $original /etc/passwd -e 's/^root:.*?:/root::/'
-#guestfish -a /var/lib/libvirt/images/$original.qcow2 -i <<EOF
-#write /etc/hostname "$original\n"
-#EOF
-#write-append /etc/sysconfig/network-scripts/ifcfg-eth0 "DHCP_HOSTNAME=$domain\nHWADDR=$mac\n"
-}
+
 
 clone () {
 virt-clone -o $original -n $destination -f /var/lib/libvirt/images/$destination.qcow2
+}
+
+prepare () {
+virt-sysprep -d $destination --hostname $destination --selinux-relabel 
+#virt-edit $destination /etc/passwd -e 's/^root:.*?:/root::/'
+#guestfish -a /var/lib/libvirt/images/$destination.qcow2 -i <<EOF
+#write /etc/hostname "$destination\n"
+#EOF
+#write-append /etc/sysconfig/network-scripts/ifcfg-eth0 "DHCP_HOSTNAME=$domain\nHWADDR=$mac\n"
 }
 
 sparsify () {
@@ -56,6 +58,6 @@ chown qemu:qemu /var/lib/libvirt/images/$destination.qcow2 || chown libvirt-qemu
 
 check_original
 check_destination
-prepare
 clone
+prepare
 sparsify

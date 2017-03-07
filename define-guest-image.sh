@@ -81,6 +81,9 @@ fi
 
 ## Local image copy to the default storage pool ##
 cp /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
+## Customize this image
+virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet
+#virt-sysprep -a guest.img --firstboot ./yum-update.sh --firstboot ./set-desktop.sh
 
 ## Import and lauch the new guest ##
 virt-install \
