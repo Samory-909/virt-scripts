@@ -59,5 +59,5 @@ chown qemu:qemu /var/lib/libvirt/images/$destination.qcow2 || chown libvirt-qemu
 check_original
 check_destination
 clone
-prepare
 sparsify
+prepare
