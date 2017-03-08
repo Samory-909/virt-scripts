@@ -15,7 +15,7 @@ validation () {
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
-        get_iso
+       sleep 1 
         ;;
     *)
         exit
@@ -32,6 +32,11 @@ sudo apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-too
 echo "kcli libvirt  wrapper installation"
 sudo apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
 sudo pip install kcli
+echo "Enabling Nested Virtualization"
+rmmod kvm-intel
+sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
+modprobe kvm-intel
+cat /sys/module/kvm_intel/parameters/nested
 }
 
 centos7_prep() { 
@@ -43,6 +48,11 @@ sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-
 echo "kcli libvirt  wrapper installation"
 sudo yum -y install gcc libvirt-devel python-devel genisoimage qemu-kvm nmap-ncat python-pip
 sudo pip install kcli
+echo "Enabling Nested Virtualization"
+rmmod kvm-intel
+sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
+modprobe kvm-intel
+cat /sys/module/kvm_intel/parameters/nested
 }
 
 services_activation() {
