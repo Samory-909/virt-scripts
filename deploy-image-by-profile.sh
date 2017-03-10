@@ -1,9 +1,8 @@
 #!/bin/bash
 # This script define a centos7 guest by profile and network connection
 # Image name : 'centos7', ...
-imagename="centos7"
-image="centos7.qcow2"
-#image="$4.qcow2"
+imagename="debian7 debian8 centos7 ubuntu1604 metasploitable kali arch"
+image="$4.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)
 name=$1
@@ -44,9 +43,9 @@ esac
 
 ## Download the image dialog function : list, choice, sure, download
 usage_message () {
-echo "Usage : $0 <name> <network_name> <profile> <image>"
+echo "Usage : $0 <name> <network_name> <profile> <image_name>"
 echo "Please download one of those images in /var/lib/libvirt/images :"
-echo "centos7 is the image by default"
+echo "centos7 is the image name by default"
 for x in $imagename ; do
 echo "https://get.goffinet.org/kvm/${x}.qcow2"
 echo "Profiles available : xsmall, small, medium, big, desktop"
@@ -55,7 +54,9 @@ done
 
 check_paramters () {
 ## Check parameters
-if [ "$parameters" -ne 3  ] ; then usage_message ; exit ; fi
+if [ "$parameters" -eq 3 ] ; then image="centos7.qcow2" ; fi
+if [ "$parameters" -gt 5  ] ; then usage_message ; exit ; fi
+if [ "$parameters" -lt 3  ] ; then usage_message ; exit ; fi
 # check a valid image name
 #if grep -qvw "$2" <<< "$imagename" ; then usage_message ; exit ; fi
 # check the presence of the image
