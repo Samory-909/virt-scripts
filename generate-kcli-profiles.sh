@@ -1,7 +1,7 @@
 #!/bin/bash
 #Please see https://github.com/karmab/kcli
 file="/root/kcli_profiles.yml"
-# check if kcli script is avaible
+# check if kcli script is available
 if [ -z $(which kcli) ] ; then echo "Please install kcli"; exit ; fi
 # check if the profiles file exists
 if [ -e ${file} ] ; then rm -i ${file} ; else echo "Exit"; exit ; fi
