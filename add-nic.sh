@@ -10,9 +10,10 @@ parameters=$#
 check_parameters () {
 # Check the numbers of parameters required
 if [ "$parameters" -ne 2  ] ; then
-echo "Description : This script add a new NIC on live guest to a bridged interface" 
+echo "Description : This script add a new NIC on live guest to an interface" 
 echo "Usage       : $0 <guest name> <bridge_interface_name>"
-echo "Example     : $0 guest1 virbr0 attach the live guest1 NIC to virbr0"
+echo "Example     : '$0 guest1 virbr0' add the live guest1 NIC to virbr0"
+echo "Example     : '$0 guest1 eth0' add the live guest1 NIC to eth0"
 exit
 fi
 # Check if the guest name chosen is in live and display help to choose 
@@ -40,7 +41,18 @@ mac_param=" --mac $mac"
 attach_nic () {
 # Detach and attach the guest nic to the live guest
 #virsh detach-interface $guest --type $type --source $bridge--live --persistent $mac_param
+if egrep -q "eth|ens|em" <<< $bridge ; then
+ip link set eth0 promisc on
+cat << EOF > /tmp/direct-$guest.xml
+<interface type='direct'>
+  <source dev='eth0' mode='bridge'/>
+  <model type='virtio'/>
+</interface>
+EOF
+virsh attach-device $guest /tmp/direct-$guest.xml
+else
 virsh attach-interface $guest --type $type --source $bridge --model $model --live --persistent $mac_param
+fi
 virsh domiflist $guest
 }
 

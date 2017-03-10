@@ -1,8 +1,5 @@
-#!/bin/bash
-# This script define a centos7 guest by profile and network connection
-# Image name : 'centos7', ...
 imagename="debian7 debian8 centos7 ubuntu1604 metasploitable kali arch"
-image="$4.qcow2"
+image=$4
 # Generate an unique string
 uuid=$(uuidgen -t)
 name=$1
@@ -49,20 +46,22 @@ case "$profile" in
     big) vcpu="2"
          memory="2048" ;;
     desktop) ;;
+    *) usage_message ; exit ;;
 esac
 }
 
 check_paramters () {
 ## Check parameters
-if [ "$parameters" -eq 3 ] ; then image="centos7.qcow2" ; fi
+if [ "$parameters" -eq 3 ] ; then image="centos7" ; fi
+if [ "$parameters" -eq 4 ] ; then image=$image ; fi
 if [ "$parameters" -gt 5  ] ; then usage_message ; exit ; fi
 if [ "$parameters" -lt 3  ] ; then usage_message ; exit ; fi
 #check a valid image name
-if grep -qvw "$2" <<< "$imagename" ; then usage_message ; exit ; fi
+if grep -qvw "$image" <<< "$imagename" ; then usage_message ; exit ; fi
 # check the presence of the image
-if [ ! -f /var/lib/libvirt/images/${image}  ] ; then usage_message ; exit ; fi
+if [ ! -f /var/lib/libvirt/images/${image}.qcow2  ] ; then usage_message ; exit ; fi
 # Check the usage of the requested domain
-if grep -qw ${name} <<< $(virsh list --all --name)  ; then echo "Please provide an other guest name : exit" ; exit; fi
+if grep -qw "$name" <<< $(virsh list --all --name)  ; then echo "Please provide an other guest name : exit" ; exit; fi
 # Check the network
 if [ ! -e /run/libvirt/network/${network}.xml ] ; then echo "$network network does not exist"
 echo "Please create a new one or choose a valid present network : " ; virsh net-list ; exit; fi
@@ -70,7 +69,7 @@ echo "Please create a new one or choose a valid present network : " ; virsh net-
 
 copy_image () {
 ## Local image copy to the default storage pool ##
-cp /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
+cp /var/lib/libvirt/images/$image.qcow2 /var/lib/libvirt/images/$disk
 ## Add disk resizing
 }
 
@@ -98,8 +97,8 @@ virt-install \
 }
 
 start_time="$(date -u +%s)"
-profile_definition
 check_paramters
+profile_definition
 copy_image
 customize_new_disk
 import_launch
