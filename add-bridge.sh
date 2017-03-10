@@ -1,6 +1,7 @@
 #!/bin/bash
 # For educational purposes : http://linux.goffinet.org/
-# This script create an isolated or a nat/ipv6 bridge <name> <type>
+# This script create an isolated, a simple nat without dhcp 
+# or  a nat/ipv6 bridge <name> <type>
 name=${1}
 bridge=$name
 # 'isolated' or 'nat'
@@ -19,8 +20,8 @@ ip6="fd00:${net_id1}:${net_id2}::"
 check_parameters () {
 # Check the number of parameters given and display help
 if [ "$parameters" -ne 2  ] ; then
-echo "Description : This script create an isolated or a nat/ipv6 bridge" 
-echo "Usage       : $0 <name> <type, isolated or nat>"
+echo "Description : This script create an isolated, nat or full bridge" 
+echo "Usage       : $0 <name> <type : isolated or nat or full>"
 echo "Example     : '$0 net1 isolated' or '$0 lan101 nat'"
 exit
 fi
@@ -91,6 +92,38 @@ cat << EOF > ${path}/${name}.xml
 EOF
 }
 
+nat () {
+# Create a routed bridge xml file for IPv4 (NAT) without dhcp
+cat << EOF > ${path}/${name}.xml
+<network>
+  <name>${name}</name>
+  <forward mode='nat'>
+    <nat>
+      <port start='1024' end='65535'/>
+    </nat>
+  </forward>
+  <bridge name='${bridge}' stp='on' delay='0'/>
+  <domain name='${name}'/>
+  <ip address='${ip4}1' netmask='255.255.255.0'>
+  </ip>
+</network>
+EOF
+}
+
+report_nat () {
+# Reporting Function about IPv4 and IPv6 configuration
+cat << EOF > ~/${name}_report.txt
+Bridge Name         : $name
+Bridge Interface    : $bridge
+------------------------------------------------------------
+Bridge IPv4 address : ${ip4}1/24
+IPv4 range          : ${ip4}0 255.255.255.0
+DNS Servers         : ${ip4}1 and ${ip6}1
+EOF
+echo "~/${name}_report.txt writed : "
+cat ~/${name}_report.txt
+}
+
 nat_ipv6 () {
 # Create a routed bridge xml file for IPv4 (NAT) and IPv6 private ranges
 cat << EOF > ${path}/${name}.xml
@@ -139,8 +172,9 @@ check_type () {
 # Check if the bridge type paramter given is 'isolated' or 'nat'
 case ${type} in
     isolated) isolated ;;
-    nat) nat_ipv6 ; report_nat_ipv6 ;;
-    *) echo "isolated or nat ? exit" ; exit ;;
+    nat) nat ; report_nat ;;
+    full) nat_ipv6 ; report_nat_ipv6 ;;
+    *) echo "isolated, nat or full ? exit" ; exit ;;
 esac
 }
 
