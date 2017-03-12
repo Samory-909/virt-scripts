@@ -14,7 +14,7 @@ Deux facilités réseaux :
 Deux machines :
 
 * Un client connecté au switch `lan101` (eth0)
-* Un routeur connecté au switch `lan101` (eth0) et au switch `wan101` (eth1) qui rendra les services DNS, DHCP, DHCPv6, SLAAC sur lan101. La plage du LAN sont
+* Un routeur connecté au switch `lan101` (eth0) et au switch `wan101` (eth1) qui rendra les services DNS, DHCP, DHCPv6, SLAAC sur lan101. Les plages du LAN sont adressées en 192.168.168.0/24 et fd00:168:168::/64.
 
 ## Usage
 
