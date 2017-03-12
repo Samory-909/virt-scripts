@@ -8,13 +8,13 @@
 
 Deux facilités réseaux :
 
-* Un commutateur (switch) isolé qui fait office de réseau local appelé lan101
-* Un routeur NAT/IPv6 qui fait office d'Internet appelé wan101
+* Un commutateur (switch) isolé qui fait office de réseau local appelé `lan101`
+* Un routeur NAT/IPv6 qui fait office d'Internet appelé `wan101`
 
 Deux machines :
 
-* Un client connecté au switch lan101 (eth0)
-* Un routeur connecté au switch lan101 (eth0) et au switch wan101 (eth1) qui rendra les services DNS, DHCP, DHCPv6, SLAAC sur lan101. La plage du LAN sont
+* Un client connecté au switch `lan101` (eth0)
+* Un routeur connecté au switch `lan101` (eth0) et au switch `wan101` (eth1) qui rendra les services DNS, DHCP, DHCPv6, SLAAC sur lan101. La plage du LAN sont
 
 ## Usage
 
@@ -41,9 +41,7 @@ bash -x router-firewall.sh
 
 Sortir de `r101`
 
-Entrer dans `c1-101`
-
-Faire tout le diagnostic TCP/IP
+Entrer dans `pc1-101` et y réaliser le diagnostic TCP/IP
 
 Source du lab101 : https://github.com/goffinet/virt-scripts/blob/master/labs/101/
 
