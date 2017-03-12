@@ -1,4 +1,6 @@
 #!/bin/bash
+## Check Variables
+connection="System eth0"
 ip4="192.168.168"
 ip6="fd00:168:168"
 lan="eth0"
