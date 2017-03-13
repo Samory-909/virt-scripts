@@ -57,7 +57,7 @@ cat /sys/module/kvm_intel/parameters/nested
 
 services_activation() {
 echo "Activate all those services"
-sudo systemctl stop firewalld
+#sudo systemctl stop firewalld
 sudo systemctl restart libvirtd
 sudo virt-host-validate
 }
