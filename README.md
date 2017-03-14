@@ -1,5 +1,7 @@
 # Virt-scripts
 
+test
+
 This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd (on Centos 7 or Debian Jessie hosts). 
 The main goal is to spawn quickly linux guests for lab purposes. But we can find other subsequents objectives as coding/scripting, automation or virtual networks and system management, helping to understand virtual infrastructures technologies and architectures. Only for educational purposes.
 
