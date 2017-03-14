@@ -43,7 +43,7 @@ Sortir de `r101`
 
 Entrer dans `pc1-101` et y réaliser le diagnostic TCP/IP
 
-Note : on déployer automatiquement ce script dans la machine virtuelle.
+Note : on peut déployer automatiquement ce script dans la machine virtuelle.
 
 ```
 cd ~/virt-scripts
