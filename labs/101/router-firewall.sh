@@ -135,16 +135,16 @@ cat /.autorelabel ; reboot
 }
 
 ## lan and wan interface configuration with NetworkManager (disabled)
-#1a_interfaces
+1a_interfaces
 ## lan and wan interface configuration with ifcfg files (enabled)
-1b_interfaces
+#1b_interfaces
 ## IPv4/IPv6 Routing
 2_routing
 ## Firewall configuration with Firewalld (disabled)
-#3a_firewall
+3a_firewall
 ## Firewall configuration with Netfilter/Iptables (disabled)
-3b_firewall
+#3b_firewall
 ## DHCP, DHCPv6, SLAAC, DNS Service
 4_dhcp-dns
 ## Selinux configuration stuff (disabled)
-5_selinux_configuration
+#5_selinux_configuration

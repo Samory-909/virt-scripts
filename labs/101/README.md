@@ -21,17 +21,17 @@ Deux machines :
 Déploiement de la topologie.
 
 ```
-cd virt-scripts
+cd ~/virt-scripts
 labs/101/start.sh
 ```
 
-Entrer dans le routeur virtuel
+Entrer dans le routeur virtuel.
 
 ```
 virsh console r101
 ```
 
-Lancer le script de configuration
+Lancer le script de configuration.
 
 ```
 wget https://raw.githubusercontent.com/goffinet/virt-scripts/master/labs/101/router-firewall.sh
@@ -42,6 +42,13 @@ bash -x router-firewall.sh
 Sortir de `r101`
 
 Entrer dans `pc1-101` et y réaliser le diagnostic TCP/IP
+
+Note : on déployer automatiquement ce script dans la machine virtuelle.
+
+```
+cd ~/virt-scripts
+labs/101/deploy.sh
+```
 
 Source du lab101 : https://github.com/goffinet/virt-scripts/blob/master/labs/101/
 
