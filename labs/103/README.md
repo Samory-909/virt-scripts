@@ -117,7 +117,7 @@ r4-103
 
 ```
 
-## Interfaces verificatio (R1)
+## Interfaces verification (R1)
 
 In the Linux shell :
 
