@@ -41,6 +41,7 @@ cat /sys/module/kvm_intel/parameters/nested
 
 centos7_prep() { 
 echo " Upgrade the system"
+sudo yum -y install epel-release
 sudo yum -y upgrade
 echo "Virtualization host installation"
 sudo yum -y group install "Virtualization Host"
