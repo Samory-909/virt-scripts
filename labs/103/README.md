@@ -26,7 +26,7 @@ r2-103# exit
 ```
 
 
-## End to end connectivity frome on of routers to PC
+## End to end connectivity from one of routers to each end PC
 
 ```
 for id in 1 2 3 4 ; do
@@ -40,7 +40,7 @@ ping -c1 $(ssh 10.103.0.${id} "cat /var/lib/dnsmasq/dnsmasq.leases | grep pc | c
 done
 ```
 
-## End to end connectivity from one PC to each LAN Gateway interface
+## End to end connectivity from one PC to each LAN gateway interface
 
 ```
 for id in 1 2 3 4 ; do
