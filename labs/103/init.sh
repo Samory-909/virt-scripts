@@ -48,7 +48,7 @@ yum -y install dnsmasq*
 echo "domain=$domain" > /etc/dnsmasq.d/eth0.conf
 echo "dhcp-range=${ip4}.${id}.50,${ip4}.${id}.150,255.255.255.0,12h" > /etc/dnsmasq.d/eth0.conf
 echo "dhcp-option=3,${ip4}.1" >> /etc/dnsmasq.d/eth0.conf
-echo "dhcp-range=${ip6}::2,${ip6}::500,slaac" >> /etc/dnsmasq.d/eth0.conf
+echo "dhcp-range=${ip6}:${id}::,ra-stateless,ra-names" >> /etc/dnsmasq.d/eth0.conf
 systemctl enable dnsmasq
 systemctl start dnsmasq
 }
