@@ -76,9 +76,9 @@ interface eth0
 interface eth1
  ipv6 ospf6 priority 1
 router ospf6
- router-id 1.1.1.1
- interface eth0
- interface eth1
+ router-id ${id}.${id}.${id}.${id}
+ interface eth0 area 0.0.0.0
+ interface eth1 area 0.0.0.0
 EOF
 chown quagga:quagga /etc/quagga/ospf6d.conf
 setsebool -P zebra_write_config 1
