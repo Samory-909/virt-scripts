@@ -83,7 +83,7 @@ r2-103# exit
 
 ```
 for id in 1 2 3 4 ; do
-if [ -z /root/.ssh/id_rsa.pub ] ; then
+if [ ! -e /root/.ssh/id_rsa.pub ] ; then
 ssh-keygen -q ; fi
 ssh-copy-id 10.103.0.${id}
 done
