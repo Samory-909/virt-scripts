@@ -89,6 +89,93 @@ cd virt-scripts
 labs/103/deploy.sh
 ```
 
+## Virtual machines and networks
+
+```
+~/virt-scripts# virsh list --name
+pc1-103
+pc2-103
+pc3-103
+pc4-103
+r1-103
+r2-103
+r3-103
+r4-103
+```
+
+
+```
+~/virt-scripts# virsh net-list
+ Name                 State      Autostart     Persistent
+----------------------------------------------------------
+ default              active     yes           yes
+ lan1-103             active     yes           yes
+ lan2-103             active     yes           yes
+ lan3-103             active     yes           yes
+ lan4-103             active     yes           yes
+ wan-103              active     yes           yes
+
+```
+
+## Interfaces verificatio (R1)
+
+In the Linux shell :
+
+```
+[root@r1-103 ~]# ip link
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT qlen 1000
+    link/ether 52:54:00:c3:b1:cd brd ff:ff:ff:ff:ff:ff
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT qlen 1000
+    link/ether 02:8c:da:b4:5d:fa brd ff:ff:ff:ff:ff:ff
+4: eth2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT qlen 1000
+    link/ether 02:0a:a9:ea:9b:83 brd ff:ff:ff:ff:ff:ff
+[root@r1-103 ~]# nmcli d
+DEVICE  TYPE      STATE         CONNECTION
+eth0    ethernet  connected     System eth0
+eth1    ethernet  connected     Wired connection 1
+eth2    ethernet  disconnected  --
+lo      loopback  unmanaged     --
+```
+
+The eth2 is used to provide network in the firstboot posy-installation that install Quagga ansd Dnsmasq. This 'disconnected' by NetworkManager.
+
+In the Quagga shell :
+
+```
+[root@r1-103 ~]# vtysh
+
+Hello, this is Quagga (version 0.99.22.4).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+r1-103# show interface
+Interface eth0 is up, line protocol detection is disabled
+  index 2 metric 1 mtu 1500
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 52:54:00:c3:b1:cd
+  inet 10.103.1.1/24 broadcast 10.103.1.255
+  inet6 fd00:103:1::1/64
+  inet6 fe80::5054:ff:fec3:b1cd/64
+Interface eth1 is up, line protocol detection is disabled
+  index 3 metric 1 mtu 1500
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 02:8c:da:b4:5d:fa
+  inet 10.103.0.1/24 broadcast 10.103.0.255
+  inet6 fd00:103::1/64
+  inet6 fe80::9e43:5599:6015:6630/64
+Interface eth2 is up, line protocol detection is disabled
+  index 4 metric 1 mtu 1500
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 02:0a:a9:ea:9b:83
+Interface lo is up, line protocol detection is disabled
+  index 1 metric 1 mtu 65536
+  flags: <UP,LOOPBACK,RUNNING>
+  inet 127.0.0.1/8
+  inet6 ::1/128
+```
+
+
 ## IPv4/IPv6 routing table on r2-103
 
 ```
