@@ -69,11 +69,25 @@ router ospf
  network ${ip4}.${id}.0/24 area 0.0.0.0
 EOF
 chown quagga:quagga /etc/quagga/ospfd.conf
+cat << EOF > /etc/quagga/ospf6d.conf
+interface eth0
+ ipv6 ospf6 passive
+ ipv6 ospf6 priority 1
+interface eth1
+ ipv6 ospf6 priority 1
+router ospf6
+ router-id 1.1.1.1
+ interface eth0
+ interface eth1
+EOF
+chown quagga:quagga /etc/quagga/ospf6d.conf
 setsebool -P zebra_write_config 1
 systemctl enable zebra
 systemctl start zebra
 systemctl enable ospfd
 systemctl start ospfd
+systemctl enable ospf6d
+systemctl start ospf6d
 }
 
 management_network_down () {

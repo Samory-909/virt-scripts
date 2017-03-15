@@ -34,6 +34,25 @@
 
 ```
 
+## First : Start
+
+Create the topology :
+
+```
+cd
+cd virt-scripts
+labs/103/start.sh
+```
+
+## Secund : Deploy
+
+Deploy the configuration located in the `init.sh` script :
+
+```
+cd
+cd virt-scripts
+labs/103/deploy.sh
+```
 
 ## Routing table on r2-103
 
