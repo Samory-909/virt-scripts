@@ -23,7 +23,7 @@ fi
 bridges_creation () {
 # bridges creation
 ./add-bridge.sh lan-$name isolated
-./add-bridge.sh internet-$name nat
+./add-bridge.sh internet-$name full
 }
 
 openwrt_installation () {
