@@ -45,7 +45,7 @@ if egrep -q "eth|ens|em" <<< $bridge ; then
 ip link set eth0 promisc on
 cat << EOF > /tmp/direct-$guest.xml
 <interface type='direct'>
-  <source dev='eth0' mode='bridge'/>
+  <source dev='$bridge' mode='bridge'/>
   <model type='virtio'/>
 </interface>
 EOF
