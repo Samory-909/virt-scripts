@@ -27,7 +27,7 @@ size="8"
 # Hypervisor can be 'qemu', 'kvm' or 'xen'
 hypervisor="kvm"
 # RAM in Mb
-memory="512"
+memory="256"
 # Graphics 'none' or 'vnc'
 graphics="none"
 # Network interface and model 'virtio' or 'rtl8139' or 'e1000'
@@ -83,7 +83,7 @@ fi
 cp /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
 
 ## Customize this new guest disk 
-virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet
+##virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet
 #virt-sysprep -a guest.img --firstboot ./yum-update.sh --firstboot ./set-desktop.sh
 #virt-sysprep --script --run-command --upload
 
