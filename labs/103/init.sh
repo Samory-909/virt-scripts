@@ -7,6 +7,7 @@ ip4="10.103"
 ip6="fd00:103"
 lan="eth0"
 wan="eth1"
+domain="lab$id"
 
 1a_interfaces () {
 #hostnamectl set-hostname router
@@ -45,8 +46,8 @@ systemctl stop ip6tables
 
 4_dhcp-dns () {
 yum -y install dnsmasq*
-echo "domain=$domain" > /etc/dnsmasq.d/eth0.conf
-echo "dhcp-range=${ip4}.${id}.50,${ip4}.${id}.150,255.255.255.0,12h" > /etc/dnsmasq.d/eth0.conf
+echo "domain=${domain}" > /etc/dnsmasq.d/eth0.conf
+echo "dhcp-range=${ip4}.${id}.50,${ip4}.${id}.150,255.255.255.0,12h" >> /etc/dnsmasq.d/eth0.conf
 echo "dhcp-option=3,${ip4}.1" >> /etc/dnsmasq.d/eth0.conf
 echo "dhcp-range=${ip6}:${id}::,ra-stateless,ra-names" >> /etc/dnsmasq.d/eth0.conf
 systemctl enable dnsmasq
