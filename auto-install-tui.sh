@@ -9,7 +9,8 @@ if [ $exitstatus = 0 ]; then
 distro=$(whiptail --title "Virt-Scripts - Distribution" --radiolist "Choisissez votre distriubtion linux" 10 60 3 \
 "ubuntu" "Ubuntu 16.04 LTS" ON \
 "debian" "Debian 8 (Jessie)" OFF \
-"centos" "Centos 7" OFF  3>&1 1>&2 2>&3)
+"centos" "Centos 7" OFF \
+"fedora" "Fedora 25" OFF  3>&1 1>&2 2>&3)
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
 ./auto-install.sh $distro $vmname

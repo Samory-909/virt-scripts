@@ -1,48 +1,36 @@
 #!/bin/bash
-#Centos 7, Fedora 25, Debian 8 Jessie or Ubuntu 16.04 Xenial fully automatic installation by HTTP Repos and response file via local HTTP.
+#Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installation by HTTP Repos and response file via local HTTP.
 image=$1 # centos, debian, ubuntu
 name=$2
-bridge="virbr0"
-bridgeip4="192.168.122.1"
-country="nl"
-url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
-url_debian_mirror="http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/"
-url_centos_mirror="http://mirror.i3d.net/pub/centos/7/os/x86_64/"
-curl -V >/dev/null 2>&1 || { echo >&2 "Please install curl"; exit 2; }
-url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-25&arch=x86_64" 2>&1 | grep ${country} | head -n 1)
-#ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
-#ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/jessie/main/installer-amd64/
-#ovh_centos_mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64
-#belnet_ubuntu_mirror=http://ftp.belnet.be/ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/
-#belnet_debian_mirror=http://ftp.belnet.be/debian/dists/jessie/main/installer-amd64/
-#belnet_centos_mirror=http://ftp.belnet.be/ftp.centos.org/7/os/x86_64
-#local_ubuntu_iso=/var/lib/iso/ubuntu-16.04.1-server-amd64.iso
-#url_ubuntu_iso=http://releases.ubuntu.com/16.04/ubuntu-16.04.1-server-amd64.iso
-#local_debian_iso=/var/lib/iso/debian-8.6.0-amd64-netinst.iso
-#url_debian_iso=http://cdimage.debian.org/debian-cd/8.6.0/amd64/iso-cd/debian-8.6.0-amd64-netinst.iso
-#local_centos_iso=/var/lib/iso/CentOS-7-x86_64-DVD-1611.iso
-#url_centos_iso=http://ftp.belnet.be/ftp.centos.org/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso
-ubuntu_mirror=$url_ubuntu_mirror
-debian_mirror=$url_debian_mirror
-centos_mirror=$url_centos_mirror
-fedora_mirror=$url_fedora_mirror
+fr_ubuntu_mirror=http://fr.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/
+fr_debian_mirror=http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/
+ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
+ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/jessie/main/installer-amd64/
+ovh_centos_mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64
+belnet_ubuntu_mirror=http://ftp.belnet.be/ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/
+belnet_debian_mirror=http://ftp.belnet.be/debian/dists/jessie/main/installer-amd64/
+belnet_centos_mirror=http://ftp.belnet.be/ftp.centos.org/7/os/x86_64
+local_ubuntu_iso=/var/lib/iso/ubuntu-16.04.1-server-amd64.iso
+url_ubuntu_iso=http://releases.ubuntu.com/16.04/ubuntu-16.04.1-server-amd64.iso
+local_debian_iso=/var/lib/iso/debian-8.6.0-amd64-netinst.iso
+url_debian_iso=http://cdimage.debian.org/debian-cd/8.6.0/amd64/iso-cd/debian-8.6.0-amd64-netinst.iso
+local_centos_iso=/var/lib/iso/CentOS-7-x86_64-DVD-1611.iso
+url_centos_iso=http://ftp.belnet.be/ftp.centos.org/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso
+ubuntu_mirror=$belnet_ubuntu_mirror
+debian_mirror=$fr_debian_mirror
+centos_mirror=$belnet_centos_mirror
 autoconsole=""
 #autoconsole="--noautoconsole"
-url_configuration="http://${bridgeip4}/conf/${image}-${name}.cfg"
-
-usage () {
-echo "Usage : $0 [ centos | fedora | debian | ubuntu ] vm_name"
-}
 
 check_guest_name () {
 if [ -z "${name}" ]; then
-echo "Centos 7, Fedora 25, Debian 8 Jessie or Ubuntu 16.04 Xenial fully automatic installation by HTTP Repos and response file via local HTTP."
-usage
-echo "Please provide one distribution centos, fedora, debian, ubuntu and one guest name: exit"
+echo "Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installation by HTTP Repos and response file via local HTTP."
+echo "Usage : $0 [ centos | debian | ubuntu ] nom_de_vm"
+echo "Please provide one distribution centos, debian, ubuntu and one guest name: exit"
 exit
 fi
 if grep -qw ${name} <<< $(virsh list --all --name)  ; then
-usage
+echo "Usage : $0 [ centos | debian | ubuntu ] nom_de_vm"
 echo "Please provide a defined guest name that is not in use : exit"
 exit
 fi
@@ -66,29 +54,12 @@ else
 fi
 }
 
-launch_guest () {
-if ! grep -q "vmx" /proc/cpuinfo ; then echo "Please enable virtualization instructions" ; exit 1 ; fi
-{ grep -q vmx /proc/cpuinfo ; [ $? == 0 ]; } || { echo "Please enable virtualization instructions" ; exit 1 ;  }
-[ `grep -c vmx /proc/cpuinfo` == 0 ] && { echo "Please enable virtualization instructions" ; exit 1 ;  }
-virt-install -h >/dev/null 2>&1 || { echo >&2 "Please install libvirt"; exit 2; }
-virt-install \
---virt-type=kvm \
---name=$name \
---disk path=/var/lib/libvirt/images/$name.qcow2,size=8,format=qcow2 \
---ram=$ram \
---vcpus=1 \
---os-variant=$os \
---network bridge=$bridge \
---graphics none \
---noreboot \
---console pty,target_type=serial \
---location $mirror \
--x "auto=true hostname=$name domain= $config text console=ttyS0,115200n8 serial $autoconsole"
-}
+ubuntu_install () {
+local url=http://192.168.122.1/conf/ubuntu1604-preseed.cfg
+local mirror=$ubuntu_mirror
 
-ubuntu_response_file () {
-touch /var/www/html/conf/${image}-${name}.cfg
-cat << EOF > /var/www/html/conf/${image}-${name}.cfg
+touch /var/www/html/conf/ubuntu1604-preseed.cfg
+cat << EOF > /var/www/html/conf/ubuntu1604-preseed.cfg
 d-i debian-installer/language                               string      en_US:en
 d-i debian-installer/country                                string      US
 d-i debian-installer/locale                                 string      en_US
@@ -150,11 +121,27 @@ d-i finish-install/keep-consoles                            boolean     false
 d-i cdrom-detect/eject                                      boolean     true
 d-i preseed/late_command in-target sed -i 's/PermitRootLogin\ prohibit-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config ; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/7cf2c788c1c5600f7433d16f8f352c877a281a6a/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh ; in-target shutdown -h now
 EOF
+
+virt-install \
+--virt-type kvm \
+--name=$name \
+--disk path=/var/lib/libvirt/images/$name.qcow2,size=8,format=qcow2 \
+--ram=512 \
+--vcpus=1 \
+--os-variant=ubuntusaucy \
+--network bridge=virbr0 \
+--graphics none \
+--console pty,target_type=serial \
+--location $mirror \
+-x "auto=true hostname=$name domain= url=$url text console=ttyS0,115200n8 serial $autoconsole"
 }
 
-debian_response_file () {
-touch /var/www/html/conf/${image}-${name}.cfg
-cat << EOF > /var/www/html/conf/${image}-${name}.cfg
+debian_install () {
+local url=http://192.168.122.1/conf/debian8-preseed.cfg
+local mirror=$debian_mirror
+
+touch /var/www/html/conf/debian8-preseed.cfg
+cat << EOF > /var/www/html/conf/debian8-preseed.cfg
 d-i debian-installer/locale string en_US
 d-i keyboard-configuration/xkb-keymap select be
 d-i netcfg/choose_interface select auto
@@ -197,15 +184,33 @@ d-i finish-install/keep-consoles boolean true
 d-i finish-install/reboot_in_progress note
 d-i preseed/late_command string in-target sed -i 's/PermitRootLogin\ without-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/7cf2c788c1c5600f7433d16f8f352c877a281a6a/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh ; in-target shutdown -h now
 EOF
+
+virt-install \
+--virt-type kvm \
+--name=$name \
+--disk path=/var/lib/libvirt/images/$name.qcow2,size=8,format=qcow2 \
+--ram=512 \
+--vcpus=1 \
+--os-variant=debianwheezy \
+--network bridge=virbr0 \
+--graphics none \
+--console pty,target_type=serial \
+--location $mirror \
+-x "auto=true hostname=$name domain= url=$url text console=ttyS0,115200n8 serial $autoconsole"
 }
 
-redhat_response_file () {
+centos_install () {
+
+local url=http://192.168.122.1/conf/centos7.ks
+local mirror=$centos_mirror
+
 read -r -d '' packages <<- EOM
 @core
 wget
 EOM
-touch /var/www/html/conf/${image}-${name}.cfg
-cat << EOF > /var/www/html/conf/${image}-${name}.cfg
+
+touch /var/www/html/conf/centos7.ks
+cat << EOF > /var/www/html/conf/centos7.ks
 install
 reboot
 rootpw --plaintext testtest
@@ -246,41 +251,37 @@ yum -y update && yum -y upgrade
 #sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 %end
 EOF
+
+
+virt-install \
+--virt-type=kvm \
+--name=$name \
+--disk path=/var/lib/libvirt/images/$name.qcow2,size=8,format=qcow2 \
+--ram=2048 \
+--vcpus=1 \
+--os-variant=rhel7 \
+--network bridge=virbr0 \
+--graphics none \
+--noreboot \
+--console pty,target_type=serial \
+--location $mirror \
+-x "auto=true hostname=$name domain= ks=$url text console=ttyS0,115200n8 serial $autoconsole"
 }
 
-configure_installation () {
-case $image in
-    centos)
-        mirror=$centos_mirror
-        ram="2048" #requiremnt
-        os="rhel7"
-        config="ks=$url_configuration"
-        redhat_response_file ;;
-    fedora)
-        mirror=$fedora_mirror
-        ram="2048" #requirement
-        os="rhel7"
-        config="ks=$url_configuration"
-        redhat_response_file ;;
-    debian)
-        mirror=$debian_mirror
-        ram="512"
-        os="debianwheezy"
-        config="url=$url_configuration"
-        debian_response_file ;;
-    ubuntu)
-        mirror=$ubuntu_mirror
-        ram="512"
-        os="ubuntusaucy"
-        config="url=$url_configuration"
-        ubuntu_response_file ;;
-    *) 
-        usage
-        echo "Please provide one of those distributions" ;;
-esac
+start_install () {
+if [ $image = centos ] ; then
+ centos_install
+elif [ $image = debian ] ; then
+ debian_install
+elif [ $image = ubuntu ] ; then
+ ubuntu_install
+else
+ echo "Error : ./auto-install.sh [ centos | debian | ubuntu ] nom_de_vm"
+ echo "Please provide one of those distributions"
+ exit
+fi
 }
 
 check_guest_name
 check_apache
-configure_installation
-launch_guest
+start_install
