@@ -363,6 +363,6 @@ To be continued ...
 ## Todo
 
 * `auto-install.sh` 
-  * Fedora
+  * ~~Fedora~~
 * `create_repo.sh` : create local repo
 * Revise code and comment, comment, comment ...
