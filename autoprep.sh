@@ -29,9 +29,9 @@ apt-get -y install sudo
 sudo apt-get update && sudo apt-get -y upgrade
 echo "Virtualization host installation"
 sudo apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime
-echo "kcli libvirt  wrapper installation"
+#echo "kcli libvirt  wrapper installation"
 sudo apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
-sudo pip install kcli
+#sudo pip install kcli
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
 sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
@@ -46,9 +46,9 @@ sudo yum -y upgrade
 echo "Virtualization host installation"
 sudo yum -y group install "Virtualization Host"
 sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer virt-manager
-echo "kcli libvirt  wrapper installation"
+#echo "kcli libvirt  wrapper installation"
 sudo yum -y install gcc libvirt-devel python-devel genisoimage qemu-kvm nmap-ncat python-pip
-sudo pip install kcli
+#sudo pip install kcli
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
 sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
