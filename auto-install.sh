@@ -8,14 +8,15 @@ country="nl"
 url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
 url_debian_mirror="http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/"
 url_centos_mirror="http://mirror.i3d.net/pub/centos/7/os/x86_64/"
+url_centos_mirror="http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/"
 curl -V >/dev/null 2>&1 || { echo >&2 "Please install curl"; exit 2; }
 url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-25&arch=x86_64" 2>&1 | grep ${country} | head -n 1)
 #ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
 #ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/jessie/main/installer-amd64/
-#ovh_centos_mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64
+#ovh_centos_mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/
 #belnet_ubuntu_mirror=http://ftp.belnet.be/ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/
 #belnet_debian_mirror=http://ftp.belnet.be/debian/dists/jessie/main/installer-amd64/
-#belnet_centos_mirror=http://ftp.belnet.be/ftp.centos.org/7/os/x86_64
+#belnet_centos_mirror=http://ftp.belnet.be/ftp.centos.org/7/os/x86_64/
 #local_ubuntu_iso=/var/lib/iso/ubuntu-16.04.1-server-amd64.iso
 #url_ubuntu_iso=http://releases.ubuntu.com/16.04/ubuntu-16.04.1-server-amd64.iso
 #local_debian_iso=/var/lib/iso/debian-8.6.0-amd64-netinst.iso
