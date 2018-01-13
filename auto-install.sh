@@ -4,11 +4,10 @@ image=$1 # centos, debian, ubuntu
 name=$2
 bridge="virbr0"
 bridgeip4="192.168.122.1"
-country="nl"
+country="fr"
 url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
 url_debian_mirror="http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/"
-url_centos_mirror="http://mirror.i3d.net/pub/centos/7/os/x86_64/"
-url_centos_mirror="http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/"
+url_centos_mirror="http://mirror.centos.org/centos/7/os/x86_64/"
 curl -V >/dev/null 2>&1 || { echo >&2 "Please install curl"; exit 2; }
 url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-25&arch=x86_64" 2>&1 | grep ${country} | head -n 1)
 #ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
@@ -84,7 +83,7 @@ virt-install \
 --noreboot \
 --console pty,target_type=serial \
 --location $mirror \
--x "auto=true hostname=$name domain= $config text console=ttyS0,115200n8 serial $autoconsole"
+-x "auto=true hostname=$name domain= $config text console=ttyS0 $autoconsole"
 }
 
 ubuntu_response_file () {
