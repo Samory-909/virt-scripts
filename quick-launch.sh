@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 ## This script import and launch minimal KVM images with a text console         ##
 ## First download all the qcow2 images on https://get.goffinet.org/kvm/         ##
 ## Usage : bash define-guest.sh <name> <image>                                  ##
@@ -85,7 +85,7 @@ fi
 qemu-img create -f qcow2 -b /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
 
 ## Customize this new guest disk
-#virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet
+virt-sysprep -v -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel 
 #virt-sysprep -a guest.img --firstboot ./yum-update.sh --firstboot ./set-desktop.sh
 #virt-sysprep --script --run-command --upload
 
@@ -102,7 +102,3 @@ virt-install \
 --console pty,target_type=serial \
 --import \
 --noautoconsole $nested
-
-## Customize this new guest guest
-
-virt-customize -a /var/lib/libvirt/images/$disk -d $name --hostname $name --selinux-relabel --quiet
