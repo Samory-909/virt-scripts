@@ -5,8 +5,9 @@ name=$2
 bridge="virbr0"
 bridgeip4="192.168.122.1"
 country="fr"
-url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
-url_debian_mirror="http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/"
+url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/"
+#url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
+url_debian_mirror="http://ftp.debian.org/debian/dists/stable/main/installer-amd64/"
 url_centos_mirror="http://mirror.centos.org/centos/7/os/x86_64/"
 curl -V >/dev/null 2>&1 || { echo >&2 "Please install curl"; exit 2; }
 url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-25&arch=x86_64" 2>&1 | grep ${country} | head -n 1)
@@ -274,7 +275,7 @@ case $image in
         os="ubuntusaucy"
         config="url=$url_configuration"
         ubuntu_response_file ;;
-    *) 
+    *)
         usage
         echo "Please provide one of those distributions" ;;
 esac

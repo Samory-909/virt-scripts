@@ -10,7 +10,7 @@
 name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
-imagename="debian7 debian8 centos7 ubuntu1604 metasploitable kali arch"
+imagename="debian7 debian8 debian9 centos7 ubuntu1604 metasploitable kali arch"
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)

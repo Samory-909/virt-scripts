@@ -1,4 +1,4 @@
-imagename="debian7 debian8 centos7 ubuntu1604 metasploitable kali arch"
+imagename="debian7 debian8 debian9 centos7 ubuntu1604 metasploitable kali arch"
 image=$4
 # Generate an unique string
 uuid=$(uuidgen -t)
@@ -74,7 +74,7 @@ cp /var/lib/libvirt/images/$image.qcow2 /var/lib/libvirt/images/$disk
 }
 
 customize_new_disk () {
-## Customize this new guest disk 
+## Customize this new guest disk
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet
 #virt-sysprep -a guest.img --firstboot ./yum-update.sh --firstboot ./set-desktop.sh
 #virt-sysprep --script --run-command --upload

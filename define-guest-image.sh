@@ -3,14 +3,14 @@
 ## First download all the qcow2 images on https://get.goffinet.org/kvm/         ##
 ## Usage : bash define-guest.sh <name> <image>                                  ##
 ## Reset root password with the procedure :                                     ##
-## https://linux.goffinet.org/07_processus_et_demarrage.html#8-password-recovery## 
+## https://linux.goffinet.org/07_processus_et_demarrage.html#8-password-recovery##
 ##################################################################################
 ## Please check all the variables
 # First parmater as name
 name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
-imagename="debian7 debian8 centos7 ubuntu1604 metasploitable kali arch"
+imagename="debian7 debian8 debian9 centos7 ubuntu1604 metasploitable kali arch"
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)
@@ -82,7 +82,7 @@ fi
 ## Local image copy to the default storage pool ##
 cp /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
 
-## Customize this new guest disk 
+## Customize this new guest disk
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet
 #virt-sysprep -a guest.img --firstboot ./yum-update.sh --firstboot ./set-desktop.sh
 #virt-sysprep --script --run-command --upload
