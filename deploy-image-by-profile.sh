@@ -1,4 +1,4 @@
-imagename="debian7 debian8 debian9 centos7 ubuntu1604 metasploitable kali arch"
+imagename="debian7 debian8 debian9 centos7 ubuntu1604 ubuntu1804 metasploitable kali arch"
 image=$4
 # Generate an unique string
 uuid=$(uuidgen -t)
