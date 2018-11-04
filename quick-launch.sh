@@ -85,7 +85,11 @@ fi
 qemu-img create -f qcow2 -b /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
 
 ## Customize this new guest disk
+if [ $image = "ubuntu1804.qcow2" ]; then
+sleep 1
+else
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
+fi
 #virt-sysprep -a guest.img --firstboot ./yum-update.sh --firstboot ./set-desktop.sh
 #virt-sysprep --script --run-command --upload
 
