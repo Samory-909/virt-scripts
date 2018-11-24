@@ -49,7 +49,6 @@ nested="--cpu host-passthrough"
 fi
 if [ $image = "docker.qcow2" ]; then
 memory="2048"
-nested="--cpu host-passthrough"
 os="ubuntu17.10"
 fi
 if [ $image = "ubuntu1804.qcow2" ]; then
