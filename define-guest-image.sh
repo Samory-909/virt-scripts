@@ -52,6 +52,7 @@ memory="2048"
 os="ubuntu17.10"
 fi
 if [ $image = "ubuntu1804.qcow2" ]; then
+nested="--cpu host-passthrough"
 os="ubuntu17.10"
 fi
 if [ $image = "centos7.qcow2" ]; then
@@ -105,7 +106,6 @@ virt-install \
 --ram=$memory \
 --vcpus=$vcpu \
 --os-type=linux \
---os-variant=$os \
 --network bridge=$interface,model=$model \
 --graphics $graphics \
 --console pty,target_type=serial \
