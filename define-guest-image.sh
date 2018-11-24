@@ -106,6 +106,7 @@ virt-install \
 --ram=$memory \
 --vcpus=$vcpu \
 --os-type=linux \
+--os-variant=$os \
 --network bridge=$interface,model=$model \
 --graphics $graphics \
 --console pty,target_type=serial \
