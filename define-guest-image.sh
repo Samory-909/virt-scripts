@@ -10,7 +10,7 @@
 name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
-imagename="debian7 debian8 debian9 centos7 ubuntu1604 ubuntu1804 metasploitable kali arch"
+imagename="debian7 debian8 debian9 centos7 ubuntu1604 ubuntu1804 metasploitable kali arch docker"
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)
@@ -47,7 +47,10 @@ if [ $image = "gns3.qcow2" ]; then
 memory="2048"
 nested="--cpu host-passthrough"
 fi
-
+if [ $image = "docker.qcow2" ]; then
+memory="2048"
+nested="--cpu host-passthrough"
+fi
 ## Download the image dialog function : list, choice, sure, download
 usage_message () {
 echo "Usage : $0 <name> <image>"
