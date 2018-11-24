@@ -50,7 +50,15 @@ fi
 if [ $image = "docker.qcow2" ]; then
 memory="2048"
 nested="--cpu host-passthrough"
+os="ubuntu17.10"
 fi
+if [ $image = "ubuntu1804.qcow2" ]; then
+os="ubuntu17.10"
+fi
+if [ $image = "centos7.qcow2" ]; then
+os="centos7.0"
+fi
+
 ## Download the image dialog function : list, choice, sure, download
 usage_message () {
 echo "Usage : $0 <name> <image>"
@@ -97,7 +105,8 @@ virt-install \
 --disk path=/var/lib/libvirt/images/$disk,size=$size,format=qcow2,bus=$diskbus \
 --ram=$memory \
 --vcpus=$vcpu \
---os-variant=linux \
+--os-type=linux \
+--os-variant=$os \
 --network bridge=$interface,model=$model \
 --graphics $graphics \
 --console pty,target_type=serial \
