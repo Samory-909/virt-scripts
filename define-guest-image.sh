@@ -57,7 +57,6 @@ os="ubuntu17.10"
 fi
 if [ $image = "centos7.qcow2" ]; then
 os="centos7.0"
-selinux="virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet"
 fi
 
 ## Download the image dialog function : list, choice, sure, download
@@ -95,10 +94,12 @@ fi
 cp /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
 
 ## Customize this new guest disk
-$selinux
-#virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel --quiet
-#virt-sysprep -a guest.img --firstboot ./yum-update.sh --firstboot ./set-desktop.sh
-#virt-sysprep --script --run-command --upload
+if [ $image = "ubuntu1804.qcow2" ]; then
+sleep 1
+virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo hostnamectl set-hostname $name ; sudo dbus-uuidgen > /etc/machine-id ; sudo reboot"
+else
+virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
+fi
 
 ## Import and lauch the new guest ##
 virt-install \
