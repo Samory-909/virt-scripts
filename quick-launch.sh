@@ -92,7 +92,7 @@ sudo hostnamectl set-hostname $name
 sudo dbus-uuidgen > /etc/machine-id
 sudo reboot
 EOF
-virt-sysprep -a /var/lib/libvirt/images/$disk --operations tmp-files --firstboot /tmp/sysprep-$disk.sh
+virt-sysprep -a /var/lib/libvirt/images/$disk --operations tmp-files --run /tmp/sysprep-$disk.sh
 else
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
 fi
