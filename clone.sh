@@ -13,7 +13,7 @@ exit
 fi
 if grep -qvw "$original" <<< $(virsh list --all --name)  ; then
 echo "Please provide a defined guest name : exit"
-echo "Guests avaible :" 
+echo "Guests avaible :"
 echo "$(virsh list --all --name)"
 exit
 fi
@@ -40,12 +40,7 @@ virt-clone -o $original -n $destination -f /var/lib/libvirt/images/$destination.
 }
 
 prepare () {
-virt-sysprep -d $destination --hostname $destination --selinux-relabel 
-#virt-edit $destination /etc/passwd -e 's/^root:.*?:/root::/'
-#guestfish -a /var/lib/libvirt/images/$destination.qcow2 -i <<EOF
-#write /etc/hostname "$destination\n"
-#EOF
-#write-append /etc/sysconfig/network-scripts/ifcfg-eth0 "DHCP_HOSTNAME=$domain\nHWADDR=$mac\n"
+virt-sysprep -d $destination --operations customize --firstboot-command "touch /.autorelabel ; sudo hostnamectl set-hostname $name ; sudo dbus-uuidgen > /etc/machine-id ; sudo reboot"
 }
 
 sparsify () {

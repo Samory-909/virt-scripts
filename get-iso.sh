@@ -1,4 +1,5 @@
 #!/bin/bash
+# Outdated !
 #Get latest iso of Centos 7, Debian Jessie and Ubuntu Xenial.
 os=$1
 parameters="$#"
@@ -48,7 +49,7 @@ get_iso () {
 mkdir -p $location
 cd $location
 wget $url
-}  
+}
 
 check_parameters
 fix_url

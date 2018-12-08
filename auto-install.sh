@@ -1,16 +1,16 @@
 #!/bin/bash
-#Centos 7, Fedora 25, Debian 8 Jessie or Ubuntu 16.04 Xenial fully automatic installation by HTTP Repos and response file via local HTTP.
+#Centos 7, Fedora 25, Debian 9 Stretch or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
 image=$1 # centos, debian, ubuntu
 name=$2
 bridge="virbr0"
 bridgeip4="192.168.122.1"
 country="fr"
 url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/"
-#url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
 url_debian_mirror="http://ftp.debian.org/debian/dists/stable/main/installer-amd64/"
 url_centos_mirror="http://mirror.centos.org/centos/7/os/x86_64/"
 curl -V >/dev/null 2>&1 || { echo >&2 "Please install curl"; exit 2; }
 url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-25&arch=x86_64" 2>&1 | grep ${country} | head -n 1)
+#url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
 #ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
 #ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/jessie/main/installer-amd64/
 #ovh_centos_mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/

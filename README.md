@@ -2,7 +2,7 @@
 
 test
 
-This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd (on Centos 7 or Debian Jessie hosts). 
+This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd (on Centos 7 or Debian Jessie hosts).
 The main goal is to spawn quickly linux guests for lab purposes. But we can find other subsequents objectives as coding/scripting, automation or virtual networks and system management, helping to understand virtual infrastructures technologies and architectures. Only for educational purposes.
 
 Three groups of scripts :
@@ -34,14 +34,16 @@ Purposes : gold image auto-creation
 
 ## Quickbuilder
 
-Purposes : deploy quickly guests based on pre-builded with previous scripts. Some images are avaible on https://get.goffinet.org/kvm : centos7 debian7 debian8 ubuntu1604 kali metasploitable openwrt15.05.
+Purposes : deploy quickly guests based on pre-builded with previous scripts. Some images are avaible on https://get.goffinet.org/kvm : centos7 centos7.5 debian7 debian8 ubuntu1604 ubuntu1804 kali metasploitable openwrt15.05.
 
-1. `define-guest-image.sh` : deploy pre-builded images (quickbuilder)
+1. `define-guest-image.sh` : deploy pre-builded images (like a quickbuilder, provisionner)
 * `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
+
+But is probably beter to build yourself your appliance with the auto-install.sh script. The root account and the password are in the preseed and kickstart templates included.
 
 ## Devices management
 
-Purposes : change RAM and vcpus, add block devices and network facilities 
+Purposes : change RAM and vcpus, add block devices and network facilities
 
 1. `add-memory.sh` : add RAM
 * `add-vcpu.sh` : set vcpus count
@@ -61,15 +63,15 @@ First clone this project in your home directory :
 cd
 git clone https://github.com/goffinet/virt-scripts
 cd virt-scripts
-``` 
+```
 
 ### Step 1 : Verify your installation
 
-Script : autoprep.sh
+Script : `autoprep.sh`
 
 Description : Setup KVM/Libvirtd/LibguestFS on RHEL7/Centos 7/Debian Jessie.
 
-Usage : 
+Usage :
 
 ```
 # ./autoprep.sh
@@ -78,9 +80,9 @@ Please reboot your host after this step
 Are you sure? [y/N]
 ```
 
-### Step 2 : Get iso images (optionnal)
+### Step 2 : Get iso images (optionnal, outdated)
 
-Script : get-iso.sh
+Script : `get-iso.sh`
 
 Description : Get latest iso of Centos 7, Debian Jessie and Ubuntu Xenial.
 
@@ -93,9 +95,9 @@ Usage : ./get-iso.sh [ centos | debian | ubuntu ]
 
 ### Step 3 : Build a guest automatically
 
-Script : auto-install.sh 
+Script : `auto-install.sh`
 
-Description :  Centos 7, Debian Jessie or Ubuntu Xenial fully automatic installation by HTTP Repo and response file via local HTTP.
+Description :  Centos 7, Debian Stretch or Ubuntu Bionic fully automatic installation by HTTP Repo and response file (preseed or kickstart) via local HTTP server.
 
 Usage :
 
@@ -113,14 +115,14 @@ Note : Escape character is `^]` (CTRL+ `]`)
 
 ### Step 4 : Sparse your native image
 
-Script : sparsify.sh
+Script : `sparsify.sh`
 
 Description : Sparse a disk. Great gain on disk space !
 
 Usage :
 
 ```
-./sparsify.sh 
+./sparsify.sh
 This script sparses an attached disk
 Please provide a the guest name of a destroyed guest: exit
 Usage : ./sparsify.sh <guest name>
@@ -284,7 +286,7 @@ To exit from the text console execute CTRL `]`.
 
 ### Step 8 : Add the guest hostname resolution
 
-Script : 
+Script :
 
 Description : Print a new `/etc/resolv.conf` with the ip address and the hostname of running guests.
 
@@ -325,9 +327,9 @@ Connection to c1 closed.
 
 ### Step 9 : Manage devices
 
-Script : add-bridge.sh 
+Script : add-bridge.sh
 
-Description : add an isolated or ipv4 nat/ipv6 ula libvirt bridge 
+Description : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
 
 Usage :
 
@@ -338,7 +340,7 @@ Usage       : ./add-bridge.sh <name> <interface> <type, isolated or nat>
 Example     : './add-bridge.sh net1 virbr100 isolated' or './add-bridge.sh lan101 virbr101 nat'
 ```
 
-Script : add-storage.sh 
+Script : add-storage.sh
 
 Description : attach an empty bit disk by GB size
 
@@ -362,7 +364,7 @@ To be continued ...
 
 ## Todo
 
-* `auto-install.sh` 
+* `auto-install.sh`
   * ~~Fedora~~
 * `create_repo.sh` : create local repo
 * Revise code and comment, comment, comment ...
