@@ -37,7 +37,7 @@ Purposes : deploy quickly guests based on pre-builded with previous scripts. Som
 1. `define-guest-image.sh` : deploy pre-builded images (like a quickbuilder, provisionner)
 * `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
-But is probably beter to build yourself your appliance with the auto-install.sh script. The root account and the password are in the preseed and kickstart templates included.
+But this is probably beter to build by yourself your appliance with the `auto-install.sh` script. The root account and the password are in the preseed and kickstart templates included.
 
 ## Devices management
 
