@@ -28,7 +28,7 @@ Purposes : gold image auto-creation
 * `sparsify.sh` : optimize space disk on the designated guest
 * `clone.sh` : clone, sysprep and optimize builded guests
 * `hosts-file` : print the running guests and their ipv4 address
-* `nested-physical.sh` : nested installation
+* `nested-physical.sh` : nested virtualization installation on the physical host
 
 ## Quickbuilder
 
