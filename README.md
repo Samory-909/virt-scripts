@@ -5,7 +5,7 @@ The main goal is to spawn quickly linux guests for lab purposes. But we can find
 
 Three groups of scripts :
 
-1. Native installation for Centos 7 Debian 8 and Ubuntu 16.04 and post-installation.
+1. Native installation for Centos 7 Debian 9 and Ubuntu 18.04 and post-installation.
 2. Quickbuilder, guests spwaning with pre-builded images
 3. Devices management
 
