@@ -40,7 +40,7 @@ virt-clone -o $original -n $destination -f /var/lib/libvirt/images/$destination.
 }
 
 prepare () {
-virt-sysprep -d $destination --operations customize --firstboot-command "touch /.autorelabel ; sudo hostnamectl set-hostname $name ; sudo dbus-uuidgen > /etc/machine-id ; sudo reboot"
+virt-sysprep -d $destination --operations customize --firstboot-command "touch /.autorelabel ; sudo hostnamectl set-hostname $destination ; sudo dbus-uuidgen > /etc/machine-id ; sudo reboot"
 }
 
 sparsify () {
