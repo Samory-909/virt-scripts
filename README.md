@@ -180,9 +180,8 @@ Please provide a the guest name of a destroyed guest: exit
 Assume that you have installed three guests with `auto-install.sh` :
 
 ```
-~/virt-scripts# ./auto-install.sh centos7 centos
-~/virt-scripts# ./auto-install.sh debian8 debian
-~/virt-scripts# ./auto-install.sh ubuntu1604 ubuntu
+~/virt-scripts# ./auto-install.sh centos7.6 centos
+~/virt-scripts# ./auto-install.sh ubuntu1804 ubuntu
 ```
 
 And you can verify it :
@@ -191,9 +190,8 @@ And you can verify it :
 ~/virt-scripts# virsh list --all
  Id    Name                           State
 ----------------------------------------------------
- -     centos7                        shut off
- -     debian8                        shut off
- -     ubuntu1604                     shut off
+ -     centos7.6                      shut off
+ -     ubuntu1804                     shut off
 
 ```
 
@@ -202,7 +200,7 @@ Move those images disk into the `virt-scripts` directory and undefine original g
 ```bash
 #!/bin/bash
 cd ~/virt-scripts
-for x in centos7 debian8 ubuntu1604
+for x in centos7.6 ubuntu1804
 do
 mv /var/lib/libvirt/images/$x.qcow2 ./
 virsh undefine $x
@@ -213,7 +211,7 @@ done
 And you can deploy quicky builded and optimized guests based on those images :
 
 ```
-~/virt-scripts# ./define-guest-image.sh c1 centos7
+~/virt-scripts# ./define-guest-image.sh c1 centos7.6
 
 Début d'installation...
 Création du domaine...                                                   |    0 B     00:00
@@ -222,16 +220,7 @@ Création du domaine terminée.  Vous pouvez redémarrer votre domaine en lança
 ```
 
 ```
-~/virt-scripts# ./define-guest-image.sh d1 debian8
-
-Début d'installation...
-Création du domaine...                                                   |    0 B     00:00
-Création du domaine terminée.  Vous pouvez redémarrer votre domaine en lançant :
-  virsh --connect qemu:///system start d1
-```
-
-```
-~/virt-scripts# ./define-guest-image.sh u1 ubuntu1604
+~/virt-scripts# ./define-guest-image.sh u1 ubuntu1804
 
 Début d'installation...
 Création du domaine...                                                   |    0 B     00:00
@@ -245,13 +234,8 @@ Also, I have prebuilded other images for training classes :
 ~/virt-scripts# ./define-guest-image.sh
 Usage : ./define-guest-image.sh <name> <image>
 Please download one of those images :
-https://get.goffinet.org/kvm/debian7.qcow2
-https://get.goffinet.org/kvm/debian8.qcow2
-https://get.goffinet.org/kvm/centos7.qcow2
-https://get.goffinet.org/kvm/ubuntu1604.qcow2
-https://get.goffinet.org/kvm/metasploitable.qcow2
-https://get.goffinet.org/kvm/kali.qcow2
-https://get.goffinet.org/kvm/arch.qcow2
+https://get.goffinet.org/kvm/centos7.6.qcow2
+https://get.goffinet.org/kvm/ubuntu1804.qcow2
 ```
 
 ### Step 7 : Manage guests
@@ -263,8 +247,7 @@ Verify your running guests
  Id    Name                           State
 ----------------------------------------------------
  88    c1                             running
- 89    d1                             running
- 90    u1                             running
+ 89    u1                             running
 ```
 
 Access to the text console
@@ -299,7 +282,6 @@ For example :
 ```
 ./hosts-file.sh
 192.168.122.47 c1
-192.168.122.56 d1
 192.168.122.118 u1
 ```
 
