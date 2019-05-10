@@ -34,8 +34,8 @@ virsh console r101
 Lancer le script de configuration.
 
 ```
-wget https://raw.githubusercontent.com/goffinet/virt-scripts/master/labs/101/router-firewall.sh
-vim router-firewall.sh
+curl https://raw.githubusercontent.com/goffinet/virt-scripts/master/labs/101/router-firewall.sh -o router-firewall.sh
+cat router-firewall.sh
 bash -x router-firewall.sh
 ```
 
@@ -51,4 +51,3 @@ labs/101/deploy.sh
 ```
 
 Source du lab101 : https://github.com/goffinet/virt-scripts/blob/master/labs/101/
-
