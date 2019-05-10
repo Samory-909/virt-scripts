@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 ## Check Variables
 id='4'
 connectionlan="System eth0"
@@ -11,14 +11,12 @@ domain="lab$id"
 
 1a_interfaces () {
 #hostnamectl set-hostname router
-nmcli c mod "$connectionlan" ipv4.method manual
-nmcli c mod "$connectionlan" ipv4.addresses ${ip4}.${id}.1/24
+nmcli c mod "$connectionlan" ipv4.method manual ipv4.addresses ${ip4}.${id}.1/24
 nmcli c mod "$connectionlan" ipv6.method manual ipv6.addresses ${ip6}:${id}::1/64
 nmcli c mod "$connectionlan" connection.zone internal
 nmcli c up  "$connectionlan"
 nmcli c reload "$connectionlan"
-nmcli c mod "$connectionwan" ipv4.method manual
-nmcli c mod "$connectionwan" ipv4.addresses ${ip4}.0.${id}/24
+nmcli c mod "$connectionwan" ipv4.method manual ipv4.addresses ${ip4}.0.${id}/24
 nmcli c mod "$connectionwan" ipv6.method manual ipv6.addresses ${ip6}::${id}/64
 nmcli c mod "$connectionwan" connection.zone internal
 nmcli c up  "$connectionwan"
