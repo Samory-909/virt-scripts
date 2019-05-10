@@ -39,7 +39,7 @@ echo "The image ${destination}${image} already exists."
 cd ${destination}
 remote_sha1="$(curl -s ${url}${image}.sha1)"
 cd ${destination}
-local_sha1="$(sha1sum ${url}${image})"
+local_sha1="$(sha1sum ${image})"
 cd ${wd}
 if [ "${remote_sha1}" = "${local_sha1}" ] ; then
 echo "The local image is exactly the same than the remote"
