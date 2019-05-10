@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script add a new NIC on live guest to a bridged interface 
+# This script add a new NIC on live guest to a bridged interface
 
 guest=$1
 bridge=$2
@@ -10,14 +10,14 @@ parameters=$#
 check_parameters () {
 # Check the numbers of parameters required
 if [ "$parameters" -ne 2  ] ; then
-echo "Description : This script add a new NIC on live guest to an interface" 
+echo "Description : This script add a new NIC on live guest to an interface"
 echo "Usage       : $0 <guest name> <bridge_interface_name>"
 echo "Example     : '$0 guest1 virbr0' add the live guest1 NIC to virbr0"
 echo "Example     : '$0 guest1 eth0' add the live guest1 NIC to eth0"
 exit
 fi
-# Check if the guest name chosen is in live and display help to choose 
-if grep -qvw "$guest" <<< $(virsh list --name)  ; then
+# Check if the guest name chosen is in live and display help to choose
+if grep -qw "$guest" <<< $(virsh list --name)  ; then
 echo "Please provide a live guest name : exit"
 echo "Guests available :"
 echo "$(virsh list --name)"
