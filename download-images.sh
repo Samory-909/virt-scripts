@@ -32,4 +32,5 @@ wget ${url}${image} -O ${destination}${image}
 wget ${url}${image}.sha1 -O ${destination}${image}.sha1
 cd ${destination}
 sha1sum -c ${image}.sha1
+rm -rf ${image}.sha1
 cd ${wd}
