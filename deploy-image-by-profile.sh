@@ -77,11 +77,15 @@ qemu-img create -f qcow2 -b /var/lib/libvirt/images/${image}.qcow2 /var/lib/libv
 
 customize_new_disk () {
 ## Customize this new guest disk
-if [ $image = "ubuntu1804.qcow2" ]; then
+if [ $image = "ubuntu1804" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
 fi
-if [ $image = "centos7.qcow2" ]; then
+if [ $image = "debian9" ]; then
+sleep 1
+virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
+fi
+if [ $image = "centos7" ]; then
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
 fi
 }
@@ -94,7 +98,7 @@ virt-install \
 --disk path=/var/lib/libvirt/images/$disk,size=$size,format=qcow2,bus=$diskbus \
 --ram=$memory \
 --vcpus=$vcpu \
---os-variant=linux \
+--os-type=linux \
 --network network=$network,model=$model \
 --graphics $graphics \
 --console pty,target_type=serial \
