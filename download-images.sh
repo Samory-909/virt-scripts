@@ -35,7 +35,7 @@ case "$response" in
 esac
 }
 
-if [ ${parameters} -ne 1 ] ; then
+if [ ${parameters} -lt 1 ] ; then
 echo "Please provide the image name : "
 echo ${imagename}
 exit
