@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 ## Check Variables
 id='4'
 connectionlan="System eth0"
