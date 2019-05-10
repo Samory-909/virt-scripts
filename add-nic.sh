@@ -56,6 +56,6 @@ fi
 virsh domiflist $guest
 }
 
-check_parameters
+#check_parameters
 mac_address
 attach_nic
