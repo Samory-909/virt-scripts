@@ -11,7 +11,7 @@ parameters=$#
 wd=$PWD
 
 download_image () {
-if [ ${2} = "--force" ] ; then
+if [ "${2}" = "--force" ] ; then
   question
 fi
 curl ${url}${image} -o ${destination}${image}
