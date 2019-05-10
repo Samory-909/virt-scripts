@@ -2,7 +2,7 @@
 
 debian8_list() {
 for name in $(virsh list --name); do
-apt update > /dev/null && apt -y install dnsutils > /dev/null
+which dig > /dev/null || ( apt update > /dev/null && apt -y install dnsutils > /dev/null )
 ip="$(dig @192.168.122.1 +short ${name})"
 echo "${ip} ${name}" #>> /etc/hosts
 done
