@@ -15,7 +15,6 @@ echo "Do you want anyway download this file ${image}"
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
-        sleep1
         curl ${url}${image} -o ${destination}${image}
         curl ${url}${image}.sha1 -o ${destination}${image}.sha1
         cd ${destination}
