@@ -11,7 +11,7 @@ name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
 #imagename="debian7 debian8 debian9 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
-which curl > /dev/null || echo "Please install curl" ; exit
+which curl > /dev/null || echo "Please install curl" && exit
 imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
 image="$2.qcow2"
 # Generate an unique string
