@@ -180,7 +180,7 @@ Please provide a the guest name of a destroyed guest: exit
 Assume that you have installed three guests with `auto-install.sh` :
 
 ```
-~/virt-scripts# ./auto-install.sh centos7.6 centos
+~/virt-scripts# ./auto-install.sh centos7 centos
 ~/virt-scripts# ./auto-install.sh ubuntu1804 ubuntu
 ```
 
@@ -190,7 +190,7 @@ And you can verify it :
 ~/virt-scripts# virsh list --all
  Id    Name                           State
 ----------------------------------------------------
- -     centos7.6                      shut off
+ -     centos7                      shut off
  -     ubuntu1804                     shut off
 
 ```
@@ -200,7 +200,7 @@ Move those images disk into the `virt-scripts` directory and undefine original g
 ```bash
 #!/bin/bash
 cd ~/virt-scripts
-for x in centos7.6 ubuntu1804
+for x in centos7 ubuntu1804
 do
 mv /var/lib/libvirt/images/$x.qcow2 ./
 virsh undefine $x
@@ -211,7 +211,7 @@ done
 And you can deploy quicky builded and optimized guests based on those images :
 
 ```
-~/virt-scripts# ./define-guest-image.sh c1 centos7.6
+~/virt-scripts# ./define-guest-image.sh c1 centos7
 
 Début d'installation...
 Création du domaine...                                                   |    0 B     00:00
@@ -234,7 +234,7 @@ Also, I have prebuilded other images for training classes :
 ~/virt-scripts# ./define-guest-image.sh
 Usage : ./define-guest-image.sh <name> <image>
 Please download one of those images :
-https://get.goffinet.org/kvm/centos7.6.qcow2
+https://get.goffinet.org/kvm/centos7.qcow2
 https://get.goffinet.org/kvm/ubuntu1804.qcow2
 ```
 

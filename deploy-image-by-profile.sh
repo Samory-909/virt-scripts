@@ -54,7 +54,7 @@ esac
 
 check_paramters () {
 ## Check parameters
-if [ "$parameters" -eq 3 ] ; then image="centos7.6" ; fi
+if [ "$parameters" -eq 3 ] ; then image="centos7" ; fi
 if [ "$parameters" -eq 4 ] ; then image=$image ; fi
 if [ "$parameters" -gt 5  ] ; then usage_message ; exit ; fi
 if [ "$parameters" -lt 3  ] ; then usage_message ; exit ; fi
@@ -81,7 +81,7 @@ if [ $image = "ubuntu1804.qcow2" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
 fi
-if [ $image = "centos7.6.qcow2" ]; then
+if [ $image = "centos7.qcow2" ]; then
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
 fi
 }

@@ -38,7 +38,7 @@ model="virtio"
 if [ $image = "ubuntu1804.qcow2" ]; then
 os="ubuntu17.10"
 fi
-if [ $image = "centos7.6.qcow2" ]; then
+if [ $image = "centos7.qcow2" ]; then
 os="centos7.0"
 fi
 # Parameters for metasploitable guests
@@ -100,7 +100,7 @@ if [ $image = "ubuntu1804.qcow2" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
 fi
-if [ $image = "centos7.6.qcow2" ]; then
+if [ $image = "centos7.qcow2" ]; then
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
 fi
 
