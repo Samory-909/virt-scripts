@@ -72,7 +72,7 @@ echo "Please create a new one or choose a valid present network : " ; virsh net-
 copy_image () {
 ## Linked image copy to the default storage pool ##
 #cp /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
-qemu-img create -f qcow2 -b /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
+qemu-img create -f qcow2 -b /var/lib/libvirt/images/${image}.qcow2 /var/lib/libvirt/images/$disk
 }
 
 customize_new_disk () {
