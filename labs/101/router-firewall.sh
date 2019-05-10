@@ -10,8 +10,7 @@ wan="eth1"
 #hostnamectl set-hostname router
 nmcli c mod "$connection" ipv4.addresses $ip4.1/24
 nmcli c mod "$connection" ipv4.method manual
-nmcli c mod "$connection" ipv6.addresses $ip6::1/64
-nmcli c mod "$connection" ipv6.method manual
+nmcli c mod "$connection" ipv6.method manual ipv6.addresses $ip6::1/64
 nmcli c mod "$connection" connection.zone internal
 nmcli c up  "$connection"
 }

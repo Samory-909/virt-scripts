@@ -13,16 +13,16 @@ domain="lab$id"
 #hostnamectl set-hostname router
 nmcli c mod "$connectionlan" ipv4.method manual
 nmcli c mod "$connectionlan" ipv4.addresses ${ip4}.${id}.1/24
-nmcli c mod "$connectionlan" ipv6.method manual
-nmcli c mod "$connectionlan" ipv6.addresses ${ip6}:${id}::1/64
+nmcli c mod "$connectionlan" ipv6.method manual ipv6.addresses ${ip6}:${id}::1/64
 nmcli c mod "$connectionlan" connection.zone internal
 nmcli c up  "$connectionlan"
+nmcli c reload "$connectionlan"
 nmcli c mod "$connectionwan" ipv4.method manual
 nmcli c mod "$connectionwan" ipv4.addresses ${ip4}.0.${id}/24
-nmcli c mod "$connectionwan" ipv6.method manual
-nmcli c mod "$connectionwan" ipv6.addresses ${ip6}::${id}/64
+nmcli c mod "$connectionwan" ipv6.method manual ipv6.addresses ${ip6}::${id}/64
 nmcli c mod "$connectionwan" connection.zone internal
 nmcli c up  "$connectionwan"
+nmcli c reload "$connectionwan"
 }
 
 2_routing () {
