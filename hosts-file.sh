@@ -2,9 +2,9 @@
 
 debian8_list() {
 for name in $(virsh list --name); do
-mac=$(virsh dumpxml ${name}|grep "mac address"|sed "s/.*'\(.*\)'.*/\1/g")
-ip=$(grep $mac /var/lib/libvirt/dnsmasq/default.leases | awk '{print $3}')
-echo "$ip $name" #>> /etc/hosts
+apt update > /dev/null && apt -y install dnsutils > /dev/null
+ip="$(dig @192.168.122.1 +short ${name})"
+echo "${ip} ${name}" #>> /etc/hosts
 done
 }
 
