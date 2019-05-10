@@ -10,17 +10,24 @@ destination=/var/lib/libvirt/images/
 parameters=$#
 wd=$PWD
 
-download_image  () {
+download_image () {
+if [ ${2} = "--force" ] ; then
+  question
+fi
+curl ${url}${image} -o ${destination}${image}
+curl ${url}${image}.sha1 -o ${destination}${image}.sha1
+cd ${destination}
+sha1sum -c ${image}.sha1
+rm -rf ${image}.sha1
+cd ${wd}
+}
+
+question () {
 echo "Do you want anyway download this file ${image}"
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
-        curl ${url}${image} -o ${destination}${image}
-        curl ${url}${image}.sha1 -o ${destination}${image}.sha1
-        cd ${destination}
-        sha1sum -c ${image}.sha1
-        rm -rf ${image}.sha1
-        cd ${wd}
+        sleep 1
         ;;
     *)
         exit
