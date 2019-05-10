@@ -1,5 +1,6 @@
 #imagename="debian7 debian8 debian9 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
-imagename="centos7.6 ubuntu1804"
+which curl > /dev/null || echo "Please install curl" ; exit
+imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
 image=$4
 # Generate an unique string
 uuid=$(uuidgen -t)

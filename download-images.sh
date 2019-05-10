@@ -2,7 +2,8 @@
 # Download kvm images
 
 #imagename="debian7 debian8 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
-imagename="centos7.6 ubuntu1804"
+which curl > /dev/null || echo "Please install curl" ; exit
+imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
 image="$1.qcow2"
 url=http://get.goffinet.org/kvm/
 destination=/var/lib/libvirt/images/
