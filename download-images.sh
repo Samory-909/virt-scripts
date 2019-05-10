@@ -9,18 +9,7 @@ url=http://get.goffinet.org/kvm/
 destination=/var/lib/libvirt/images/
 parameters=$#
 wd=$PWD
-
-download_image () {
-if [ "${2}" != "--force" ] ; then
-  question
-fi
-curl ${url}${image} -o ${destination}${image}
-curl ${url}${image}.sha1 -o ${destination}${image}.sha1
-cd ${destination}
-sha1sum -c ${image}.sha1
-rm -rf ${image}.sha1
-cd ${wd}
-}
+force="$2"
 
 question () {
 echo "Do you want anyway download this file ${image}"
@@ -35,26 +24,38 @@ case "$response" in
 esac
 }
 
+download_image () {
+if [ "${force}" != "--force" ] ; then
+  question
+fi
+curl ${url}${image} -o ${destination}${image}
+curl ${url}${image}.sha1 -o ${destination}${image}.sha1
+cd ${destination}
+sha1sum -c ${image}.sha1
+rm -rf ${image}.sha1
+cd ${wd}
+}
+
 if [ ${parameters} -lt 1 ] ; then
-echo "Please provide the image name : "
-echo ${imagename}
-exit
+  echo "Please provide the image name : "
+  echo ${imagename}
+  exit
 fi
 if [ -f ${destination}${image}  ] ; then
-echo "The image ${destination}${image} already exists."
-cd ${destination}
-remote_sha1="$(curl -s ${url}${image}.sha1)"
-cd ${destination}
-local_sha1="$(sha1sum ${image})"
-cd ${wd}
-if [ "${remote_sha1}" = "${local_sha1}" ] ; then
-echo "The local image is exactly the same than the remote"
-download_image
-else
-echo "The local image is not the same than the remote"
-download_image
+  echo "The image ${destination}${image} already exists."
+  cd ${destination}
+  remote_sha1="$(curl -s ${url}${image}.sha1)"
+  cd ${destination}
+  local_sha1="$(sha1sum ${image})"
+  cd ${wd}
+    if [ "${remote_sha1}" = "${local_sha1}" ] ; then
+      echo "The local image is exactly the same than the remote"
+      download_image
+    else
+      echo "The local image is not the same than the remote"
+      download_image
 fi
 else
-echo "The image ${destination}${image} does not exist."
-download_image
+  echo "The image ${destination}${image} does not exist."
+  download_image
 fi
