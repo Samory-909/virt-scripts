@@ -15,7 +15,7 @@ validation () {
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
-       sleep 1 
+       sleep 1
         ;;
     *)
         exit
@@ -39,7 +39,7 @@ modprobe kvm-intel
 cat /sys/module/kvm_intel/parameters/nested
 }
 
-centos7_prep() { 
+centos7_prep() {
 echo " Upgrade the system"
 sudo yum -y install epel-release
 sudo yum -y upgrade
