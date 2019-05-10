@@ -11,16 +11,16 @@ domain="lab$id"
 
 1a_interfaces () {
 #hostnamectl set-hostname router
-nmcli c mod "$connectionlan" ipv4.addresses ${ip4}.${id}.1/24
 nmcli c mod "$connectionlan" ipv4.method manual
-nmcli c mod "$connectionlan" ipv6.addresses ${ip6}:${id}::1/64
+nmcli c mod "$connectionlan" ipv4.addresses ${ip4}.${id}.1/24
 nmcli c mod "$connectionlan" ipv6.method manual
+nmcli c mod "$connectionlan" ipv6.addresses ${ip6}:${id}::1/64
 nmcli c mod "$connectionlan" connection.zone internal
 nmcli c up  "$connectionlan"
-nmcli c mod "$connectionwan" ipv4.addresses ${ip4}.0.${id}/24
 nmcli c mod "$connectionwan" ipv4.method manual
-nmcli c mod "$connectionwan" ipv6.addresses ${ip6}::${id}/64
+nmcli c mod "$connectionwan" ipv4.addresses ${ip4}.0.${id}/24
 nmcli c mod "$connectionwan" ipv6.method manual
+nmcli c mod "$connectionwan" ipv6.addresses ${ip6}::${id}/64
 nmcli c mod "$connectionwan" connection.zone internal
 nmcli c up  "$connectionwan"
 }
@@ -98,7 +98,7 @@ nmcli c down "Wired connection 2"
 }
 
 
-## lan and wan interface configuration with NetworkManager 
+## lan and wan interface configuration with NetworkManager
 1a_interfaces
 ## IPv4/IPv6 Routing
 2_routing
