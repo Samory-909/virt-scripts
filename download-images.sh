@@ -49,10 +49,10 @@ if [ -f ${destination}${image}  ] ; then
   local_sha1="$(sha1sum ${image})"
   cd ${wd}
     if [ "${remote_sha1}" = "${local_sha1}" ] ; then
-      echo "The local image is exactly the same than the remote"
+      echo "The local image is exactly the same than the remote image"
       download_image
     else
-      echo "The local image is not the same than the remote"
+      echo "The local image is differs from the remote image"
       download_image
 fi
 else
