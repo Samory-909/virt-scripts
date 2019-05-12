@@ -15,7 +15,8 @@ echo "Example     : '$0 guest1 1024' set RAM to 1024 MB"
 exit
 fi
 # Check if the guest name is a defined guest
-if grep -qvw "$guest" <<< $(virsh list --name)  ; then
+guests_defined="$(virsh list --all --name)"
+if grep -qvw "$guest" <<< ${guests_defined}  ; then
 echo "Please provide a live guest name : exit"
 echo "Guests avaible :"
 echo "$(virsh list --name)"

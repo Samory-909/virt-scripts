@@ -17,7 +17,8 @@ echo "Example     : '$0 guest1 eth0' add the live guest1 NIC to eth0"
 exit
 fi
 # Check if the guest name chosen is in live and display help to choose
-if grep -qvw "$guest" <<< $(virsh list --name)  ; then
+guests_defined_live="$(virsh list --name)"
+if grep -qvw "$guest" <<< ${guests_defined_live}  ; then
 echo "Please provide a live guest name : exit"
 echo "Guests available :"
 echo "$(virsh list --name)"

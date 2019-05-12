@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script detach a live guest NIC from a bridged interface 
+# This script detach a live guest NIC from a bridged interface
 
 guest=$1
 bridge=$2
@@ -14,8 +14,9 @@ echo "Usage       : $0 <guest name> <bridge_interface_name>"
 echo "Example     : $0 guest1 virbr0 detach the live guest1 NIC from virbr0"
 exit
 fi
-# Check if the guest name chosen is in live and display help to choose 
-if grep -qvw "$guest" <<< $(virsh list --name)  ; then
+# Check if the guest name chosen is in live and display help to choose
+guests_defined_live="$(virsh list --name)"
+if grep -qvw "$guest" <<< ${guests_defined_live}  ; then
 echo "Please provide a live guest name : exit"
 echo "Guests avaible :"
 echo "$(virsh list --name)"
