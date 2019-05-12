@@ -48,7 +48,7 @@ usage
 echo "Please provide a defined guest name that is not in use : exit"
 exit
 fi
-if [ "${silent}" != "--silent" ] ; then
+if [ "${silent}" = "--silent" ] ; then
   autoconsole="--noautoconsole"
 fi
 }
