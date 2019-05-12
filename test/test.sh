@@ -5,7 +5,7 @@ version="$2"
 
 # Deploy and test guests
 for x in {1..5} ; do ./define-guest-image.sh ${os}-$x ${os}${version} ; done && \
-sleep 90 && \
+sleep 180 && \
 ./hosts-file.sh >> /etc/hosts && \
 for x in {1..5} ; do ping -c1 ${os}-$x ; done
 
