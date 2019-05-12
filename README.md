@@ -21,13 +21,13 @@ For native installation of Arch Linux : look at https://github.com/Anthony25/spa
 Purposes : gold image auto-creation
 
 1. `autoprep.sh` : prepare your system as virtualization host
-* `get-iso.sh` : get iso distributions for fresh installations
-* `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system with http repos and kickstart files
-* `auto-install-tui.sh` : auto-install.sh text user interface demo
-* `sparsify.sh` : optimize space disk on the designated guest
-* `clone.sh` : clone, sysprep and optimize builded guests
-* `hosts-file` : print the running guests and their ipv4 address
-* `nested-physical.sh` : nested virtualization installation on the physical host
+2. `get-iso.sh` : get iso distributions for fresh installations
+3. `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system with http repos and kickstart files
+4. `auto-install-tui.sh` : auto-install.sh text user interface demo
+5. `sparsify.sh` : optimize space disk on the designated guest
+6. `clone.sh` : clone, sysprep and optimize builded guests
+7. `hosts-file` : print the running guests and their ipv4 address
+8. `nested-physical.sh` : nested virtualization installation on the physical host
 
 ## Build your images with Packer, Qemu/KVM and Ansible
 
