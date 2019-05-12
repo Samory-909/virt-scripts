@@ -11,8 +11,8 @@ echo "Please provide a the guest name of a destroyed guest: exit"
 echo "Usage : $0 <guest name>"
 exit
 fi
-
-if grep -qvw "$name" <<< echo $(virsh list --all --name)  ; then
+guests_defined="$(virsh list --all --name)"
+if grep -qvw "$name" <<< ${guests_defined}  ; then
 echo "Please provide a defined guest name : exit"
 echo "Guests avaible : "
 echo "$(virsh list --all --name)"
