@@ -1,7 +1,8 @@
 #!/bin/bash
 #Centos 7, Fedora 25, Debian 9 Stretch or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
-image=$1 # centos, debian, ubuntu
-name=$2
+image="$1" # centos, fedora, debian, ubuntu
+name="$2"
+silent="$3"
 bridge="virbr0"
 bridgeip4="192.168.122.1"
 country="fr"
@@ -37,7 +38,7 @@ echo "Usage : $0 [ centos | fedora | debian | ubuntu ] vm_name"
 
 check_guest_name () {
 if [ -z "${name}" ]; then
-echo "Centos 7, Fedora 25, Debian 8 Jessie or Ubuntu 16.04 Xenial fully automatic installation by HTTP Repos and response file via local HTTP."
+echo "Centos 7, Fedora 25, Debian 9 Stretch or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP."
 usage
 echo "Please provide one distribution centos, fedora, debian, ubuntu and one guest name: exit"
 exit
@@ -46,6 +47,9 @@ if grep -qw ${name} <<< $(virsh list --all --name)  ; then
 usage
 echo "Please provide a defined guest name that is not in use : exit"
 exit
+fi
+if [ "${silent}" != "--silent" ] ; then
+  autoconsole="--noautoconsole"
 fi
 }
 
