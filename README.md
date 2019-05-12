@@ -11,11 +11,10 @@ Three groups of scripts :
 
 If you already have images at stock, there exists beter ways to automate and manage libvirt guest like those nice scripts :
 
-* in python :  `kcli` (https://github.com/karmab/kcli/tree/master/kvirt)
+* in python :  `kcli` (https://github.com/karmab/kcli)
 * in bash : https://github.com/vpenso/libvirt-shell-functions
 
 For native installation of Arch Linux : look at https://github.com/Anthony25/spawn-archlinux-libvirt.
-
 
 ## Native installation and post-installation
 
@@ -30,28 +29,75 @@ Purposes : gold image auto-creation
 * `hosts-file` : print the running guests and their ipv4 address
 * `nested-physical.sh` : nested virtualization installation on the physical host
 
+## Build your images with Packer, Qemu/KVM and Ansible
+
+You can also download builded with Packer and Ansible automation based ont this other educational project https://github.com/goffinet/packer-kvm
+
+Some images are available on https://get.goffinet.org/kvm : centos7 debian9 ubuntu1804. Old images are archived on https://get.goffinet.org/kvm/archives/.
+
+You can download them with the `download-images.sh` script :
+
+```
+./download-images.sh
+Please provide the image name :
+centos7 ubuntu1804 debian9
+```
+
+As it with user interaction :
+
+```
+./download-images.sh centos7
+The image /var/lib/libvirt/images/centos7.qcow2 does not exist.
+Do you want anyway download this file centos7.qcow2
+Are you sure? [y/N] y
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  611M  100  611M    0     0   123M      0  0:00:04  0:00:04 --:--:--  123M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    56  100    56    0     0   2153      0 --:--:-- --:--:-- --:--:--  2153
+centos7.qcow2: OK
+```
+
+You can force the download for automation purpose :
+
+```
+./download-images.sh debian9 --force
+The image /var/lib/libvirt/images/debian9.qcow2 already exists.
+The local image is exactly the same than the remote
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  686M  100  686M    0     0   120M      0  0:00:05  0:00:05 --:--:--  116M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    56  100    56    0     0   1696      0 --:--:-- --:--:-- --:--:--  1750
+debian9.qcow2: OK
+
+```
+
 ## Quickbuilder
 
-Purposes : deploy quickly guests based on pre-builded with previous scripts. Some images are avaible on https://get.goffinet.org/kvm : centos7 centos7.5 debian7 debian8 ubuntu1604 ubuntu1804 kali metasploitable openwrt15.05.
+Purposes : deploy quickly guests based on pre-builded with previous scripts.
 
-1. `define-guest-image.sh` : deploy pre-builded images (like a quickbuilder, provisionner)
-* `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
+1. `define-guest-image.sh` : deploy pre-builded images (like a quickbuilder, provisionner) as linked clones
+2. `deploy-image-by-profile.sh` : deploy pre-builded images by profiles (xs, s, m, l xl)  as linked clones
+3. `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
 
-But this is probably beter to build by yourself your appliance with the `auto-install.sh` script. The root account and the password are in the preseed and kickstart templates included.
+But this is probably beter to build by yourself your appliance with the `auto-install.sh` script or with packer and qemu. The root account and the password are in the preseed and kickstart templates included.
 
 ## Devices management
 
 Purposes : change RAM and vcpus, add block devices and network facilities
 
 1. `add-memory.sh` : add RAM
-* `add-vcpu.sh` : set vcpus count
-* `add-bridge.sh` : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
-* `add-nic.sh` : a new NIC on live guest to a bridged interface
-* `attach-nic.sh` : attach a live guest present NIC to a bridge
-* `detach-nic.sh` : detach a live guest from a bridge
-* `add-storage.sh` : attach an empty bit disk by GB size
-* `start_all.sh` : start all the defined guests
-* `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
+2. `add-vcpu.sh` : set vcpus count
+3. `add-bridge.sh` : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
+4. `add-nic.sh` : a new NIC on live guest to a bridged interface
+5. `attach-nic.sh` : attach a live guest present NIC to a bridge
+6. `detach-nic.sh` : detach a live guest from a bridge
+7. `add-storage.sh` : attach an empty bit disk by GB size
+8. `start_all.sh` : start all the defined guests
+9. `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
 
 ## How-To
 
@@ -108,7 +154,10 @@ Usage : ./auto-install.sh [ centos | debian | ubuntu ] nom_de_vm
 Please provide one distribution centos, debian, ubuntu and one guest name: exit
 ```
 
-Note : Escape character is `^]` (CTRL+ `]`)
+Note : Escape character is :
+
+* `^]` (CTRL+ `]`) on Unix french keyboards
+* CTRL + 5 on Windows french keyboards
 
 
 ### Step 4 : Sparse your native image
@@ -195,14 +244,13 @@ And you can verify it :
 
 ```
 
-Move those images disk into the `virt-scripts` directory and undefine original guests :
+Undefine original guests :
 
 ```bash
 #!/bin/bash
 cd ~/virt-scripts
 for x in centos7 ubuntu1804
 do
-mv /var/lib/libvirt/images/$x.qcow2 ./
 virsh undefine $x
 done
 
@@ -238,9 +286,25 @@ https://get.goffinet.org/kvm/centos7.qcow2
 https://get.goffinet.org/kvm/ubuntu1804.qcow2
 ```
 
+You can download them with `download-images.sh` :
+
+```
+./download-images.sh centos7
+The image /var/lib/libvirt/images/centos7.qcow2 does not exist.
+Do you want anyway download this file centos7.qcow2
+Are you sure? [y/N] y
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  611M  100  611M    0     0   123M      0  0:00:04  0:00:04 --:--:--  123M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    56  100    56    0     0   2153      0 --:--:-- --:--:-- --:--:--  2153
+centos7.qcow2: OK
+```
+
 ### Step 7 : Manage guests
 
-Verify your running guests
+Verify your running guests :
 
 ```
 ~/virt-scripts# virsh list
@@ -250,7 +314,7 @@ Verify your running guests
  89    u1                             running
 ```
 
-Access to the text console
+Access to the text console :
 
 ```
 ~/virt-scripts# virsh console c1
@@ -267,7 +331,7 @@ To exit from the text console execute CTRL `]`.
 
 ### Step 8 : Add the guest hostname resolution
 
-Script :
+Script : `hosts-file.sh`
 
 Description : Print a new `/etc/resolv.conf` with the ip address and the hostname of running guests.
 
@@ -307,7 +371,7 @@ Connection to c1 closed.
 
 ### Step 9 : Manage devices
 
-Script : add-bridge.sh
+Script : `add-bridge.sh`
 
 Description : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
 
@@ -320,7 +384,15 @@ Usage       : ./add-bridge.sh <name> <interface> <type, isolated or nat>
 Example     : './add-bridge.sh net1 virbr100 isolated' or './add-bridge.sh lan101 virbr101 nat'
 ```
 
-Script : add-storage.sh
+Associated scripts :
+
+* `add-nic.sh` : a new NIC on live guest to a bridged interface
+* `attach-nic.sh` : attach a live guest present NIC to a bridge
+* `detach-nic.sh` : detach a live guest from a bridge
+
+
+
+Script : `add-storage.sh`
 
 Description : attach an empty bit disk by GB size
 
@@ -333,13 +405,19 @@ Usage       : ./add-storage.sh <guest name> <block device name> <size in GB>
 Example     : './add-storage.sh guest1 vdb 4' add a vdb 4GB disk to guest1
 ```
 
-To be continued ...
+To be continued ... with :
+
+* `add-memory.sh` : add RAM
+* `add-vcpu.sh` : set vcpus count
+* `start_all.sh` : start all the defined guests
+* `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
+
 
 ### Next steps ...
 
 * Integrate kcli for guests management
-* Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes.
-* Exploit snapshots and virtual storage
+* Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes : see https://github.com/goffinet/packer-kvm
+* Exploit ~~snapshots~~ and virtual storage
 * Exploit free-ipa, pacemaker, ovirt, openstack, gns3 (see kcli plans)
 
 ## Todo
