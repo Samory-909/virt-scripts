@@ -36,11 +36,5 @@ mv /var/lib/libvirt/images/$name-sparsified.qcow2 /var/lib/libvirt/images/$name.
 #chown qemu:qemu /var/lib/libvirt/images/$name.qcow2
 }
 
-sysprep () {
-echo "Sysprep"
-virt-sysprep -d $name --hostname $name --selinux-relabel
-}
-
 check_guest_name
-sysprep
 sparsify
