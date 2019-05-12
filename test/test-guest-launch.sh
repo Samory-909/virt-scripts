@@ -12,6 +12,4 @@ for x in {1..5} ; do ping -c1 ${os}-$x ; done
 # Erase all
 
 ./destroy_and_undefine_all.sh
-rm /var/lib/libvirt/images/${os}.qcow2
-rm /var/lib/libvirt/images/${os}${version}.qcow2
 sed -if "/$os-/d" /etc/hosts
