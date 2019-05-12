@@ -1,8 +1,11 @@
 #!/bin/bash
 
-./auto-install.sh centos centos
-du -h /var/lib/libvirt/images/centos.qcow2
-./sparsify.sh centos
-virsh undefine centos
-mv /var/lib/libvirt/images/centos.qcow2 /var/lib/libvirt/images/centos7.qcow2
-du -h /var/lib/libvirt/images/centos7.qcow2
+os="$1"
+version="$2"
+
+./auto-install.sh ${os} ${os}
+du -h /var/lib/libvirt/images/${os}.qcow2
+./sparsify.sh ${os}
+virsh undefine ${os}
+mv /var/lib/libvirt/images/${os}.qcow2 /var/lib/libvirt/images/${os}${version}.qcow2
+du -h /var/lib/libvirt/images/${os}${version}.qcow2
