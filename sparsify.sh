@@ -1,6 +1,6 @@
 #!/bin/bash
 #This script sparses an attached disk
-#The guest must be shutdown 
+#The guest must be shutdown
 #Great gain on disk space !
 name=$1
 
@@ -11,7 +11,8 @@ echo "Please provide a the guest name of a destroyed guest: exit"
 echo "Usage : $0 <guest name>"
 exit
 fi
-if grep -qvw "$name" <<< $(virsh list --all --name)  ; then
+
+if grep -qvw "$name" <<< echo $(virsh list --all --name)  ; then
 echo "Please provide a defined guest name : exit"
 echo "Guests avaible : "
 echo "$(virsh list --all --name)"
