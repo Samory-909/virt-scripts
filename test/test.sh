@@ -12,7 +12,7 @@ echo "#########################################################################"
 ./auto-install.sh ${os} ${os}
 du -h /var/lib/libvirt/images/${os}.qcow2
 sleep 30
-virsh destroy ${os}
+virsh shutdown ${os}
 }
 
 image_provision () {
@@ -20,7 +20,6 @@ echo "#########################################################################"
 echo "#  Image Provision                                                      #"
 echo "#########################################################################"
 virsh start ${os}
-sleep 60
 cd ansible
 ansible -m ping -i inventory ${os} && \
 ansible-playbook -i inventory playbook.yml --limit ${os}
