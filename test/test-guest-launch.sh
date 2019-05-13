@@ -9,6 +9,7 @@ date=$(date +%s)
 for x in {1..5} ; do ./define-guest-image.sh ${os}-$x ${os}${version} ; sleep 45 ; done &&
 ./hosts-file.sh >> /etc/hosts && \
 for x in {1..5} ; do ping -c1 ${os}-$x >> /tmp/${date}-${os}${version}.log ; done
+echo "Logs in /tmp/${date}-${os}${version}.log"
 
 # Erase all
 
