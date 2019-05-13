@@ -40,7 +40,7 @@ guests_erase () {
 sed -if "/$os-/d" /etc/hosts
 }
 
-if [ -z "${action}" ] ; then
+if [ ! -z "${action}" ] ; then
 	if grep 'b' <<< "${action}" ; then
 		echo image_build
 		#if [ !-f /var/lib/libvirt/images/${os}.qcow2 ] ; then exit ; fi
