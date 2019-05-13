@@ -79,6 +79,5 @@ else
 		guests_icmp_echo
 	  guests_erase
 	fi
-else
 	echo "script error" ; exit
 fi
