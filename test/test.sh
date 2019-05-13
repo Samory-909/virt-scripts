@@ -40,21 +40,23 @@ guests_erase () {
 sed -if "/$os-/d" /etc/hosts
 }
 
-if [ ! -z "${action}" ] ; then
-	if grep 'b' <<< "${action}" ; then
-		echo image_build
-		#if [ !-f /var/lib/libvirt/images/${os}.qcow2 ] ; then echo "script error" ; exit ; fi
+if [ -z "${action}" ] ; then
+  echo "script error" ; exit
+else
+	if grep -q 'b' <<< "${action}" ; then
+		image_build
+		if [ !-f /var/lib/libvirt/images/${os}.qcow2 ] ; then echo "script error" ; exit ; fi
 	fi
-	if grep 'p' <<< "${action}" ; then
-	  echo image_provision
+	if grep -q 'p' <<< "${action}" ; then
+	  image_provision
 	fi
-	if grep 'i' <<< "${action}" ; then
-		echo image_install
-		#if [ !-f /var/lib/libvirt/images/${os}${version}.qcow2 ] ; then echo "script error" ; exit ; fi
+	if grep -q 'i' <<< "${action}" ; then
+		image_install
+		if [ !-f /var/lib/libvirt/images/${os}${version}.qcow2 ] ; then echo "script error" ; exit ; fi
 	fi
-	if grep 't' <<< "${action}" ; then
-		echo guests_icmp_echo
-	  echo guests_erase
+	if grep -q 't' <<< "${action}" ; then
+		guests_icmp_echo
+	  guests_erase
 	fi
 else
 	echo "script error" ; exit
