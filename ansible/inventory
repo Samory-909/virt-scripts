@@ -1,23 +1,23 @@
-[ubuntu]
+[ubuntu_hosts]
 ubuntu
 
-[centos]
+[centos_hosts]
 centos
 
-[debian]
+[debian_hosts]
 debian
 
-[ubuntu:vars]
+[ubuntu_hosts:vars]
 ansible_ssh_user=user
 ansible_ssh_pass=testtest
 ansible_become=true
 ansible_sudo_pass=testtest
 
-[centos:vars]
+[centos_hosts:vars]
 ansible_ssh_user=root
 ansible_ssh_pass=testtest
 
-[debian:vars]
+[debian_hosts:vars]
 ansible_ssh_user=root
 ansible_ssh_pass=testtest
 
