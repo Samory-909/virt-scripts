@@ -12,6 +12,5 @@ for x in {1..5} ; do ping -c1 ${os}-$x >> /tmp/${date}-${os}${version}.log ; don
 echo "Logs in /tmp/virt-scripts-${os}${version}-${date}.log"
 
 # Erase all
-
 ./destroy_and_undefine_all.sh
 sed -if "/$os-/d" /etc/hosts
