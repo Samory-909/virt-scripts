@@ -19,10 +19,13 @@ image_provision () {
 echo "#########################################################################"
 echo "#  Image Provision                                                      #"
 echo "#########################################################################"
+virsh start ${os}
+sleep 60
 cd ansible
 ansible -m ping -i inventory ${os} && \
 ansible-playbook -i inventory playbook.yml --limit ${os}
 cd ..
+virsh destroy ${os}
 }
 
 
