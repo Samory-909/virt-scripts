@@ -6,7 +6,7 @@
       wait_for_connection:
         delay: 30
         timeout: 180
-        connect_timeout: 10
+        connect_timeout: 60
         sleep: 5
 - name: Configure KVM base image
   hosts: all
