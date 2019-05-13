@@ -49,7 +49,7 @@ guests_launch () {
 echo "#########################################################################"
 echo "#  Launch 5 guests                                                      #"
 echo "#########################################################################"
-for x in {1..5} ; do ./define-guest-image.sh ${os}-$x ${os}${version} ; sleep 45 ; done &&
+for x in {1..5} ; do ./define-guest-image.sh ${os}-$x ${os}${version} ; sleep 15 ; done &&
 ./hosts-file.sh >> /etc/hosts
 }
 
@@ -81,9 +81,10 @@ else
 	fi
 	if grep -q 'i' <<< "${action}" ; then
 		image_install
-		if [ !-f /var/lib/libvirt/images/${os}${version}.qcow2 ] ; then echo "script error" ; exit ; fi
+		if [ ! -f /var/lib/libvirt/images/${os}${version}.qcow2 ] ; then echo "script error" ; exit ; fi
 	fi
 	if grep -q 't' <<< "${action}" ; then
+    guests_launch
 		guests_icmp_echo
 	  guests_erase
 	fi
