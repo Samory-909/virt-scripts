@@ -66,7 +66,7 @@ if [ -z "${action}" ] ; then
 else
 	if grep -q 'b' <<< "${action}" ; then
 		image_build
-		if [ !-f /var/lib/libvirt/images/${os}.qcow2 ] ; then echo "script error" ; exit ; fi
+		if [ ! -f /var/lib/libvirt/images/${os}.qcow2 ] ; then echo "script error" ; exit ; fi
 	fi
 	if grep -q 'p' <<< "${action}" ; then
 	  image_provision
