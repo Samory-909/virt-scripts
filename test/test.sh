@@ -57,7 +57,7 @@ guests_icmp_echo () {
 echo "#########################################################################"
 echo "#  ICMP echo Req against the 5 guests                                   #"
 echo "#########################################################################"
-for x in {1..5} ; do ping -c1 ${os}-$x >> /tmp/${date}-${os}${version}.log ; done
+for x in {1..5} ; do ping -c1 ${os}-${x} >> /tmp/${date}-${os}${version}.log ; done
 echo "Logs in /tmp/virt-scripts-${os}${version}-${date}.log"
 }
 
@@ -65,8 +65,11 @@ guests_erase () {
 echo "#########################################################################"
 echo "#  Erase the 5 guests                                                   #"
 echo "#########################################################################"
-./destroy_and_undefine_all.sh
-sed -if "/$os-/d" /etc/hosts
+for x in {1..5} ; do
+virsh destroy ${os}-${x}
+virsh undefine ${os}-${x} --remove-all-storage
+sed -if "/$os-$x/d" /etc/hosts
+done
 }
 
 if [ -z "${action}" ] ; then
