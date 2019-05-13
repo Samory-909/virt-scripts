@@ -38,9 +38,9 @@ image_install () {
 echo "#########################################################################"
 echo "#  Image Installation                                                   #"
 echo "#########################################################################"
-./sparsify.sh ${os}
 du -h /var/lib/libvirt/images/${os}.qcow2
-virsh undefine ${os}
+./sparsify.sh ${os} && \
+virsh undefine ${os} && \
 mv /var/lib/libvirt/images/${os}.qcow2 /var/lib/libvirt/images/${os}${version}.qcow2
 du -h /var/lib/libvirt/images/${os}${version}.qcow2
 }
