@@ -1,6 +1,6 @@
 ---
 - name: Configure KVM base image
-  hosts: localhost
+  hosts: all
   gather_facts: True
   roles:
     - common
