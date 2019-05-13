@@ -58,7 +58,7 @@ echo "#########################################################################"
 echo "#  ICMP echo Req against the 5 guests                                   #"
 echo "#########################################################################"
 wich dig || apt -y dnsutils
-for x in {1..5} ; do ping -c1 $(dig +short @192.168.11.1 ${os}-${x}) >> /tmp/${date}-${os}${version}.log ; done
+for x in {1..5} ; do ping -c1 $(dig +short @192.168.122.1 ${os}-${x}) >> /tmp/${date}-${os}${version}.log ; done
 echo "Logs in /tmp/virt-scripts-${os}${version}-${date}.log"
 }
 
