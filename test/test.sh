@@ -12,7 +12,7 @@ echo "#########################################################################"
 ./auto-install.sh ${os} ${os}
 du -h /var/lib/libvirt/images/${os}.qcow2
 sleep 30
-virsh shutdown ${os}
+virsh destroy ${os}
 }
 
 image_provision () {
