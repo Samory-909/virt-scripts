@@ -4,11 +4,13 @@ os="$1"
 version="$2"
 date=$(date +%s)
 action="$3"
+wd="$PWD"
 
 image_build () {
 echo "#########################################################################"
 echo "#  Image Build                                                          #"
 echo "#########################################################################"
+cd ${wd}
 ./auto-install.sh ${os} ${os}
 du -h /var/lib/libvirt/images/${os}.qcow2
 sleep 30
@@ -24,10 +26,10 @@ which ansible || ( curl -L https://git.io/fjWan -o install-ansible.sh && bash -x
 sed -i '1 i\nameserver 192.168.122.1' /etc/resolv.conf
 ssh-keygen -f "/root/.ssh/known_hosts" -R "${os}"
 virsh start ${os}
-cd ansible
+cd cd ${wd}ansible
 #ansible -m ping -i inventory ${os} && \
 ansible-playbook -i inventory playbook.yml --limit ${os}
-cd ..
+cd ${wd}
 virsh destroy ${os}
 sed -if "/nameserver 192.168.122.1/d" /etc/resolv.conf
 ssh-keygen -f "/root/.ssh/known_hosts" -R "${os}"
@@ -39,8 +41,9 @@ echo "#########################################################################"
 echo "#  Image Installation                                                   #"
 echo "#########################################################################"
 du -h /var/lib/libvirt/images/${os}.qcow2
-./sparsify.sh ${os} && \
-virsh undefine ${os} && \
+cd ${wd}
+./sparsify.sh ${os}
+virsh undefine ${os}
 mv /var/lib/libvirt/images/${os}.qcow2 /var/lib/libvirt/images/${os}${version}.qcow2
 du -h /var/lib/libvirt/images/${os}${version}.qcow2
 }
@@ -49,6 +52,7 @@ guests_launch () {
 echo "#########################################################################"
 echo "#  Launch 5 guests                                                      #"
 echo "#########################################################################"
+cd ${wd}
 for x in {1..5} ; do ./define-guest-image.sh ${os}-$x ${os}${version} ; done
 sleep 180
 ./hosts-file.sh >> /etc/hosts
