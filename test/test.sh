@@ -19,8 +19,8 @@ image_provision () {
 echo "#########################################################################"
 echo "#  Image Provision                                                      #"
 echo "#########################################################################"
-which curl > /dev/null || apt -y install curl
-which ansible > /dev/null || ( curl -L https://git.io/fjWan -o install-ansible.sh && bash -x install-ansible.sh )
+which curl || apt -y install curl
+which ansible || ( curl -L https://git.io/fjWan -o install-ansible.sh && bash -x install-ansible.sh )
 sed -i '1 i\nameserver 192.168.122.1' /etc/resolv.conf
 ssh-keygen -f "/root/.ssh/known_hosts" -R "${os}"
 virsh start ${os}
