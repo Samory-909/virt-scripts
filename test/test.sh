@@ -21,7 +21,7 @@ echo "#  Image Provision                                                      #"
 echo "#########################################################################"
 virsh start ${os}
 cd ansible
-ansible -m ping -i inventory ${os} && \
+#ansible -m ping -i inventory ${os} && \
 ansible-playbook -i inventory playbook.yml --limit ${os}
 cd ..
 virsh destroy ${os}
