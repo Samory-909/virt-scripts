@@ -58,7 +58,7 @@ guests_icmp_echo () {
 echo "#########################################################################"
 echo "#  ICMP echo Req against the 5 guests                                   #"
 echo "#########################################################################"
-for x in {1..5} ; do ping -c1 ${os}-$x >> /tmp/${date}-${os}${version}.log ; done
+for x in {1..5} ; do ping -c1 ${os}-$x ; done
 echo "Logs in /tmp/virt-scripts-${os}${version}-${date}.log"
 }
 
