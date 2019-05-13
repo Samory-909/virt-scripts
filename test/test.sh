@@ -79,5 +79,4 @@ else
 		guests_icmp_echo
 	  guests_erase
 	fi
-	echo "script error" ; exit
 fi
