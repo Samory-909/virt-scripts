@@ -58,4 +58,5 @@ if [ ! -z "${action}" ] ; then
 	fi
 else
 	script error
+	exit
 fi
