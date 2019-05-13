@@ -49,7 +49,7 @@ guests_launch () {
 echo "#########################################################################"
 echo "#  Launch 5 guests                                                      #"
 echo "#########################################################################"
-for x in {1..5} ; do ./define-guest-image.sh ${os}-$x ${os}${version} done
+for x in {1..5} ; do ./define-guest-image.sh ${os}-$x ${os}${version} ; done
 sleep 180
 ./hosts-file.sh >> /etc/hosts
 }
