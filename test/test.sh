@@ -19,12 +19,14 @@ image_provision () {
 echo "#########################################################################"
 echo "#  Image Provision                                                      #"
 echo "#########################################################################"
+sed -i '1 i\nameserver 192.168.122.1' /etc/resolv.conf
 virsh start ${os}
 cd ansible
 #ansible -m ping -i inventory ${os} && \
 ansible-playbook -i inventory playbook.yml --limit ${os}
 cd ..
 virsh destroy ${os}
+sed -if "/nameserver 192.168.122.1/d" /etc/resolv.conf
 }
 
 
