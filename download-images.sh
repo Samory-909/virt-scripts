@@ -3,7 +3,7 @@
 
 #imagename="debian7 debian8 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
-imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
+imagename=($(curl -qs https://get.goffinet.org/kvm/imagename))
 image="$1.qcow2"
 url=http://get.goffinet.org/kvm/
 destination=/var/lib/libvirt/images/
@@ -43,10 +43,10 @@ usage () {
   echo "Usage:"
   echo "$0 image_name [--force]"
   echo "where \"image_name\" can be:"
-  echo ${imagename}
+  echo ${imagename[*]}
   echo "Examples:"
-  echo "$0 ${imagename}[0] --force"
-  echo "$0 ${imagename}[1]"
+  echo "$0 ${imagename[0]} --force"
+  echo "$0 ${imagename[1]}"
   echo "------------------------------------------------------------------------"
 }
 
@@ -55,7 +55,7 @@ if [ ${parameters} -lt 1 ] ; then
   usage
   exit
 fi
-if grep -qvw "${image}" <<< "$imagename" ; then
+if grep -qvw "${image}" <<< "${imagename[*]}" ; then
   echo "ERROR: Please provide a valid image name."
   usage
   exit
