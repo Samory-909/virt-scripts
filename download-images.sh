@@ -51,18 +51,18 @@ usage () {
 }
 
 if [ ${parameters} -lt 1 ] ; then
-  echo "ERROR: Please provide an image name."
   usage
+  echo "ERROR: Please provide an image name."
   exit
 fi
 if grep -qvw "${image}" <<< "${imagename[*]}" ; then
-  echo "ERROR: Please provide a valid image name."
   usage
+  echo "ERROR: Please provide a valid image name."
   exit
 fi
 if [ ${parameters} -gt 2 ] ; then
-  echo "ERROR: Too much args."
   usage
+  echo "ERROR: Too much args."
   exit
 fi
 if [ -f ${destination}${image}.qcow2  ] ; then
