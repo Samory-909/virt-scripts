@@ -39,14 +39,14 @@ cd ${wd}
 usage () {
   echo "------------------------------------------------------------------------"
   echo "This script download automatically KVM images from get.goffinet.org/kvm."
-  echo "The option \"--force\" does not ask any confirmation"
   echo "Usage:"
-  echo "$0 image_name [--force]"
-  echo "where \"image_name\" can be:"
+  echo "  $0 image_name [--force]"
+  echo "Where \"image_name\" can be:"
   echo ${imagename[*]}
+  echo "The option \"--force\" does not ask any confirmation."
   echo "Examples:"
-  echo "$0 ${imagename[0]} --force"
-  echo "$0 ${imagename[1]}"
+  echo "  $0 ${imagename[0]} --force"
+  echo "  $0 ${imagename[1]}"
   echo "------------------------------------------------------------------------"
 }
 
