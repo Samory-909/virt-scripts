@@ -97,7 +97,7 @@ Purposes : change RAM and vcpus, add block devices and network facilities
 6. `detach-nic.sh` : detach a live guest from a bridge
 7. `add-storage.sh` : attach an empty bit disk by GB size
 8. `start_all.sh` : start all the defined guests
-9. `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
+9. `destroy-and-undefine-all.sh` : destroy,  undefine all the guests with storage removing
 
 ## How-To
 
@@ -410,7 +410,7 @@ To be continued ... with :
 * `add-memory.sh` : add RAM
 * `add-vcpu.sh` : set vcpus count
 * `start_all.sh` : start all the defined guests
-* `destroy_and_undefine_all.sh` : destroy,  undefine all the guests with storage removing
+* `destroy-and-undefine-all.sh` : destroy,  undefine all the guests with storage removing
 
 
 ### Next steps ...
