@@ -45,8 +45,8 @@ usage () {
   echo "where \"image_name\" can be:"
   echo ${imagename}
   echo "Examples:"
-  echo "$0 centos7 --force"
-  echo "$0 ubuntu1804"
+  echo "$0 ${imagename[0]} --force"
+  echo "$0 ${imagename[1]}"
   echo "------------------------------------------------------------------------"
 }
 
