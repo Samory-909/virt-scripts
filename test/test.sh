@@ -5,6 +5,7 @@ version="$2"
 date=$(date +%s)
 action="$3"
 wd="$PWD"
+silent="> /dev/null 2>&1"
 
 image_build () {
 echo "#########################################################################"
@@ -81,19 +82,19 @@ if [ -z "${action}" ] ; then
   echo "script error" ; exit
 else
 	if grep -q 'b' <<< "${action}" ; then
-		image_build
+		image_build ${silent}
 		if [ ! -f /var/lib/libvirt/images/${os}.qcow2 ] ; then echo "script error" ; exit ; fi
 	fi
 	if grep -q 'p' <<< "${action}" ; then
-	  image_provision
+	  image_provision ${silent}
 	fi
 	if grep -q 'i' <<< "${action}" ; then
-		image_install
+		image_install ${silent}
 		if [ ! -f /var/lib/libvirt/images/${os}${version}.qcow2 ] ; then echo "script error" ; exit ; fi
 	fi
 	if grep -q 't' <<< "${action}" ; then
-    guests_launch
+    guests_launch ${silent}
 		guests_icmp_echo
-	  guests_erase
+	  guests_erase ${silent}
 	fi
 fi
