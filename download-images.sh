@@ -41,12 +41,12 @@ usage () {
   echo "This script download automatically KVM images from get.goffinet.org/kvm."
   echo "The option \"--force\" does not ask any confirmation"
   echo "Usage:"
-  echo "./$0 image_name [--force]"
+  echo "$0 image_name [--force]"
   echo "Valid image names are :"
   echo ${imagename}
   echo "Examples:"
-  echo "./$0 centos7 --force"
-  echo "./$0 ubuntu1804"
+  echo "$0 centos7 --force"
+  echo "/$0 ubuntu1804"
   echo "------------------------------------------------------------------------"
 }
 
