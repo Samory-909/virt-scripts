@@ -12,7 +12,7 @@ wd=$PWD
 force="$2"
 
 question () {
-echo "Do you want anyway download this file ${image}.qcow2"
+echo "WARN : Do you want anyway download this file ${image}.qcow2 ?"
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
