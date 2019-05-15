@@ -12,7 +12,7 @@ wd=$PWD
 force="$2"
 
 question () {
-echo "Do you want anyway download this file ${image}"
+echo "Do you want anyway download this file ${image}.qcow2"
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
@@ -28,34 +28,58 @@ download_image () {
 if [ "${force}" != "--force" ] ; then
   question
 fi
-curl ${url}${image} -o ${destination}${image}
-curl ${url}${image}.sha1 -o ${destination}${image}.sha1
+curl ${url}${image}.qcow2 -o ${destination}${image}.qcow2
+curl ${url}${image}.qcow2.sha1 -o ${destination}${image}.qcow2.sha1
 cd ${destination}
-sha1sum -c ${image}.sha1
-rm -rf ${image}.sha1
+sha1sum -c ${image}.qcow2.sha1
+rm -rf ${image}.qcow2.sha1
 cd ${wd}
 }
 
-if [ ${parameters} -lt 1 ] ; then
-  echo "Please provide the image name : "
+usage () {
+  echo "------------------------------------------------------------------------"
+  echo "This script download automatically KVM images from get.goffinet.org/kvm."
+  echo "The option \"--force\" does not ask any confirmation"
+  echo "Usage:"
+  echo "./$0 image_name [--force]"
+  echo "Valid image names are :"
   echo ${imagename}
+  echo "Examples:"
+  echo "./$0 centos7 --force"
+  echo "./$0 ubuntu1804"
+  echo "------------------------------------------------------------------------"
+}
+
+if [ ${parameters} -lt 1 ] ; then
+  echo "ERROR: Please provide an image name."
+  usage
   exit
 fi
-if [ -f ${destination}${image}  ] ; then
-  echo "The image ${destination}${image} already exists."
+if grep -qvw "${image}" <<< "$imagename" ; then
+  echo "ERROR: Please provide a valid image name."
+  usage
+  exit
+fi
+if [ ${parameters} -gt 2 ] ; then
+  echo "ERROR: Too much args."
+  usage
+  exit
+fi
+if [ -f ${destination}${image}.qcow2  ] ; then
+  echo "The image ${destination}${image}.qcow2 already exists."
   cd ${destination}
-  remote_sha1="$(curl -s ${url}${image}.sha1)"
+  remote_sha1="$(curl -s ${url}${image}.qcow2.sha1)"
   cd ${destination}
-  local_sha1="$(sha1sum ${image})"
+  local_sha1="$(sha1sum ${image}.qcow2)"
   cd ${wd}
     if [ "${remote_sha1}" = "${local_sha1}" ] ; then
-      echo "The local image is exactly the same than the remote image"
+      echo "The local image is exactly the same than the remote image."
       download_image
     else
-      echo "The local image is differs from the remote image"
+      echo "The local image differs from the remote image."
       download_image
 fi
 else
-  echo "The image ${destination}${image} does not exist."
+  echo "The image ${destination}${image}.qcow2 does not exist."
   download_image
 fi
