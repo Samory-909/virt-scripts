@@ -42,7 +42,7 @@ usage () {
   echo "The option \"--force\" does not ask any confirmation"
   echo "Usage:"
   echo "$0 image_name [--force]"
-  echo "Valid image names are :"
+  echo "where \"image_name\" can be:"
   echo ${imagename}
   echo "Examples:"
   echo "$0 centos7 --force"
