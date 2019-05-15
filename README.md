@@ -81,7 +81,7 @@ Purposes : deploy quickly guests based on pre-builded with previous scripts.
 
 1. `define-guest-image.sh` : deploy pre-builded images (like a quickbuilder, provisionner) as linked clones
 2. `deploy-image-by-profile.sh` : deploy pre-builded images by profiles (xs, s, m, l xl)  as linked clones
-3. `get_and_install_openwrt.sh` : get and start openwrt with two interfaces
+3. `get-and-install-openwrt.sh` : get and start openwrt with two interfaces
 
 But this is probably beter to build by yourself your appliance with the `auto-install.sh` script or with packer and qemu. The root account and the password are in the preseed and kickstart templates included.
 
