@@ -1,0 +1,1 @@
+define-guest-image.sh
