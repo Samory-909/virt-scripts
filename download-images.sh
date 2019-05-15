@@ -66,20 +66,20 @@ if [ ${parameters} -gt 2 ] ; then
   exit
 fi
 if [ -f ${destination}${image}.qcow2  ] ; then
-  echo "The image ${destination}${image}.qcow2 already exists."
+  echo "WARN: The image ${destination}${image}.qcow2 already exists."
   cd ${destination}
   remote_sha1="$(curl -s ${url}${image}.qcow2.sha1)"
   cd ${destination}
   local_sha1="$(sha1sum ${image}.qcow2)"
   cd ${wd}
     if [ "${remote_sha1}" = "${local_sha1}" ] ; then
-      echo "The local image is exactly the same than the remote image."
+      echo "WARN: The local image is exactly the same than the remote image."
       download_image
     else
-      echo "The local image differs from the remote image."
+      echo "WARN: The local image differs from the remote image."
       download_image
 fi
 else
-  echo "The image ${destination}${image}.qcow2 does not exist."
+  echo "WARN: The image ${destination}${image}.qcow2 does not exist."
   download_image
 fi
