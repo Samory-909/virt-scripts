@@ -46,7 +46,7 @@ usage () {
   echo ${imagename}
   echo "Examples:"
   echo "$0 centos7 --force"
-  echo "/$0 ubuntu1804"
+  echo "$0 ubuntu1804"
   echo "------------------------------------------------------------------------"
 }
 
