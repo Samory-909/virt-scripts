@@ -37,18 +37,18 @@ cd ${wd}
 }
 
 usage () {
-  printf "-------------------------------------------------------"
-  printf "This script download automatically KVM images"
-  printf "from https://get.goffinet.org/kvm.\n"
-  printf "Usage:"
-  printf "  $0 image_name [--force]\n"
-  printf "Where \"image_name\" can be:"
-  printf "${imagename[*]}"
-  printf "The option \"--force\" does not ask any confirmation.\n"
-  printf "Examples:"
-  printf "  $0 ${imagename[0]} --force"
-  printf "  $0 ${imagename[1]}"
-  printf "-------------------------------------------------------"
+  echo "-------------------------------------------------------"
+  echo "This script download automatically KVM images"
+  echo "from https://get.goffinet.org/kvm.\n"
+  echo "Usage:"
+  echo "  $0 image_name [--force]\n"
+  echo "Where \"image_name\" can be:"
+  echo "${imagename[*]}"
+  echo "The option \"--force\" does not ask any confirmation.\n"
+  echo "Examples:"
+  echo "  $0 ${imagename[0]} --force"
+  echo "  $0 ${imagename[1]}"
+  echo "-------------------------------------------------------"
 }
 
 if [ ${parameters} -lt 1 ] ; then
