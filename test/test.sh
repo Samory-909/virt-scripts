@@ -27,7 +27,7 @@ which ansible || ( curl -L https://git.io/fjWan -o install-ansible.sh && bash -x
 sed -i '1 i\nameserver 192.168.122.1' /etc/resolv.conf
 ssh-keygen -f "/root/.ssh/known_hosts" -R "${os}"
 virsh start ${os}
-cd cd ${wd}ansible
+cd ansible
 #ansible -m ping -i inventory ${os} && \
 ansible-playbook -i inventory playbook.yml --limit ${os}
 cd ${wd}
