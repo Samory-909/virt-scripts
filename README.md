@@ -31,9 +31,9 @@ Purposes : gold image auto-creation
 
 ## Build your images with Packer, Qemu/KVM and Ansible
 
-You can also download builded with Packer and Ansible automation based ont this other educational project https://github.com/goffinet/packer-kvm
+You can also build your images with Packer and Ansible automation based ont this other educational project https://github.com/goffinet/packer-kvm
 
-Some images are available on https://get.goffinet.org/kvm : centos7 debian9 ubuntu1804. Old images are archived on https://get.goffinet.org/kvm/archives/.
+Some images are available for download on https://get.goffinet.org/kvm : centos7 debian9 ubuntu1804. Old images are archived on https://get.goffinet.org/kvm/archives/.
 
 You can download them with the `download-images.sh` script :
 
@@ -72,7 +72,6 @@ The local image is exactly the same than the remote
                                  Dload  Upload   Total   Spent    Left  Speed
 100    56  100    56    0     0   1696      0 --:--:-- --:--:-- --:--:--  1750
 debian9.qcow2: OK
-
 ```
 
 ## Quickbuilder
@@ -83,7 +82,7 @@ Purposes : deploy quickly guests based on pre-builded with previous scripts.
 2. `deploy-image-by-profile.sh` : deploy pre-builded images by profiles (xs, s, m, l xl)  as linked clones
 3. `get-and-install-openwrt.sh` : get and start openwrt with two interfaces
 
-But this is probably beter to build by yourself your appliance with the `auto-install.sh` script or with packer and qemu. The root account and the password are in the preseed and kickstart templates included.
+But this is probably better to build by yourself your appliance with the `auto-install.sh` script or with packer and qemu. The root account and the password are stored in the "preseed" and "kickstart" templates included in the script.
 
 ## Devices management
 
@@ -124,20 +123,7 @@ Please reboot your host after this step
 Are you sure? [y/N]
 ```
 
-### Step 2 : Get iso images (optionnal, outdated)
-
-Script : `get-iso.sh`
-
-Description : Get latest iso of Centos 7, Debian Jessie and Ubuntu Xenial.
-
-Usage :
-
-```
-# ./get-iso.sh
-Usage : ./get-iso.sh [ centos | debian | ubuntu ]
-```
-
-### Step 3 : Build a guest automatically
+### Step 2 : Build a guest automatically
 
 Script : `auto-install.sh`
 
@@ -160,7 +146,7 @@ Note : Escape character is :
 * CTRL + 5 on Windows french keyboards
 
 
-### Step 4 : Sparse your native image
+### Step 3 : Sparse your native image
 
 Script : `sparsify.sh`
 
@@ -209,7 +195,7 @@ Check the disk usage : 432M
 432M    /var/lib/libvirt/images/ubuntu-gold-31122016.qcow2
 ```
 
-### Step 5 : Clone your guest
+### Step 4 : Clone your guest
 
 Script : clone.sh
 
@@ -224,9 +210,9 @@ Usage : './clone.sh <original guest> <destination guest>'
 Please provide a the guest name of a destroyed guest: exit
 ```
 
-### Step 6 : Quickbuilder
+### Step 5 : Quickbuilder
 
-Assume that you have installed three guests with `auto-install.sh` :
+Assume that you have installed two guests with `auto-install.sh` :
 
 ```
 ~/virt-scripts# ./auto-install.sh centos7 centos
@@ -302,7 +288,7 @@ Are you sure? [y/N] y
 centos7.qcow2: OK
 ```
 
-### Step 7 : Manage guests
+### Step 6 : Manage guests as usual with Libvirt
 
 Verify your running guests :
 
@@ -329,7 +315,7 @@ centos7 login:
 
 To exit from the text console execute CTRL `]`.
 
-### Step 8 : Add the guest hostname resolution
+### Step 7 : Add the guest hostname resolution
 
 Script : `hosts-file.sh`
 
@@ -369,7 +355,7 @@ déconnexion
 Connection to c1 closed.
 ```
 
-### Step 9 : Manage devices
+### Step 8 : Manage devices
 
 Script : `add-bridge.sh`
 
@@ -389,7 +375,6 @@ Associated scripts :
 * `add-nic.sh` : a new NIC on live guest to a bridged interface
 * `attach-nic.sh` : attach a live guest present NIC to a bridge
 * `detach-nic.sh` : detach a live guest from a bridge
-
 
 
 Script : `add-storage.sh`
@@ -415,14 +400,14 @@ To be continued ... with :
 
 ### Next steps ...
 
-* Integrate kcli for guests management
+* (Integrate kcli for guests management)
 * Install ansible, add ssh hosts keys, create an ansible inventory and test your managed nodes : see https://github.com/goffinet/packer-kvm
-* Exploit ~~snapshots~~ and virtual storage
+* Exploit virtual storage (LVM, ...)
 * Exploit free-ipa, pacemaker, ovirt, openstack, gns3 (see kcli plans)
 
 ## Todo
 
 * `auto-install.sh`
-  * ~~Fedora~~
+  * Centos 8
 * `create_repo.sh` : create local repo
 * Revise code and comment, comment, comment ...
