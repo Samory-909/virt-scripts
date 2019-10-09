@@ -9,7 +9,7 @@ Three groups of scripts :
 2. Quickbuilder, guests spwaning with pre-builded images
 3. Devices management
 
-If you already have images at stock, there exists beter ways to automate and manage libvirt guest like those nice scripts :
+If you already have images at stock, there exists better ways to automate and manage libvirt guest like those nice scripts :
 
 * in python :  `kcli` (https://github.com/karmab/kcli)
 * in bash : https://github.com/vpenso/libvirt-shell-functions
@@ -21,12 +21,12 @@ For native installation of Arch Linux : look at https://github.com/Anthony25/spa
 Purposes : gold image auto-creation
 
 1. `autoprep.sh` : prepare your system as virtualization host
-2. `get-iso.sh` : get iso distributions for fresh installations
-3. `auto-install.sh` : build a fresh Centos, Debian or Ubuntu system with http repos and kickstart files
+2. `download-images.sh` : get a builded image by this project
+3. `auto-install.sh` : build by yourself a fresh Centos, Debian or Ubuntu system with http repos and kickstart files
 4. `auto-install-tui.sh` : auto-install.sh text user interface demo
 5. `sparsify.sh` : optimize space disk on the designated guest
-6. `clone.sh` : clone, sysprep and optimize builded guests
-7. `hosts-file` : print the running guests and their ipv4 address
+6. `clone.sh` : clone as linked, sysprep and optimize builded guests
+7. `hosts-file` : display the running guests and their ipv4 address as /etc/hosts file
 8. `nested-physical.sh` : nested virtualization installation on the physical host
 
 ## Build your images with Packer, Qemu/KVM and Ansible
