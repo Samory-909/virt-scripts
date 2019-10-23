@@ -4,8 +4,8 @@
 check_distribution () {
 if [ -f /etc/debian_version ]; then
 debian8_prep
-sudo virsh net-start default
-sudo virsh net-autostart default
+virsh net-start default
+virsh net-autostart default
 elif [ -f /etc/redhat-release ]; then
 centos7_prep
 fi
@@ -25,13 +25,12 @@ esac
 
 debian8_prep() {
 echo " Upgrade the system"
-apt-get -y install sudo
-sudo apt-get update && sudo apt-get -y upgrade
+apt-get update && apt-get -y upgrade
 echo "Virtualization host installation"
-sudo apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime curl
+apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime curl
 #echo "kcli libvirt  wrapper installation"
-sudo apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
-#sudo pip install kcli
+apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
+#pip install kcli
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
 sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
@@ -41,14 +40,14 @@ cat /sys/module/kvm_intel/parameters/nested
 
 centos7_prep() {
 echo " Upgrade the system"
-sudo yum -y install epel-release
-sudo yum -y upgrade
+yum -y install epel-release
+yum -y upgrade
 echo "Virtualization host installation"
-sudo yum -y group install "Virtualization Host"
-sudo yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer virt-manager curl
+yum -y group install "Virtualization Host"
+yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer virt-manager curl
 #echo "kcli libvirt  wrapper installation"
-sudo yum -y install gcc libvirt-devel python-devel genisoimage qemu-kvm nmap-ncat python-pip
-#sudo pip install kcli
+yum -y install gcc libvirt-devel python-devel genisoimage qemu-kvm nmap-ncat python-pip
+#pip install kcli
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
 sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
@@ -58,9 +57,9 @@ cat /sys/module/kvm_intel/parameters/nested
 
 services_activation() {
 echo "Activate all those services"
-#sudo systemctl stop firewalld
-sudo systemctl restart libvirtd
-sudo virt-host-validate
+#systemctl stop firewalld
+systemctl restart libvirtd
+virt-host-validate
 }
 
 check_apache () {
