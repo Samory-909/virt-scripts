@@ -21,7 +21,7 @@ nested=""
 # VCPUs
 vcpu="1"
 # The new guest disk name
-disk="${name}-${uuid:25}.qcow2"
+disk="${name}-${uuid}.qcow2"
 # Diskbus can be 'ide', 'scsi', 'usb', 'virtio' or 'xen'
 diskbus="virtio"
 size="8"
