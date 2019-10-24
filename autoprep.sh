@@ -1,6 +1,13 @@
 #!/bin/bash
 #Setup KVM/Libvirtd/LibguestFS on RHEL7/Centos 7/Debian Jessie.
 
+check_root_id () {
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+}
+
 check_distribution () {
 if [ -f /etc/debian_version ]; then
 debian8_prep
@@ -83,6 +90,7 @@ fi
 
 echo "This script will install all the necessary packages to use Libvirtd/KVM"
 echo "Please reboot your host after this step"
+check_root_id
 validation
 check_distribution
 services_activation
