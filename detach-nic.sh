@@ -11,7 +11,8 @@ check_parameters () {
 if [ "$parameters" -ne 2  ] ; then
 echo "Description : This script detach a live guest from a bridge"
 echo "Usage       : $0 <guest name> <bridge_interface_name>"
-echo "Example     : $0 guest1 virbr0 detach the live guest1 NIC from virbr0"
+echo "Example     : $0 guest1 virbr0"
+echo "              to detach the live guest1 NIC from virbr0"
 exit
 fi
 # Check if the guest name chosen is in live and display help to choose
@@ -35,7 +36,7 @@ check_mac_address () {
 mac=""
 while grep -qvw "$mac" <<< $(virsh domiflist $guest | tail -n +3 | head -n -1 | awk '{ print $5; }') ; do
 virsh domiflist $guest
-read -p  "Please choose a mac address to attach : " mac
+read -p  "Please choose a mac address to detach : " mac
 done
 }
 
