@@ -11,7 +11,8 @@ check_parameters () {
 if [ "$parameters" -ne 2  ] ; then
 echo "Description : This script attach a live guest present NIC to a bridge"
 echo "Usage       : $0 <guest name> <bridge_interface_name>"
-echo "Example     : $0 guest1 virbr0 attach the live guest1 NIC to virbr0"
+echo "Example     : $0 guest1 virbr0"
+echo "              to attach the live guest1 NIC to virbr0"
 exit
 fi
 # Check if the guest name chosen is in live and display help to choose
