@@ -27,7 +27,7 @@ debian8_prep() {
 echo " Upgrade the system"
 apt-get update && apt-get -y upgrade
 echo "Virtualization host installation"
-apt-get -y install qemu-kvm libvirt-bin virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime curl
+apt-get -y install qemu-kvm libvirt-dev virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime curl
 #echo "kcli libvirt  wrapper installation"
 apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
 #pip install kcli
