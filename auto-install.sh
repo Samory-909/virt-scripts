@@ -1,5 +1,5 @@
 #!/bin/bash
-#Centos 7, Fedora 25, Debian 9 Stretch or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
+#Centos 7, Fedora 25, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
 image="$1" # centos, fedora, debian, ubuntu
 name="$2"
 silent="$3"
@@ -153,7 +153,7 @@ d-i grub-installer/with_other_os                            boolean     true
 d-i finish-install/reboot_in_progress                       note
 d-i finish-install/keep-consoles                            boolean     false
 d-i cdrom-detect/eject                                      boolean     true
-d-i preseed/late_command in-target sed -i 's/PermitRootLogin\ prohibit-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config ; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/db89976e8c5028ce5502e272e49c3ed65bbaba8e/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh ; in-target shutdown -h now
+d-i preseed/late_command in-target sed -i 's/PermitRootLogin\ prohibit-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config ; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/db89976e8c5028ce5502e272e49c3ed65bbaba8e/ubuntu-grub-console.sh ; in-target sh ubuntu-grub-console.sh ; in-target sed -i 's/ens2/eth0/' /etc/netplan/01-netcfg.yaml ; in-target shutdown -h now
 EOF
 }
 
@@ -177,6 +177,7 @@ d-i clock-setup/utc boolean true
 d-i time/zone string Europe/Paris
 d-i clock-setup/ntp boolean true
 d-i partman-auto/method string lvm
+d-i partman-auto-lvm/guided_size string max
 d-i partman-lvm/device_remove_lvm boolean true
 d-i partman-md/device_remove_md boolean true
 d-i partman-lvm/confirm boolean true
