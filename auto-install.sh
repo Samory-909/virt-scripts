@@ -72,9 +72,9 @@ fi
 }
 
 launch_guest () {
-if ! grep -q "vmx" /proc/cpuinfo ; then echo "Please enable virtualization instructions" ; exit 1 ; fi
-{ grep -q vmx /proc/cpuinfo ; [ $? == 0 ]; } || { echo "Please enable virtualization instructions" ; exit 1 ;  }
-[ `grep -c vmx /proc/cpuinfo` == 0 ] && { echo "Please enable virtualization instructions" ; exit 1 ;  }
+if ! grep -q 'vmx\|svm' /proc/cpuinfo ; then echo "Please enable virtualization instructions" ; exit 1 ; fi
+{ grep -q 'vmx\|svm' /proc/cpuinfo ; [ $? == 0 ]; } || { echo "Please enable virtualization instructions" ; exit 1 ;  }
+[ `grep -c 'vmx\|svm' /proc/cpuinfo` == 0 ] && { echo "Please enable virtualization instructions" ; exit 1 ;  }
 virt-install -h >/dev/null 2>&1 || { echo >&2 "Please install libvirt"; exit 2; }
 virt-install \
 --virt-type=kvm \
@@ -270,7 +270,7 @@ case $image in
         redhat_response_file ;;
     debian)
         mirror=$debian_mirror
-        ram="512"
+        ram="1024"
         os="debianwheezy"
         config="url=$url_configuration"
         debian_response_file ;;
