@@ -237,7 +237,7 @@ yum -y update && yum -y upgrade
 #mkdir /root/.ssh
 #curl ${conf}/id_rsa.pub > /root/.ssh/authorized_keys
 #sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
-sed -e 's/console=ttyS0"/console=ttyS0 net.ifnames=0 biosdevname=0"/' /etc/default/grub
+sed -i 's/console=ttyS0"/console=ttyS0 net.ifnames=0 biosdevname=0"/' /etc/default/grub
 grub2-mkconfig > /boot/grub2/grub.cfg
 %end
 EOF
