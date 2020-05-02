@@ -1,5 +1,5 @@
 #!/bin/bash
-#Centos 7, Fedora 25, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
+#Centos 7/8, Fedora 25, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
 image="$1" # centos, fedora, debian, ubuntu
 name="$2"
 silent="$3"
@@ -8,39 +8,31 @@ bridgeip4="192.168.122.1"
 country="fr"
 url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/"
 url_debian_mirror="http://ftp.debian.org/debian/dists/stable/main/installer-amd64/"
-url_centos_mirror="http://mirror.centos.org/centos/7/os/x86_64/"
+url_centos7_mirror="http://mirror.centos.org/centos/7/os/x86_64/"
+url_centos8_mirror="http://mirror.centos.org/centos/8/BaseOS/x86_64/kickstart/"
 curl -V >/dev/null 2>&1 || { echo >&2 "Please install curl"; exit 2; }
 url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-25&arch=x86_64" 2>&1 | grep ${country} | head -n 1)
-#url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/"
-#ovh_ubuntu_mirror=http://mirror.ovh.net/ubuntu/dists/xenial/main/installer-amd64/
-#ovh_debian_mirror=http://debian.mirrors.ovh.net/debian/dists/jessie/main/installer-amd64/
-#ovh_centos_mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/
-#belnet_ubuntu_mirror=http://ftp.belnet.be/ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/
-#belnet_debian_mirror=http://ftp.belnet.be/debian/dists/jessie/main/installer-amd64/
-#belnet_centos_mirror=http://ftp.belnet.be/ftp.centos.org/7/os/x86_64/
 #local_ubuntu_iso=/var/lib/iso/ubuntu-16.04.1-server-amd64.iso
-#url_ubuntu_iso=http://releases.ubuntu.com/16.04/ubuntu-16.04.1-server-amd64.iso
 #local_debian_iso=/var/lib/iso/debian-8.6.0-amd64-netinst.iso
-#url_debian_iso=http://cdimage.debian.org/debian-cd/8.6.0/amd64/iso-cd/debian-8.6.0-amd64-netinst.iso
 #local_centos_iso=/var/lib/iso/CentOS-7-x86_64-DVD-1611.iso
-#url_centos_iso=http://ftp.belnet.be/ftp.centos.org/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso
 ubuntu_mirror=$url_ubuntu_mirror
 debian_mirror=$url_debian_mirror
-centos_mirror=$url_centos_mirror
+centos7_mirror=$url_centos7_mirror
 fedora_mirror=$url_fedora_mirror
+centos8_mirror=$url_centos8_mirror
 autoconsole=""
 #autoconsole="--noautoconsole"
 url_configuration="http://${bridgeip4}/conf/${image}-${name}.cfg"
 
 usage () {
-echo "Usage : $0 [ centos | fedora | debian | ubuntu ] vm_name"
+echo "Usage : $0 [ centos | centos8 | fedora | debian | ubuntu ] vm_name"
 }
 
 check_guest_name () {
 if [ -z "${name}" ]; then
-echo "Centos 7, Fedora 25, Debian 9 Stretch or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP."
+echo "Centos 7/8, Fedora 25, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP."
 usage
-echo "Please provide one distribution centos, fedora, debian, ubuntu and one guest name: exit"
+echo "Please provide one distribution centos, centos8, fedora, debian, ubuntu and one guest name: exit"
 exit
 fi
 if grep -qw ${name} <<< $(virsh list --all --name)  ; then
@@ -79,7 +71,7 @@ virt-install -h >/dev/null 2>&1 || { echo >&2 "Please install libvirt"; exit 2; 
 virt-install \
 --virt-type=kvm \
 --name=$name \
---disk path=/var/lib/libvirt/images/$name.qcow2,size=8,format=qcow2 \
+--disk path=/var/lib/libvirt/images/$name.qcow2,size=32,format=qcow2 \
 --ram=$ram \
 --vcpus=1 \
 --os-variant=$os \
@@ -196,7 +188,7 @@ d-i grub-installer/with_other_os boolean true
 d-i grub-installer/bootdev  string /dev/vda
 d-i finish-install/keep-consoles boolean true
 d-i finish-install/reboot_in_progress note
-d-i preseed/late_command string in-target sed -i 's/PermitRootLogin\ without-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/db89976e8c5028ce5502e272e49c3ed65bbaba8e/ubuntu-grub-console.sh ; in-target chmod +x ubuntu-grub-console.sh && sh ubuntu-grub-console.sh ; in-target shutdown -h now
+d-i preseed/late_command string in-target sed -i 's/PermitRootLogin\ without-password/PermitRootLogin\ yes/' /etc/ssh/sshd_config ; in-target wget https://gist.githubusercontent.com/goffinet/f515fb4c87f510d74165780cec78d62c/raw/db89976e8c5028ce5502e272e49c3ed65bbaba8e/ubuntu-grub-console.sh ; in-target chmod +x ubuntu-grub-console.sh && sh ubuntu-grub-console.sh ; in-target shutdown -h now
 EOF
 }
 
@@ -252,8 +244,20 @@ EOF
 configure_installation () {
 case $image in
     centos)
-        mirror=$centos_mirror
-        ram="2048" #requiremnt
+        mirror=$centos7_mirror
+        ram="2048" #requirement
+        os="rhel7"
+        config="ks=$url_configuration"
+        redhat_response_file ;;
+    centos7)
+        mirror=$centos7_mirror
+        ram="2048" #requirement
+        os="rhel7"
+        config="ks=$url_configuration"
+        redhat_response_file ;;
+    centos8)
+        mirror=$centos8_mirror
+        ram="2048" #requirement
         os="rhel7"
         config="ks=$url_configuration"
         redhat_response_file ;;
