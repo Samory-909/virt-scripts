@@ -80,7 +80,7 @@ cd virt-scripts
 labs/103/start.sh
 ```
 
-## Secund : Deploy
+## Second : Deploy
 
 Deploy the configuration located in the `init.sh` script :
 
