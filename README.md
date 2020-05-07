@@ -408,6 +408,7 @@ To be continued ... with :
 ## Todo
 
 * `auto-install.sh`
-  * Centos 8
+  * ~~Centos 8~~
+  * Ubuntu 20.04 Focal Fossa
 * `create_repo.sh` : create local repo
 * Revise code and comment, comment, comment ...
