@@ -76,7 +76,7 @@ IPv6 diagram :
 
 -->
 
-## First : Start
+## First : Start the topology
 
 Create the topology :
 
@@ -86,7 +86,7 @@ cd virt-scripts
 labs/103/start.sh
 ```
 
-## Second : Deploy
+## Second : Deploy the configuration
 
 Deploy the configuration located in the `init.sh` script :
 
