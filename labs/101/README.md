@@ -14,26 +14,26 @@ Deux facilités réseaux :
 Deux machines :
 
 * Un client connecté au switch `lan101` (eth0)
-* Un routeur connecté au switch `lan101` (eth0) et au switch `wan101` (eth1) qui rendra les services DNS, DHCP, DHCPv6, SLAAC sur lan101. Les plages du LAN sont adressées en 192.168.168.0/24 et fd00:168:168::/64.
+* Un routeur connecté au switch `lan101` (eth0) et au switch `wan101` (eth1) qui rendra les services DNS, DHCP, DHCPv6, SLAAC sur lan101. Les plages du LAN sont adressées en `192.168.168.0/24` et `fd00:168:168::/64`.
 
 ## Usage
 
 Déploiement de la topologie.
 
-```
+```bash
 cd ~/virt-scripts
 labs/101/start.sh
 ```
 
 Entrer dans le routeur virtuel.
 
-```
+```bash
 virsh console r101
 ```
 
 Lancer le script de configuration.
 
-```
+```bash
 curl https://raw.githubusercontent.com/goffinet/virt-scripts/master/labs/101/router-firewall.sh -o router-firewall.sh
 cat router-firewall.sh
 bash -x router-firewall.sh
@@ -45,7 +45,7 @@ Entrer dans `pc1-101` et y réaliser le diagnostic TCP/IP
 
 Note : on peut déployer automatiquement ce script dans la machine virtuelle.
 
-```
+```bash
 cd ~/virt-scripts
 labs/101/deploy.sh
 ```

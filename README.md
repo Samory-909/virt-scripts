@@ -1,11 +1,11 @@
 # Virt-scripts
 
-This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd (on Centos 7 or Debian Jessie hosts).
+This suite of "quick and dirty" scripts are intended to mount virtual sandboxes for labs during Linux training courses with KVM/libvirtd (on Centos 7/8, Ubuntu Bionic 18.04 or Debian stable hosts).
 The main goal is to spawn quickly linux guests for lab purposes. But we can find other subsequents objectives as coding/scripting, automation or virtual networks and system management, helping to understand virtual infrastructures technologies and architectures. Only for educational purposes.
 
 Three groups of scripts :
 
-1. Native installation for Centos 7 Debian 9 and Ubuntu 18.04 and post-installation.
+1. Native installation for Centos 7/8 Debian Stable and Ubuntu Bionic 18.04 and post-installation.
 2. Quickbuilder, guests spwaning with pre-builded images
 3. Devices management
 
@@ -242,7 +242,7 @@ done
 
 ```
 
-And you can deploy quicky builded and optimized guests based on those images :
+And you can deploy quickly builded and optimized guests based on those images :
 
 ```
 ~/virt-scripts# ./define-guest-image.sh c1 centos7

@@ -2,6 +2,10 @@
 
 ## Topology
 
+![OSPF quad pod Topology](lab103-ospf-quad-pod.png)
+
+<!--
+
 IPv4 diagram :
 
 ```
@@ -70,11 +74,13 @@ IPv6 diagram :
 
 ```
 
+-->
+
 ## First : Start
 
 Create the topology :
 
-```
+```bash
 cd
 cd virt-scripts
 labs/103/start.sh
@@ -84,7 +90,7 @@ labs/103/start.sh
 
 Deploy the configuration located in the `init.sh` script :
 
-```
+```bash
 cd
 cd virt-scripts
 labs/103/deploy.sh
@@ -92,7 +98,7 @@ labs/103/deploy.sh
 
 ## Virtual machines and networks
 
-```
+```bash
 ~/virt-scripts# virsh list --name
 pc1-103
 pc2-103
@@ -105,7 +111,7 @@ r4-103
 ```
 
 
-```
+```bash
 ~/virt-scripts# virsh net-list
  Name                 State      Autostart     Persistent
 ----------------------------------------------------------
@@ -122,7 +128,7 @@ r4-103
 
 In the Linux shell :
 
-```
+```bash
 [root@r1-103 ~]# ip link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT qlen 1
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -140,7 +146,7 @@ eth2    ethernet  disconnected  --
 lo      loopback  unmanaged     --
 ```
 
-The eth2 is used to provide network in the firstboot posy-installation that install Quagga ansd Dnsmasq. This 'disconnected' by NetworkManager.
+The eth2 is used to provide network in the firstboot post-installation that install Quagga ansd Dnsmasq. This 'disconnected' by NetworkManager.
 
 In the Quagga shell :
 
@@ -222,7 +228,7 @@ C>* fe80::/64 is directly connected, eth0
 
 ## End to end IPv4 connectivity from one of routers to each end PC
 
-```
+```bash
 for id in 1 2 3 4 ; do
 if [ ! -e /root/.ssh/id_rsa.pub ] ; then
 ssh-keygen -q ; fi
@@ -236,7 +242,7 @@ done
 
 ## End to end IPv4 connectivity from one PC to each LAN gateway interface
 
-```
+```bash
 for id in 1 2 3 4 ; do
 echo "PC${id} -->  LAN${id}"
 ping -c1 10.103.${id}.1
