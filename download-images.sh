@@ -3,7 +3,7 @@
 
 #imagename="debian7 debian8 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
-imagename=($(curl -qs https://get.goffinet.org/kvm/imagename))
+imagename=($(curl -qks https://get.goffinet.org/kvm/imagename))
 image="$1"
 url=http://get.goffinet.org/kvm/
 destination=/var/lib/libvirt/images/
@@ -28,11 +28,11 @@ download_image () {
 if [ "${force}" != "--force" ] ; then
   question
 fi
-curl ${url}${image}.qcow2 -o ${destination}${image}.qcow2
-curl ${url}${image}.qcow2.sha1 -o ${destination}${image}.qcow2.sha1
+curl -k ${url}${image}.qcow2 -o ${destination}${image}.qcow2
+curl -k ${url}${image}.qcow2.md5sum -o ${destination}${image}.qcow2.md5sum
 cd ${destination}
-sha1sum -c ${image}.qcow2.sha1
-rm -rf ${image}.qcow2.sha1
+md5sum -c ${image}.qcow2.md5sum
+rm -rf ${image}.qcow2.md5sum
 cd ${wd}
 }
 
@@ -72,11 +72,11 @@ fi
 if [ -f ${destination}${image}.qcow2  ] ; then
   echo "WARN: The image ${destination}${image}.qcow2 already exists."
   cd ${destination}
-  remote_sha1="$(curl -s ${url}${image}.qcow2.sha1)"
+  remote_md5="$(curl -ks ${url}${image}.qcow2.md5sum)"
   cd ${destination}
-  local_sha1="$(sha1sum ${image}.qcow2)"
+  local_md5="$(md5sum ${image}.qcow2)"
   cd ${wd}
-    if [ "${remote_sha1}" = "${local_sha1}" ] ; then
+    if [ "${remote_md5}" = "${local_md5}" ] ; then
       echo "WARN: The local image is exactly the same than the remote image."
       download_image
     else
