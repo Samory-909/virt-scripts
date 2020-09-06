@@ -1,21 +1,21 @@
 #!/bin/bash
-#Centos 7/8, Fedora 25, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
-image="$1" # centos, fedora, debian, ubuntu
+#Centos 7/8, Fedora 32, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP.
+image="$1" # centos, fedora, debian, bionic
 name="$2"
 silent="$3"
 bridge="virbr0"
 bridgeip4="192.168.122.1"
 country="fr"
-url_ubuntu_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/"
+fedora_version="32"
+url_bionic_mirror="http://${country}.archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/"
 url_debian_mirror="http://ftp.debian.org/debian/dists/stable/main/installer-amd64/"
 url_centos7_mirror="http://mirror.centos.org/centos/7/os/x86_64/"
 url_centos8_mirror="http://mirror.centos.org/centos/8/BaseOS/x86_64/kickstart/"
 curl -V >/dev/null 2>&1 || { echo >&2 "Please install curl"; exit 2; }
-url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-25&arch=x86_64" 2>&1 | grep ${country} | head -n 1)
-#local_ubuntu_iso=/var/lib/iso/ubuntu-16.04.1-server-amd64.iso
+url_fedora_mirror=$(curl -v --silent "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-${fedora_version}&arch=x86_64&country=global" 2>&1 | grep 'dl.fedoraproject' | head -n 1)
 #local_debian_iso=/var/lib/iso/debian-8.6.0-amd64-netinst.iso
 #local_centos_iso=/var/lib/iso/CentOS-7-x86_64-DVD-1611.iso
-ubuntu_mirror=$url_ubuntu_mirror
+bionic_mirror=$url_bionic_mirror
 debian_mirror=$url_debian_mirror
 centos7_mirror=$url_centos7_mirror
 fedora_mirror=$url_fedora_mirror
@@ -25,14 +25,14 @@ autoconsole=""
 url_configuration="http://${bridgeip4}/conf/${image}-${name}.cfg"
 
 usage () {
-echo "Usage : $0 [ centos | centos8 | fedora | debian | ubuntu ] vm_name"
+echo "Usage : $0 [ centos | centos8 | fedora | debian | bionic ] vm_name"
 }
 
 check_guest_name () {
 if [ -z "${name}" ]; then
-echo "Centos 7/8, Fedora 25, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP."
+echo "Centos 7/8, Fedora 32, Debian Stable or Ubuntu 18.04 Bionic fully automatic installation by HTTP Repos and response file via local HTTP."
 usage
-echo "Please provide one distribution centos, centos8, fedora, debian, ubuntu and one guest name: exit"
+echo "Please provide one distribution centos, centos8, fedora, debian, bionic and one guest name: exit"
 exit
 fi
 if grep -qw ${name} <<< $(virsh list --all --name)  ; then
@@ -83,7 +83,7 @@ virt-install \
 -x "auto=true hostname=$name domain= $config text console=ttyS0 $autoconsole"
 }
 
-ubuntu_response_file () {
+bionic_response_file () {
 touch /var/www/html/conf/${image}-${name}.cfg
 cat << EOF > /var/www/html/conf/${image}-${name}.cfg
 d-i debian-installer/language                               string      en_US:en
@@ -275,12 +275,12 @@ case $image in
         os="debianwheezy"
         config="url=$url_configuration"
         debian_response_file ;;
-    ubuntu)
-        mirror=$ubuntu_mirror
+    bionic)
+        mirror=$bionic_mirror
         ram="512"
         os="ubuntusaucy"
         config="url=$url_configuration"
-        ubuntu_response_file ;;
+        bionic_response_file ;;
     *)
         usage
         echo "Please provide one of those distributions" ;;
