@@ -29,7 +29,7 @@ size="8"
 # Hypervisor can be 'qemu', 'kvm' or 'xen'
 hypervisor="kvm"
 # RAM in Mb
-memory="512"
+memory="1024"
 # Graphics 'none' or 'vnc'
 graphics="none"
 # Network interface and model 'virtio' or 'rtl8139' or 'e1000'
