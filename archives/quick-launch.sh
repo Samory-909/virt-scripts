@@ -10,7 +10,7 @@
 name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
-#imagename="debian7 debian8 debian9 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
+#imagename="debian7 debian8 debian10 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
 imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
 image="$2.qcow2"
@@ -35,10 +35,16 @@ graphics="none"
 # Network interface and model 'virtio' or 'rtl8139' or 'e1000'
 interface="virbr0"
 model="virtio"
-if [ $image = "ubuntu1804.qcow2" ]; then
+if [ $image = "bionic.qcow2" ]; then
 os="ubuntu17.10"
 fi
 if [ $image = "centos7.qcow2" ]; then
+os="centos7.0"
+fi
+if [ $image = "focal.qcow2" ]; then
+os="ubuntu17.10"
+fi
+if [ $image = "centos8.qcow2" ]; then
 os="centos7.0"
 fi
 # Parameters for metasploitable guests
@@ -93,11 +99,11 @@ fi
 qemu-img create -f qcow2 -b /var/lib/libvirt/images/$image /var/lib/libvirt/images/$disk
 
 ## Customize this new guest disk
-if [ $image = "ubuntu1804.qcow2" ]; then
+if [ $image = "bionic.qcow2" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
 fi
-if [ $image = "debian9.qcow2" ]; then
+if [ $image = "debian10.qcow2" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
 fi

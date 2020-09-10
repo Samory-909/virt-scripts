@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#imagename="debian7 debian8 debian9 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
+#imagename="debian7 debian8 debian10 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
 imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
 image=$4
@@ -79,11 +79,15 @@ qemu-img create -f qcow2 -b /var/lib/libvirt/images/${image}.qcow2 /var/lib/libv
 
 customize_new_disk () {
 ## Customize this new guest disk
-if [ $image = "ubuntu1804" ]; then
+if [ $image = "bionic" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
 fi
-if [ $image = "debian9" ]; then
+if [ $image = "focal" ]; then
+sleep 1
+virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
+fi
+if [ $image = "debian10" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
 fi

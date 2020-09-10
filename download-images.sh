@@ -1,7 +1,7 @@
 #!/bin/bash
 # Download kvm images builded with https://github.com/goffinet/packer-kvm from http://get.goffinet.org/kvm/
 
-#imagename="debian7 debian8 centos7 centos7.5 ubuntu1604 ubuntu1804 metasploitable kali arch"
+#imagename="debian7 debian8 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
 imagename=($(curl -qks https://get.goffinet.org/kvm/imagename))
 image="$1"
