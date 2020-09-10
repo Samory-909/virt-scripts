@@ -12,7 +12,7 @@ name=$1
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
 #imagename="debian7 debian8 debian10 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
-imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
+imagename="$(curl -kqs https://get.goffinet.org/kvm/imagename)"
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)

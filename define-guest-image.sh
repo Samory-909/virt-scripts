@@ -11,7 +11,7 @@ name=$1
 # Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
 #imagename="centos7 bionic debian10"
 which curl > /dev/null || ( echo "Please install curl" && exit )
-imagename="$(curl -qs https://get.goffinet.org/kvm/imagename)"
+imagename="$(curl -kqs https://get.goffinet.org/kvm/imagename)"
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)
