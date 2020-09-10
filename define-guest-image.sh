@@ -116,7 +116,7 @@ fi
 virt-install \
 --virt-type $hypervisor \
 --name=$name \
---disk path=/var/lib/libvirt/images/$disk,size=$size,format=qcow2,bus=$diskbus \
+--disk path=/var/lib/libvirt/images/$disk \
 --ram=$memory \
 --vcpus=$vcpu \
 --os-type=linux \
