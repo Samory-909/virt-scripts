@@ -38,7 +38,7 @@ if [ $image = "bionic.qcow2" ]; then
 os="ubuntu17.10"
 fi
 if [ $image = "debian10.qcow2" ]; then
-os="debian10"
+os="debian9"
 fi
 if [ $image = "centos7.qcow2" ]; then
 os="centos7.0"
