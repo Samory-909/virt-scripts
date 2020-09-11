@@ -31,16 +31,29 @@ Purposes : gold image auto-creation
 
 ## Build your images with Packer, Qemu/KVM and Ansible
 
-You can also build your images with Packer and Ansible automation based ont this other educational project https://github.com/goffinet/packer-kvm
+You can also build your images with Packer and Ansible automation based ont this other educational project [https://github.com/goffinet/packer-kvm](https://github.com/goffinet/packer-kvm)
 
-Some images are available for download on https://get.goffinet.org/kvm : centos7 debian9 ubuntu1804. Old images are archived on https://get.goffinet.org/kvm/archives/.
+Some images are available for download on https://get.goffinet.org/kvm : centos7 centos8 fedora32 debian10 bionic focal.
 
 You can download them with the `download-images.sh` script :
 
 ```
 ./download-images.sh
-Please provide the image name :
-centos7 ubuntu1804 debian9
+-------------------------------------------------------
+This script download automatically KVM images
+from https://get.goffinet.org/kvm.
+
+Usage:
+  ./download-images.sh image_name [--force]
+
+Where the "image_name" parameter can be:
+bionic focal centos7 centos8 debian10 fedora32
+The option "--force" does not ask any confirmation.
+
+Examples:
+  ./download-images.sh bionic --force
+  ./download-images.sh focal
+-------------------------------------------------------
 ```
 
 As it with user interaction :
@@ -62,8 +75,8 @@ centos7.qcow2: OK
 You can force the download for automation purpose :
 
 ```
-./download-images.sh debian9 --force
-The image /var/lib/libvirt/images/debian9.qcow2 already exists.
+./download-images.sh debian10 --force
+The image /var/lib/libvirt/images/debian10.qcow2 already exists.
 The local image is exactly the same than the remote
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -71,7 +84,7 @@ The local image is exactly the same than the remote
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100    56  100    56    0     0   1696      0 --:--:-- --:--:-- --:--:--  1750
-debian9.qcow2: OK
+debian10.qcow2: OK
 ```
 
 ## Quickbuilder
