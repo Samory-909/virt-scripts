@@ -129,7 +129,7 @@ systemctl start dnsmasq
 5_selinux_configuration () {
 sed -i "s/SELINUX=enforcing/SELINUX=permissive/g" /etc/sysconfig/selinux
 #sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/sysconfig/selinux
-cat /.autorelabel ; reboot
+touch /.autorelabel ; reboot
 }
 
 ## lan and wan interface configuration with NetworkManager (disabled)
