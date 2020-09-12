@@ -34,6 +34,7 @@ graphics="none"
 # Network interface and model 'virtio' or 'rtl8139' or 'e1000'
 interface="virbr0"
 model="virtio"
+# osinfo-query os
 if [ $image = "bionic.qcow2" ]; then
 os="ubuntu18.04"
 fi
