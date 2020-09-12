@@ -35,7 +35,7 @@ graphics="none"
 interface="virbr0"
 model="virtio"
 if [ $image = "bionic.qcow2" ]; then
-os="ubuntu17.10"
+os="ubuntu18.04"
 fi
 if [ $image = "debian10.qcow2" ]; then
 os="debian9"
@@ -44,10 +44,13 @@ if [ $image = "centos7.qcow2" ]; then
 os="centos7.0"
 fi
 if [ $image = "focal.qcow2" ]; then
-os="ubuntu17.10"
+os="ubuntu18.04"
 fi
 if [ $image = "centos8.qcow2" ]; then
 os="centos7.0"
+fi
+if [ $image = "fedora32.qcow2" ]; then
+os="fedora28"
 fi
 # Parameters for metasploitable guests
 if [ $image = "metasploitable.qcow2" ]; then
