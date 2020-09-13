@@ -14,7 +14,25 @@ network=$2
 # Profiles : xsmall, small, medium, big (and  desktop)
 profile=$3
 parameters=$#
-
+# osinfo-query os
+if [ $image = "bionic.qcow2" ]; then
+os="ubuntu18.04"
+fi
+if [ $image = "debian10.qcow2" ]; then
+os="debian9"
+fi
+if [ $image = "centos7.qcow2" ]; then
+os="centos7.0"
+fi
+if [ $image = "focal.qcow2" ]; then
+os="ubuntu18.04"
+fi
+if [ $image = "centos8.qcow2" ]; then
+os="centos7.0"
+fi
+if [ $image = "fedora32.qcow2" ]; then
+os="fedora28"
+fi
 
 usage_message () {
 ## Usage message
@@ -105,6 +123,7 @@ virt-install \
 --ram=$memory \
 --vcpus=$vcpu \
 --os-type=linux \
+--os-variant=$os \
 --network network=$network,model=$model \
 --graphics $graphics \
 --console pty,target_type=serial \
