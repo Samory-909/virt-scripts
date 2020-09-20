@@ -1,11 +1,11 @@
 #!/bin/bash
-# Download kvm images builded with https://github.com/goffinet/packer-kvm from http://get.goffinet.org/kvm/
+# Download kvm images builded with https://github.com/goffinet/packer-kvm from http://download.goffinet.org/kvm/
 
 #imagename="debian7 debian8 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
-imagename=($(curl -qks https://get.goffinet.org/kvm/imagename))
+imagename=($(curl -qks https://download.goffinet.org/kvm/imagename))
 image="$1"
-url=http://get.goffinet.org/kvm/
+url=http://download.goffinet.org/kvm/
 destination=/var/lib/libvirt/images/
 parameters=$#
 wd=$PWD
@@ -39,7 +39,7 @@ cd ${wd}
 usage () {
   echo "-------------------------------------------------------"
   echo "This script download automatically KVM images"
-  echo "from https://get.goffinet.org/kvm."
+  echo "from https://download.goffinet.org/kvm."
   echo ""
   echo "Usage:"
   echo "  $0 image_name [--force]"

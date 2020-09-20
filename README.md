@@ -33,7 +33,7 @@ Purposes : gold image auto-creation
 
 You can also build your images with Packer and Ansible automation based ont this other educational project [https://github.com/goffinet/packer-kvm](https://github.com/goffinet/packer-kvm)
 
-Some images are available for download on https://get.goffinet.org/kvm : centos7 centos8 fedora32 debian10 bionic focal.
+Some images are available for download on https://download.goffinet.org/kvm : centos7 centos8 fedora32 debian10 bionic focal.
 
 You can download them with the `download-images.sh` script :
 
@@ -41,7 +41,7 @@ You can download them with the `download-images.sh` script :
 ./download-images.sh
 -------------------------------------------------------
 This script download automatically KVM images
-from https://get.goffinet.org/kvm.
+from https://download.goffinet.org/kvm.
 
 Usage:
   ./download-images.sh image_name [--force]
@@ -281,8 +281,8 @@ Also, I have prebuilded other images for training classes :
 ~/virt-scripts# ./define-guest-image.sh
 Usage : ./define-guest-image.sh <name> <image>
 Please download one of those images :
-https://get.goffinet.org/kvm/centos7.qcow2
-https://get.goffinet.org/kvm/ubuntu1804.qcow2
+https://download.goffinet.org/kvm/centos7.qcow2
+https://download.goffinet.org/kvm/ubuntu1804.qcow2
 ```
 
 You can download them with `download-images.sh` :

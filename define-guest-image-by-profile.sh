@@ -2,7 +2,7 @@
 
 #imagename="debian7 debian8 debian10 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
-imagename="$(curl -kqs https://get.goffinet.org/kvm/imagename)"
+imagename="$(curl -kqs https://download.goffinet.org/kvm/imagename)"
 image=$4
 # Generate an unique string
 uuid=$(uuidgen -t)
@@ -41,7 +41,7 @@ echo "Profiles available : xsmall, small, medium, big, desktop"
 echo "centos7 is the image name by default if ommited"
 echo "Please download one of those images in /var/lib/libvirt/images :"
 for x in $imagename ; do
-echo "https://get.goffinet.org/kvm/${x}.qcow2"
+echo "https://download.goffinet.org/kvm/${x}.qcow2"
 done
 }
 

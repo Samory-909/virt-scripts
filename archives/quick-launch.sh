@@ -1,6 +1,6 @@
 #!/bin/bash
 ## This script import and launch minimal KVM linked images with a text console  ##
-## First download all the qcow2 images on https://get.goffinet.org/kvm/         ##
+## First download all the qcow2 images on https://download.goffinet.org/kvm/         ##
 ## Usage : bash define-guest.sh <name> <image>                                  ##
 ## Reset root password with the procedure :                                     ##
 ## https://linux.goffinet.org/06-02-demarrage-du-systeme-linux/#5-password-recovery##
@@ -8,11 +8,11 @@
 ## Please check all the variables
 # First parmater as name
 name=$1
-# Secund parameter image name avaible on "https://get.goffinet.org/kvm/"
+# Secund parameter image name avaible on "https://download.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
 #imagename="debian7 debian8 debian10 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )
-imagename="$(curl -kqs https://get.goffinet.org/kvm/imagename)"
+imagename="$(curl -kqs https://download.goffinet.org/kvm/imagename)"
 image="$2.qcow2"
 # Generate an unique string
 uuid=$(uuidgen -t)
@@ -67,7 +67,7 @@ usage_message () {
 echo "Usage : $0 <name> <image>"
 echo "Please download one of those images in /var/lib/libvirt/images :"
 for x in $imagename ; do
-echo "https://get.goffinet.org/kvm/${x}.qcow2"
+echo "https://download.goffinet.org/kvm/${x}.qcow2"
 done
 }
 
