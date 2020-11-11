@@ -115,6 +115,10 @@ if [ $image = "centos7.qcow2" ]; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
 fi
+if [ $image = "centos8.qcow2" ]; then
+sleep 1
+virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
+fi
 
 ## Import and lauch the new guest ##
 virt-install \
