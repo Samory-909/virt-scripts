@@ -84,7 +84,7 @@ fi
 if [ "$EUID" -ne 0 ] ; then echo "Please run as root" ; exit ; fi
 echo "This script will install all the necessary packages to use Libvirtd/KVM"
 echo "Please reboot your host after this step"
-validation
+if [ "$1" != "--force" ] ; then validation ; fi
 check_distribution
 services_activation
 check_apache
