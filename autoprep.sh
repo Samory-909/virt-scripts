@@ -45,7 +45,7 @@ yum -y upgrade
 echo "Virtualization host installation"
 yum -y group install "Virtualization Host"
 yum -y install @virt
-yum -y install virt-manager virt-install virt-top libguestfs-tools virt-viewer virt-manager curl
+yum -y install virt-manager virt-install qemu-kvm xauth virt-top libguestfs-tools virt-viewer virt-manager curl
 #echo "kcli libvirt  wrapper installation"
 yum -y install gcc libvirt-devel python-devel genisoimage qemu-kvm nmap-ncat python-pip
 #pip install kcli
