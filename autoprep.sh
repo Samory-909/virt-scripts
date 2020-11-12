@@ -47,7 +47,7 @@ yum -y group install "Virtualization Host"
 yum -y install @virt
 yum -y install virt-manager virt-install qemu-kvm xauth virt-top libguestfs-tools virt-viewer virt-manager curl
 #echo "kcli libvirt  wrapper installation"
-yum -y install gcc libvirt-devel python-devel genisoimage qemu-kvm nmap-ncat python-pip
+yum -y install gcc libvirt-devel python3-devel genisoimage qemu-kvm nmap-ncat python3-pip
 #pip install kcli
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
