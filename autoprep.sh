@@ -44,9 +44,10 @@ yum -y install epel-release
 yum -y upgrade
 echo "Virtualization host installation"
 yum -y group install "Virtualization Host"
-yum -y install virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts virt-top libguestfs-tools virt-viewer virt-manager curl
+yum -y install @virt
+yum -y install virt-manager virt-install qemu-kvm xauth virt-top libguestfs-tools virt-viewer virt-manager curl
 #echo "kcli libvirt  wrapper installation"
-yum -y install gcc libvirt-devel python-devel genisoimage qemu-kvm nmap-ncat python-pip
+yum -y install gcc libvirt-devel python3-devel genisoimage qemu-kvm nmap-ncat python3-pip
 #pip install kcli
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
@@ -84,7 +85,7 @@ fi
 if [ "$EUID" -ne 0 ] ; then echo "Please run as root" ; exit ; fi
 echo "This script will install all the necessary packages to use Libvirtd/KVM"
 echo "Please reboot your host after this step"
-validation
+if [ "$1" != "--force" ] ; then validation ; fi
 check_distribution
 services_activation
 check_apache
