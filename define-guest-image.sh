@@ -35,34 +35,34 @@ graphics="none"
 interface="virbr0"
 model="virtio"
 # osinfo-query os
-if [ $image = "bionic.qcow2" ]; then
+if [ $image = "bionic" ]; then
 os="ubuntu18.04"
 fi
-if [ $image = "debian10.qcow2" ]; then
+if [ $image = "debian10" ]; then
 os="debian9"
 fi
-if [ $image = "centos7.qcow2" ]; then
+if [ $image = "centos7" ]; then
 os="centos7.0"
 fi
-if [ $image = "focal.qcow2" ]; then
+if [ $image = "focal" ]; then
 os="ubuntu18.04"
 fi
-if [ $image = "centos8.qcow2" ]; then
+if [ $image = "centos8" ]; then
 os="centos7.0"
 fi
-if [ $image = "fedora32.qcow2" ]; then
+if [ $image = "fedora32" ]; then
 os="fedora28"
 fi
 # Parameters for metasploitable guests
-if [ $image = "metasploitable.qcow2" ]; then
+if [ $image = "metasploitable" ]; then
 diskbus="scsi"
 model="e1000"
 fi
 # Parameters for Kali guests
-if [ $image = "kali.qcow2" ]; then
+if [ $image = "kali" ]; then
 memory="1024"
 fi
-if [ $image = "gns3.qcow2" ]; then
+if [ $image = "gns3" ]; then
 memory="2048"
 nested="--cpu host-passthrough"
 fi
