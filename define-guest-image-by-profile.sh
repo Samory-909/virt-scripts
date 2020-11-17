@@ -15,22 +15,22 @@ network=$2
 profile=$3
 parameters=$#
 # osinfo-query os
-if [ $image = "bionic.qcow2" ]; then
+if [ $image = "bionic" ]; then
 os="ubuntu18.04"
 fi
-if [ $image = "debian10.qcow2" ]; then
+if [ $image = "debian10" ]; then
 os="debian9"
 fi
-if [ $image = "centos7.qcow2" ]; then
+if [ $image = "centos7" ]; then
 os="centos7.0"
 fi
-if [ $image = "focal.qcow2" ]; then
+if [ $image = "focal" ]; then
 os="ubuntu18.04"
 fi
-if [ $image = "centos8.qcow2" ]; then
+if [ $image = "centos8" ]; then
 os="centos7.0"
 fi
-if [ $image = "fedora32.qcow2" ]; then
+if [ $image = "fedora32" ]; then
 os="fedora28"
 fi
 
