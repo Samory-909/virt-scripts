@@ -2,6 +2,8 @@
 
 >How can I assign VMs with public ips that I have rented out from ISP (currently Hetzner) ?
 
+https://github.com/goffinet/virt-scripts/issues/4
+
 You can deploy directly your VMs with IP adresses rented from Hetzner for example :
 
 1. assign dynamically to one VM a single public IPv4 address
