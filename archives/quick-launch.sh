@@ -8,7 +8,7 @@
 ## Please check all the variables
 # First parmater as name
 name=$1
-# Secund parameter image name avaible on "https://download.goffinet.org/kvm/"
+# Secund parameter image name available on "https://download.goffinet.org/kvm/"
 # Image name : 'debian7', 'debian8', 'centos7', 'ubuntu1604', 'metasploitable', 'kali', 'arch'
 #imagename="debian7 debian8 debian10 centos7 centos8 ubuntu1604 bionic metasploitable kali arch"
 which curl > /dev/null || ( echo "Please install curl" && exit )

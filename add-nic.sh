@@ -40,7 +40,7 @@ interface=$(virsh net-dumpxml "${bridge}" | grep 'forward dev' | sed -n "s/^.*<f
 if grep -qw "$interface" <<< $(ls /sys/class/net) ; then
 mode="bridged"
 fi
-# Check if the bridge interface is avaible
+# Check if the bridge interface is available
 elif grep -qvw "$bridge" <<< $(ls /sys/class/net) ; then
 echo "This interface ${bridge} is not available"
 echo "Please create a valid bridge or choose between : "

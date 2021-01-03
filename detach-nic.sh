@@ -19,13 +19,13 @@ fi
 guests_defined_live="$(virsh list --name)"
 if grep -qvw "$guest" <<< ${guests_defined_live}  ; then
 echo "Please provide a live guest name : exit"
-echo "Guests avaible :"
+echo "Guests available :"
 echo "$(virsh list --name)"
 exit
 fi
-# Check if the bridge interface is avaible
+# Check if the bridge interface is available
 if grep -qvw "$bridge" <<< $(ls /sys/class/net) ; then
-echo "This interface ${bridge} is not avaible"
+echo "This interface ${bridge} is not available"
 echo "Please create a valid bridge or choose between : "
 echo $(ls /sys/class/net)
 exit

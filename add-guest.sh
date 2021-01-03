@@ -8,7 +8,7 @@
 ## Please check all the variables
 # First parmater as name
 name=$1
-# Secund parameter image name avaible on "https://download.goffinet.org/kvm/"
+# Secund parameter image name available on "https://download.goffinet.org/kvm/"
 #imagename="centos7 bionic debian10"
 which curl > /dev/null || ( echo "Please install curl" && exit )
 imagename="$(curl -kqs https://download.goffinet.org/kvm/imagename)"

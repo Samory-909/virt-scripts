@@ -53,7 +53,7 @@ mirror=http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64
 ## and the name of your new domains between double quotes as arguments.
 ## 3. Look to your console and please read the logs.
 ## If the newly created domains already exist, the script ask you what to do with them.
-## Assume that you have a local http server avaible
+## Assume that you have a local http server available
 ## when you choose http kickstart installation
 ##
 ## What the script is doing for you ?

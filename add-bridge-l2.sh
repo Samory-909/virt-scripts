@@ -12,7 +12,7 @@ check_parameters () {
 if [ "$parameters" -eq 0  ] ; then
 echo "Description : This script create a L2 bridge that connects a physical NIC"
 echo "Usage       : $0 <name> <interface name>"
-echo "Example     : '$0 internet enp2s0' or '$0 internet eth0'"
+echo "Example     : '$0 internet enp2s0'"
 exit
 fi
 }

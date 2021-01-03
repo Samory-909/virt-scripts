@@ -101,15 +101,19 @@ But this is probably better to build by yourself your appliance with the `auto-i
 
 Purposes : change RAM and vcpus, add block devices and network facilities
 
-1. `add-memory.sh` : add RAM
-2. `add-vcpu.sh` : set vcpus count
-3. `add-bridge.sh` : add an isolated or ipv4 nat/ipv6 ula libvirt bridge
-4. `add-nic.sh` : a new NIC on live guest to a bridged interface
-5. `attach-nic.sh` : attach a live guest present NIC to a bridge
-6. `detach-nic.sh` : detach a live guest from a bridge
-7. `add-storage.sh` : attach an empty bit disk by GB size
-8. `start_all.sh` : start all the defined guests
-9. `destroy-and-undefine-all.sh` : destroy,  undefine all the guests with storage removing
+To assign public IPs on VMs hosted on Hetzner hosts see [Connect public IPv4 addresses, IPv4 and IPv6 subnets on Hetzner servers](README.hetzner.md).
+
+- `add-memory.sh` : add RAM
+- `add-vcpu.sh` : set vcpus count
+- `add-bridge.sh` : add an isolated or ipv4 nat/ipv6 ula local libvirt bridge
+- `add-bridge-l2.sh` : create a L2 bridge that connects a physical NIC
+- `add-bridge-l3.sh` : create a L3 bridge to forward (Hetzner) IPv4 public ranges to your guests
+- `add-nic.sh` : a new NIC on live guest to a bridged interface
+- `attach-nic.sh` : attach a live guest present NIC to a bridge
+- `detach-nic.sh` : detach a live guest from a bridge
+- `add-storage.sh` : attach an empty bit disk by GB size
+- `start_all.sh` : start all the defined guests
+- `destroy-and-undefine-all.sh` : destroy,  undefine all the guests with storage removing
 
 ## How-To
 

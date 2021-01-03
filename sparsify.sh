@@ -14,7 +14,7 @@ fi
 guests_defined="$(virsh list --all --name)"
 if grep -qvw "$name" <<< ${guests_defined}  ; then
 echo "Please provide a defined guest name : exit"
-echo "Guests avaible : "
+echo "Guests available : "
 echo "$(virsh list --all --name)"
 echo "Usage : $0 <guest name>"
 exit

@@ -8,12 +8,11 @@ parameters="$#"
 path="/tmp"
 
 error () {
-echo "Description : This script create a L3 bridge to route Hetzner IPv4 public ranges to your VMs"
+echo "Description : This script create a L3 bridge to forward Hetzner IPv4 public ranges to your VMs"
 echo "Syntax      : '$0 <name> <ip4|ip4_dhcp> <ipv4 network> <ipv4 netmask> <ipv4 gateway>'"
-echo "              <ivp4 gateway> is the ipv4 address of the root interface that"
+echo "              <ivp4 gateway> is the ipv4 address of the enp2s0 interface"
 echo "Examples    : '$0 hetzner1 ip4 5.9.214.208 255.255.255.248 5.9.156.152'"
 echo "              '$0 hetzner1 ip4_dhcp 5.9.214.208 255.255.255.248 5.9.156.152'"
-
 exit
 }
 
