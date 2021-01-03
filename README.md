@@ -410,6 +410,9 @@ To be continued ... with :
 * `start_all.sh` : start all the defined guests
 * `destroy-and-undefine-all.sh` : destroy,  undefine all the guests with storage removing
 
+### Connect public IPv4 addresses, IPv4 and IPv6 subnets on Hetzner servers
+
+See this document : [Connect public IPv4 addresses, IPv4 and IPv6 subnets on Hetzner servers](README.hetzner.md)
 
 ### Next steps ...
 
@@ -421,7 +424,8 @@ To be continued ... with :
 ## Todo
 
 * `auto-install.sh`
+  * Centos Stream
   * ~~Centos 8~~
-  * Ubuntu 20.04 Focal Fossa
-* `create_repo.sh` : create local repo
+  * ~~Ubuntu 20.04 Focal Fossa~~
+* ~~`create_repo.sh` : create local repo~~ : Look at [goffinet/upstream_sync](https://github.com/goffinet/upstream_sync)
 * Revise code and comment, comment, comment ...
