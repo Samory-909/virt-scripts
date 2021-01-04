@@ -13,6 +13,7 @@ nested=""
 network=$2
 # Profiles : xsmall, small, medium, big (and  desktop)
 profile=$3
+mac=$5
 parameters=$#
 if [ $image = "bionic" ] ; then
 os="ubuntu18.04"
@@ -29,7 +30,6 @@ os="fedora28"
 else
 usage_message
 fi
-
 if [[ ! -z "$mac" ]] ; then
 mac_param=",mac=$mac"
 else
