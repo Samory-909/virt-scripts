@@ -14,31 +14,36 @@ network=$2
 # Profiles : xsmall, small, medium, big (and  desktop)
 profile=$3
 parameters=$#
-# osinfo-query os
-if [ $image = "bionic" ]; then
+if [ $image = "bionic" ] ; then
 os="ubuntu18.04"
-fi
-if [ $image = "debian10" ]; then
+elif [ $image = "debian10" ] ; then
 os="debian9"
-fi
-if [ $image = "centos7" ]; then
+elif [ $image = "centos7" ] ; then
 os="centos7.0"
-fi
-if [ $image = "focal" ]; then
+elif [ $image = "focal" ] ; then
 os="ubuntu18.04"
-fi
-if [ $image = "centos8" ]; then
+elif [ $image = "centos8" ] ; then
 os="centos7.0"
-fi
-if [ $image = "fedora32" ]; then
+elif [ $image = "fedora32" ] ; then
 os="fedora28"
+else
+usage_message
+fi
+
+if [[ ! -z "$mac" ]] ; then
+mac_param=",mac=$mac"
+else
+random_mac=$(tr -dc a-f0-9 < /dev/urandom | head -c 10 | sed -r 's/(..)/\1:/g;s/:$//;s/^/02:/')
+mac_param=",mac=$random_mac"
+mac="$random_mac"
 fi
 
 usage_message () {
 ## Usage message
-echo "Usage : $0 <name> <network_name> <profile> <image_name>"
+echo "Usage : $0 <name> <network_name> <profile> <image_name> <mac address>"
 echo "Profiles available : xsmall, small, medium, big, desktop"
-echo "centos7 is the image name by default if ommited"
+echo "<mac address> can be omitted"
+echo "Example : '$0 server1 internet desktop centos7 00:50:56:00:7F:E0'"
 echo "Please download one of those images in /var/lib/libvirt/images :"
 for x in $imagename ; do
 echo "https://download.goffinet.org/kvm/${x}.qcow2"
@@ -68,25 +73,22 @@ case "$profile" in
     big) vcpu="2"
          memory="2048" ;;
     desktop) vcpu="2"
-         memory="4096" ;;
+             memory="4096" ;;
     *) usage_message ; exit ;;
 esac
 }
 
 check_paramters () {
 ## Check parameters
-if [ "$parameters" -eq 3 ] ; then image="centos7" ; fi
-if [ "$parameters" -eq 4 ] ; then image=$image ; fi
-if [ "$parameters" -gt 5  ] ; then usage_message ; exit ; fi
-if [ "$parameters" -lt 3  ] ; then usage_message ; exit ; fi
+if [ "$parameters" -eq 0 ] ; then usage_message ; exit
 #check a valid image name
-if grep -qvw "$image" <<< "$imagename" ; then usage_message ; exit ; fi
+elif grep -qvw "$image" <<< "$imagename" ; then usage_message ; exit
 # check the presence of the image
-if [ ! -f /var/lib/libvirt/images/${image}.qcow2  ] ; then usage_message ; exit ; fi
+elif [ ! -f /var/lib/libvirt/images/${image}.qcow2  ] ; then usage_message ; exit
 # Check the usage of the requested domain
-if grep -qw "$name" <<< $(virsh list --all --name)  ; then echo "Please provide an other guest name : exit" ; exit; fi
+elif grep -qw "$name" <<< $(virsh list --all --name)  ; then echo "Please provide an other guest name : exit" ; exit
 # Check the network
-if [ ! -e /run/libvirt/network/${network}.xml ] ; then echo "$network network does not exist"
+elif [ ! -e /run/libvirt/network/${network}.xml ] ; then echo "$network network does not exist"
 echo "Please create a new one or choose a valid present network : " ; virsh net-list ; exit; fi
 }
 
@@ -98,19 +100,16 @@ qemu-img create -f qcow2 -b /var/lib/libvirt/images/${image}.qcow2 /var/lib/libv
 
 customize_new_disk () {
 ## Customize this new guest disk
-if [ $image = "bionic" ]; then
+if [ $image = "bionic" ] ; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
-fi
-if [ $image = "focal" ]; then
+elif [ $image = "focal" ] ; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
-fi
-if [ $image = "debian10" ]; then
+elif [ $image = "debian10" ] ; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
-fi
-if [ $image = "centos7" ]; then
+elif [ $image = "centos7" ] ; then
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
 fi
 }
@@ -118,18 +117,18 @@ fi
 import_launch () {
 ## Import and lauch the new guest ##
 virt-install \
---virt-type $hypervisor \
---name=$name \
---disk path=/var/lib/libvirt/images/$disk,size=$size,format=qcow2,bus=$diskbus \
+--virt-type ${hypervisor} \
+--name=${name} \
+--disk path=/var/lib/libvirt/images/${disk} \
 --ram=$memory \
---vcpus=$vcpu \
+--vcpus=${vcpu} \
 --os-type=linux \
---os-variant=$os \
---network network=$network,model=$model \
---graphics $graphics \
+--os-variant=${os} \
+--network network=${network},model=${model}${mac_param} \
+--graphics ${graphics} \
 --console pty,target_type=serial \
 --import \
---noautoconsole $nested
+--noautoconsole ${nested}
 }
 
 start_time="$(date -u +%s)"
