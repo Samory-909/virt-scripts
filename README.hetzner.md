@@ -52,7 +52,13 @@ Inside your guest, the new interface will get the public IP by DHCP.
 
 You can use this connection for IPv6 subnets also (See below).
 
-### Second case : assign dynamically public IPv4 addresses within a subnet to many VMs
+If you want to deploy a native VM connected on the right bridge with the correct mac address on the first interafce, you can use the `define-guest-image-by-profile.sh` script like this :
+
+```bash
+./define-guest-image-by-profile.sh server1 hetzner1 big centos7 00:50:56:00:7F:E0
+```
+
+## Second case : assign dynamically public IPv4 addresses within a subnet to many VMs
 
 In the following example, we will create a new router (bridge) that forwards the IPv4 trafic to `5.9.214.208/29` to your server from the Internet and that forwards the trafic from this subnet to the Internet. The router attributes IPv4 adresses (without network and broadcast adresses) :
 
@@ -66,7 +72,7 @@ And you attach two new guests like `guest2` and `guest3` :
 for x in 2 3 ; do ./add-nic.sh guest$x hetzner2 ; done
 ```
 
-### Third case : assign public IPv6 within the default /64 subnet to many VMs
+## Third case : assign public IPv6 within the default /64 subnet to many VMs
 
 To enable the default IPv6 subnet for your VMs, we simply create a L2 bridge and we attach the VMs. In this example, the root interface is `enp2s0`. The IPv6 range varies between `2a01:4f8:190:44bb::2` and `2a01:4f8:190:44bb:ffff:ffff:ffff:ffff`.
 
