@@ -67,7 +67,8 @@ case "$profile" in
     medium) memory="1024" ;;
     big) vcpu="2"
          memory="2048" ;;
-    desktop) ;;
+    desktop) vcpu="2"
+         memory="4096" ;;
     *) usage_message ; exit ;;
 esac
 }
