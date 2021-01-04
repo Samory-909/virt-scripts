@@ -43,7 +43,8 @@ cat << EOF > ${path}/${name}.xml
   <name>${name}</name>
   <forward mode="route"/>
     <interface dev="${interface// /}"/>
-  <bridge name="${bridge}" stp="on" delay="0"/>
+  </forward>
+  <bridge name="${bridge}" stp="off"/>
   <ip address="${ip4_router_address}" netmask="${ip4_router_address}">
   </ip>
 </network>
@@ -58,7 +59,8 @@ cat << EOF > ${path}/${name}.xml
   <name>${name}</name>
   <forward mode="route"/>
     <interface dev="${interface// /}"/>
-  <bridge name="${bridge}" stp="on" delay="0"/>
+  </forward>
+  <bridge name="${bridge}" stp="off"/>
   <ip address="${ip4_router_address}" netmask="${ip4_netmask}">
     <dhcp>
       <range start="${ip4_first_address}" end="${ip4_router_address}"/>
