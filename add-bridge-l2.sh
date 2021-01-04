@@ -33,7 +33,6 @@ cat << EOF > ${path}/${name}.xml
   <forward mode="bridge">
     <interface dev="${interface}"/>
   </forward>
-  <bridge name="${bridge}" stp="off"/>
 </network>
 EOF
 }
