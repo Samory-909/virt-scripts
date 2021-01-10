@@ -45,7 +45,7 @@ cat << EOF > ${path}/${name}.xml
     <interface dev="${interface// /}"/>
   </forward>
   <bridge name="${bridge}" stp="off"/>
-  <ip address="${ip4_router_address}" netmask="${ip4_router_address}">
+  <ip address="${ip4_router_address}" netmask="${ip4_netmask}">
   </ip>
 </network>
 EOF
