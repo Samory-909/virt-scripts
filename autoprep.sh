@@ -31,6 +31,8 @@ apt-get -y install qemu-kvm libvirt-dev virtinst virt-viewer libguestfs-tools vi
 #echo "kcli libvirt  wrapper installation"
 apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
 #pip install kcli
+#Disable apparmor
+sed -i 's/^security_driver/#security_driver/g' /etc/libvirt/qemu.conf
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
 sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
