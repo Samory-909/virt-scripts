@@ -15,17 +15,13 @@ network=$2
 profile=$3
 mac=$5
 parameters=$#
-if [ $image = "bionic" ] ; then
+if [[ $image = "bionic" ]] || [[ $image = "focal" ]] ; then
 os="ubuntu18.04"
-elif [ $image = "debian10" ] ; then
+elif [[ $image = "debian10" ]] ; then
 os="debian9"
-elif [ $image = "centos7" ] ; then
+elif [[ $image = "centos7" ]] || [[ $image = "centos8" ]] || [[ $image = "centos8" ]] ; then
 os="centos7.0"
-elif [ $image = "focal" ] ; then
-os="ubuntu18.04"
-elif [ $image = "centos8" ] ; then
-os="centos7.0"
-elif [ $image = "fedora32" ] ; then
+elif [[ $image = "fedora32" ]] || [[ $image = "fedora33" ]] ; then
 os="fedora28"
 else
 usage_message
@@ -80,15 +76,15 @@ esac
 
 check_paramters () {
 ## Check parameters
-if [ "$parameters" -eq 0 ] ; then usage_message ; exit
+if [[ "$parameters" -eq 0 ]] ; then usage_message ; exit
 #check a valid image name
 elif grep -qvw "$image" <<< "$imagename" ; then usage_message ; exit
 # check the presence of the image
-elif [ ! -f /var/lib/libvirt/images/${image}.qcow2  ] ; then usage_message ; exit
+elif [[ ! -f /var/lib/libvirt/images/${image}.qcow2  ]] ; then usage_message ; exit
 # Check the usage of the requested domain
 elif grep -qw "$name" <<< $(virsh list --all --name)  ; then echo "Please provide an other guest name : exit" ; exit
 # Check the network
-elif [ ! -e /run/libvirt/network/${network}.xml ] ; then echo "$network network does not exist"
+elif [[ ! -e /run/libvirt/network/${network}.xml ]] ; then echo "$network network does not exist"
 echo "Please create a new one or choose a valid present network : " ; virsh net-list ; exit; fi
 }
 
@@ -100,16 +96,16 @@ qemu-img create -f qcow2 -b /var/lib/libvirt/images/${image}.qcow2 /var/lib/libv
 
 customize_new_disk () {
 ## Customize this new guest disk
-if [ $image = "bionic" ] ; then
+if [[ $image = "bionic" ]] ; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
-elif [ $image = "focal" ] ; then
+elif [[ $image = "focal" ]] ; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
-elif [ $image = "debian10" ] ; then
+elif [[ $image = "debian10" ]] ; then
 sleep 1
 virt-sysprep -a /var/lib/libvirt/images/$disk --operations customize --firstboot-command "sudo dbus-uuidgen > /etc/machine-id ; sudo hostnamectl set-hostname $name ; sudo reboot"
-elif [ $image = "centos7" ] ; then
+elif [[ $image = "centos7" ]] ; then
 virt-sysprep -a /var/lib/libvirt/images/$disk --hostname $name --selinux-relabel  --quiet
 fi
 }

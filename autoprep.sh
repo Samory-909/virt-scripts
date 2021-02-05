@@ -27,10 +27,14 @@ debian8_prep() {
 echo " Upgrade the system"
 apt-get update && apt-get -y upgrade
 echo "Virtualization host installation"
-apt-get -y install qemu-kvm libvirt-dev virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime curl linux-source libosinfo-bin
+apt-get -y install qemu-kvm libvirt-dev virtinst virt-viewer libguestfs-tools virt-manager uuid-runtime curl linux-source libosinfo-bin genisoimage
 #echo "kcli libvirt  wrapper installation"
-apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
+#apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
 #pip install kcli
+source /etc/os-release
+if [ $ID == "ubuntu" ] && [ $VERSION_ID == "20.04" ] ; then
+apt-get -y install libvirt-daemon-system dnsmasq
+fi
 echo "Enabling Nested Virtualization"
 rmmod kvm-intel
 sh -c "echo 'options kvm-intel nested=y' >> /etc/modprobe.d/dist.conf"
