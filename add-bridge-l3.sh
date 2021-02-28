@@ -16,11 +16,7 @@ echo "              '$0 hetzner1 ip4_dhcp 5.9.214.208 255.255.255.248 5.9.156.15
 exit
 }
 
-binary="ipcalc"
-if [[ "$(which $binary 1> /dev/null 2> /dev/null ; echo $?)" != "0" ]] ; then
-yum -y install $binary || apt update && apt -y install $binary
-# check parameters
-elif [ "$parameters" -eq 0 ] ; then
+if [ "$parameters" -eq 0 ] ; then
 error
 # check and fix IPv4 parameters
 elif [[ "$type" == "ip4" || "$type" == "ip4_dhcp" ]] ; then
@@ -28,10 +24,10 @@ declare ip4_network="${3}"
 declare ip4_netmask="${4}"
 declare ip4_gateway="${5}"
 declare interface=$(ip -4 a | grep -B 1 "${ip4_gateway}" | head -1 | cut -d ":" -f 2)
-declare $(ipcalc --maxaddr ${ip4_network} ${ip4_netmask})
-declare ip4_router_address="${MAXADDR}"
-declare $(ipcalc --minaddr ${ip4_network} ${ip4_netmask})
-declare ip4_first_address="${MINADDR}"
+IFS=. read -r i1 i2 i3 i4 <<< "$ip4_network"
+IFS=. read -r m1 m2 m3 m4 <<< "$ip4_netmask"
+declare ip4_router_address="$((i1 & m1 | 255-m1)).$((i2 & m2 | 255-m2)).$((i3 & m3 | 255-m3)).$(((i4 & m4 | 255-m4)-1))"
+declare ip4_first_address="$((i1 & m1)).$((i2 & m2)).$((i3 & m3)).$(((i4 & m4)+1))"
 else
 error
 fi
