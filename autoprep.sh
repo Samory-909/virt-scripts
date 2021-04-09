@@ -32,7 +32,7 @@ apt-get -y install qemu-kvm libvirt-dev virtinst virt-viewer libguestfs-tools vi
 #apt-get -y install python-pip pkg-config libvirt-dev genisoimage qemu-kvm netcat libvirt-bin python-dev libyaml-dev
 #pip install kcli
 source /etc/os-release
-if [ $ID == "ubuntu" ] && [ $VERSION_ID == "20.04" ] ; then
+if [ "$ID" == "ubuntu" ] && [ "$VERSION_ID" == "20.04" ] ; then
 apt-get -y install libvirt-daemon-system dnsmasq
 fi
 echo "Enabling Nested Virtualization"
@@ -81,7 +81,7 @@ mkdir -p /var/www/html/conf
 echo "this is ok" > /var/www/html/conf/ok
 local check_value="this is ok"
 local check_remote=$(curl -s http://127.0.0.1/conf/ok)
-if [ "$check_remote"="$check_value" ] ; then
+if [ "$check_remote" = "$check_value" ] ; then
  echo "Apache is working"
 else
  echo "Apache is not working"
