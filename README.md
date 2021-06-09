@@ -48,7 +48,7 @@ Usage:
 
 Where the "image_name" parameter can be:
 bionic focal centos7 centos8 debian10 fedora32
-The option "--force" does not ask any confirmation.
+The option "--force" does not ask for any confirmation.
 
 Examples:
   ./download-images.sh bionic --force
