@@ -46,7 +46,7 @@ usage () {
   echo ""
   echo "Where the \"image_name\" parameter can be:"
   echo "${imagename[*]}"
-  echo "The option \"--force\" does not ask any confirmation."
+  echo "The option \"--force\" does not ask for any confirmation."
   echo ""
   echo "Examples:"
   echo "  $0 ${imagename[0]} --force"
