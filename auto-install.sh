@@ -35,7 +35,7 @@ usage
 echo "Please provide one distribution centos, centos8, fedora, debian, bionic and one guest name: exit"
 exit
 fi
-if grep -qw ${name} <<< $(virsh list --all --name)  ; then
+if grep -qw "${name}" <<< $(virsh list --all --name)  ; then
 usage
 echo "Please provide a defined guest name that is not in use : exit"
 exit
@@ -55,7 +55,7 @@ mkdir -p /var/www/html/conf
 echo "this is ok" > /var/www/html/conf/ok
 local check_value="this is ok"
 local check_remote=$(curl -s http://127.0.0.1/conf/ok)
-if [ "$check_remote"="$check_value" ] ; then
+if [ "$check_remote" = "$check_value" ] ; then
  echo "Apache is working"
 else
  echo "Apache is not working"
