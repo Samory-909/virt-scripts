@@ -17,11 +17,11 @@ mac=$5
 parameters=$#
 if [[ $image = "bionic" ]] || [[ $image = "focal" ]] ; then
 os="ubuntu18.04"
-elif [[ $image = "debian10" ]] ; then
+elif [[ $image = "debian10" ]] || [[ $image = "kali20211" ]] ; then
 os="debian9"
-elif [[ $image = "centos7" ]] || [[ $image = "centos8" ]] || [[ $image = "centos8" ]] ; then
+elif [[ $image = "centos7" ]] || [[ $image = "centos8" ]] || [[ $image = "centos8-stream" ]] || [[ $image = "almalinux8" ]] || [[ $image = "rocky8" ]] ; then
 os="centos7.0"
-elif [[ $image = "fedora32" ]] || [[ $image = "fedora33" ]] ; then
+elif [[ $image = "fedora32" ]] || [[ $image = "fedora33" ]] || [[ $image = "fedora34" ]] ; then
 os="fedora28"
 else
 usage_message
