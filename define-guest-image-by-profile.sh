@@ -15,7 +15,6 @@ network=$2
 profile=$3
 mac=$5
 parameters=$#
-# almalinux8 bionic centos7 centos8 centos8-stream debian10 fedora32 fedora33 fedora34 focal kali20211 rocky8
 if [[ $image = "bionic" ]] || [[ $image = "focal" ]] ; then
 os="ubuntu18.04"
 elif [[ $image = "debian10" ]] || [[ $image = "kali20211" ]] ; then
